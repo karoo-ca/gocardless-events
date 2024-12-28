@@ -1,0 +1,31 @@
+<h3><code>tax_exchange_rates_confirmed</code></h3>
+<p>
+  The tax exchange rates for all payout items of the payout have been confirmed.
+  This event will only exist if the payout has a
+  <code>tax_currency</code>
+  and if its
+  <code>tax_currency</code>
+  is different from its
+  <a><code>currency</code></a
+  >. It will be created once all fees in the payout are invoiced.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Cause</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>gocardless</td>
+      <td>payout_tax_exchange_rates_confirmed</td>
+      <td>
+        The exchange rates for the taxes (such as VAT) that applied to
+        GoCardless fees deducted from the payout have all been confirmed and
+        will not change.
+      </td>
+    </tr>
+  </tbody>
+</table>

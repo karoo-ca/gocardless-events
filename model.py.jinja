@@ -1,0 +1,85 @@
+{%- for resource_name, resource_list in schema.items() -%}
+"""
+"{{ resource_name }}": [
+    {%- for item in resource_list %}
+    {
+        "action": "{{ item.action }}",
+        "description": "{{ item.description }}",
+        "details": [
+            {%- for detail in item.details %}
+            {
+                {%- for key, value in detail.items() %}
+                "{{ key }}": "{{ value }}"{% if not loop.last %},{% endif %}
+                {%- endfor %}
+            }{%- if not loop.last %},{% endif %}
+            {%- endfor %}
+        ]
+    }{% if not loop.last %},{% endif %}
+    {%- endfor %}
+],
+"""
+
+from __future__ import annotations
+from typing import Annotated, Literal, Union, List
+from pydantic import BaseModel, Field, RootModel
+
+{%- set resource_singular = resource_name.rstrip('s') | to_pascal %}
+{%- set actions = resource_list | map(attribute='action') | list | unique | list %}
+{%- for action in actions %}
+
+
+class {{ resource_singular }}{{ action | to_pascal }}(BaseModel):
+    action: Literal["{{ action }}"]
+    description: str
+    {%- set causes = [] -%}
+    {%- for item in resource_list if item.action == action %}
+        {%- for detail in item.details %}
+            {%- if detail.cause not in causes %}
+                {%- do causes.append(detail.cause) -%}
+            {%- endif %}
+        {%- endfor %}
+    {%- endfor %}
+    {%- if causes|length == 1 %}
+    details: {{ resource_singular }}{{ action | to_pascal }}{{ causes[0] | to_pascal }}Detail
+    {%- else %}
+    details: List[Annotated[
+        Union[
+            {%- for cause in causes %}
+            {{ resource_singular }}{{ action | to_pascal }}{{ cause | to_pascal }}Detail,
+            {%- endfor %}
+        ],
+        Field(..., discriminator="cause")
+    ]]
+    {%- endif %}
+{%- endfor %}
+
+{%- for action in actions %}
+    {%- set causes_defined = [] -%}
+    {%- for item in resource_list if item.action == action %}
+        {%- for detail in item.details %}
+            {%- if detail.cause not in causes_defined %}
+class {{ resource_singular }}{{ action | to_pascal }}{{ detail.cause | to_pascal }}Detail(BaseModel):
+    {%- for key, value in detail.items() %}
+    {%- if key in ['origin', 'cause'] %}
+    {{ key }}: Literal["{{ value }}"]
+    {%- else %}
+    {{ key }}: str
+    {%- endif %}
+    {%- endfor %}
+    {%- do causes_defined.append(detail.cause) -%}
+            {%- endif %}
+        {%- endfor %}
+    {%- endfor %}
+{%- endfor %}
+
+{{ resource_singular }}Type = Annotated[
+    Union[
+        {%- for action in actions %}
+        {{ resource_singular }}{{ action | to_pascal }},
+        {%- endfor %}
+    ],
+    Field(..., discriminator="action")
+]
+
+{{ resource_singular }} = RootModel[{{ resource_singular }}Type]
+{%- endfor %}

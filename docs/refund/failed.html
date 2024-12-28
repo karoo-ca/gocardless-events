@@ -1,0 +1,33 @@
+<h3><code>failed</code></h3>
+<p>
+  The refund did not reach your customer the funds will be returned to you. The
+  <code>details[cause]</code> will be <code>refund_failed</code> and the
+  <code>details[origin]</code> will be <code>gocardless</code>.
+  <span>
+    It is important to note that the ‘failed' and ‘refund_settled' events are
+    not associated. A refund can fail even after it's been settled. If a refund
+    fails GoCardless has attempted to refund the customer and has already
+    deducted the applicable funds from one of your payouts. The refund has then
+    subsequently failed to reach the customer. If this occurs the funds will be
+    returned to you.
+  </span>
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Cause</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>gocardless</td>
+      <td>refund_failed</td>
+      <td>
+        The refund did not reach your customer the funds will be returned to
+        you.
+      </td>
+    </tr>
+  </tbody>
+</table>

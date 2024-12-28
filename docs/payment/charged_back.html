@@ -1,0 +1,204 @@
+<h3><code>charged_back</code></h3>
+<p>
+  The customer asked their bank to refund the payment under the Direct Debit
+  Guarantee and it has been returned to the customer.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Cause</th>
+      <th>Scheme</th>
+      <th>Reason code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>ach</td>
+      <td>ACH_RETURN-R05ACH_RETURN-R31</td>
+      <td>
+        This payment was charged back by the customer's bank because the
+        customer disputed authorising the transaction.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>refund_requested</td>
+      <td>ach</td>
+      <td>ACH_RETURN-R16</td>
+      <td>
+        This payment was charged back by the customer's bank at the customer's
+        request within the 8 week cool-off period.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>ach</td>
+      <td>ACH_RETURN-R07</td>
+      <td>This payment was charged back because the mandate was withdrawn.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>ach</td>
+      <td>ACH_RETURN-R08ACH_RETURN-R10ACH_RETURN-R11ACH_RETURN-R29</td>
+      <td>
+        The customer disputes having authorised you to set up a mandate with
+        them.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>return_on_odfi_request</td>
+      <td>ach</td>
+      <td>ACH_RETURN-R06</td>
+      <td>
+        This payment was charged back by the customer's bank because the
+        customer disputed authorising the transaction.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>bacs</td>
+      <td>DDICA-1</td>
+      <td>
+        The customer has disputed that the amount taken differs from the amount
+        they were notified of.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>bacs</td>
+      <td>DDICA-2</td>
+      <td>
+        The customer has disputed having been notified of this Direct Debit.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>bacs</td>
+      <td>DDICA-4</td>
+      <td>
+        The customer claims that they asked you to cancel their mandate before
+        you took the payment.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>bacs</td>
+      <td>DDICA-5DDICA-6DDICA-8</td>
+      <td>
+        The customer disputes having authorised you to set up a mandate with
+        them.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>sepa_core</td>
+      <td>MD01</td>
+      <td>
+        This payment was charged back by the customer's bank because the
+        customer disputed authorising the transaction.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>refund_requested</td>
+      <td>sepa_core</td>
+      <td>MD06</td>
+      <td>
+        This payment was charged back by the customer's bank at the customer's
+        request within the 8 week cool-off period.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>refund_requested</td>
+      <td>betalingsservice</td>
+      <td>PAYMENT_INFORMATION-0239</td>
+      <td>
+        This payment was charged back by the customer's bank at the customer's
+        request within the 8 week cool-off period.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>becs</td>
+      <td>UDUNAUT</td>
+      <td>
+        The customer disputes having authorised you to set up a mandate with
+        them.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>becs</td>
+      <td>CBC</td>
+      <td>The customer cancelled their mandate at their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>other</td>
+      <td>becs</td>
+      <td>UCDUOTHR</td>
+      <td>The payment was charged back.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>becs</td>
+      <td>MD01</td>
+      <td>
+        The customer disputes having authorised you to set up a mandate with
+        them.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>pad</td>
+      <td>PAYMENT_STATUS_REPORT-915</td>
+      <td>
+        The customer disputes having authorised you to set up a mandate with
+        them.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>other</td>
+      <td>pad</td>
+      <td>PAYMENT_STATUS_REPORT-916PAYMENT_STATUS_REPORT-919</td>
+      <td>
+        The customer has disputed that the amount taken differs from the amount
+        they were notified of.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>other</td>
+      <td>pad</td>
+      <td>PAYMENT_STATUS_REPORT-918PAYMENT_STATUS_REPORT-921</td>
+      <td>
+        The customer has disputed having been notified of this Direct Debit.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>pad</td>
+      <td>PAYMENT_STATUS_REPORT-917PAYMENT_STATUS_REPORT-920</td>
+      <td>This payment was charged back because the mandate was withdrawn.</td>
+    </tr>
+  </tbody>
+</table>

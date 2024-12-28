@@ -1,0 +1,26 @@
+<h3><code>paid</code></h3>
+<p>
+  GoCardless has transferred the payout to the creditor's bank account. The
+  <code>details[cause]</code> will always be <code>payout_paid</code> and the
+  <code>details[origin]</code> will be <code>gocardless</code>.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Cause</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>gocardless</td>
+      <td>payout_paid</td>
+      <td>
+        GoCardless has transferred the payout to the creditor's bank account. FX
+        payouts will emit this event but will continue to have a pending status
+        until we emit the payout_fx_rate_confirmed event.
+      </td>
+    </tr>
+  </tbody>
+</table>

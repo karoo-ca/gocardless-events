@@ -1,0 +1,536 @@
+<h3><code>cancelled</code></h3>
+<p>
+  The mandate has been cancelled either by the customer through their bank or
+  this API or automatically when their bank account is closed.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Cause</th>
+      <th>Scheme</th>
+      <th>Reason code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>ach</td>
+      <td>ACH_RETURN-R14ACH_RETURN-R15</td>
+      <td>This bank account has been closed as the customer is deceased.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>ach</td>
+      <td>ACH_RETURN-R02ACH_RETURN-R12</td>
+      <td>The bank account for this mandate has been closed.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>ach</td>
+      <td>ACH_RETURN-R07</td>
+      <td>The mandate was cancelled at a bank branch.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>ach</td>
+      <td>
+        ACH_RETURN-R05ACH_RETURN-R06ACH_RETURN-R08ACH_RETURN-R10ACH_RETURN-R11ACH_RETURN-R29ACH_RETURN-R31ACH_RETURN-R51
+      </td>
+      <td>
+        The customer disputes having authorised you to set up a mandate with
+        them.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>invalid_bank_details</td>
+      <td>ach</td>
+      <td>
+        ACH_RETURN-R03ACH_RETURN-R04ACH_RETURN-R13ACH_RETURN-R28ACH_RETURN-R82
+      </td>
+      <td>The specified bank account does not exist or was closed.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>direct_debit_not_enabled</td>
+      <td>ach</td>
+      <td>ACH_RETURN-R16ACH_RETURN-R34</td>
+      <td>The bank account does not support Direct Debit.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>refer_to_payer</td>
+      <td>ach</td>
+      <td>
+        ACH_RETURN-R05ACH_RETURN-R06ACH_RETURN-R08ACH_RETURN-R16ACH_RETURN-R20ACH_RETURN-R29ACH_RETURN-R26
+      </td>
+      <td>
+        This mandate has been cancelled because a payment under it failed.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>return_on_odfi_request</td>
+      <td>ach</td>
+      <td>ACH_RETURN-R06</td>
+      <td>mandate_cancelled_because_payment_charged_back</td>
+    </tr>
+    <tr>
+      <td>api</td>
+      <td>mandate_cancelled</td>
+      <td>-</td>
+      <td>-</td>
+      <td>The mandate was cancelled at your request.</td>
+    </tr>
+    <tr>
+      <td>api</td>
+      <td>bank_account_closed</td>
+      <td>-</td>
+      <td>-</td>
+      <td>The customer's account was disabled at your request.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>bacs</td>
+      <td>ADDACS-0ADDACS-1</td>
+      <td>The mandate was cancelled at a bank branch.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>bacs</td>
+      <td>ADDACS-2</td>
+      <td>This bank account has been closed as the customer is deceased.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_transferred</td>
+      <td>bacs</td>
+      <td>ADDACS-3ADDACS-CADDACS-E</td>
+      <td>
+        The customer's bank account was transferred to a different bank or
+        building society.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>bacs</td>
+      <td>ADDACS-B</td>
+      <td>The customer's account was closed at their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>bacs</td>
+      <td>ADDACS-D</td>
+      <td>
+        The customer has disputed the amount of notice specified on the mandate
+        via their bank.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>bacs</td>
+      <td>ARUDD-1</td>
+      <td>The mandate was cancelled at a bank branch.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>bacs</td>
+      <td>ARUDD-2</td>
+      <td>
+        This mandate has been cancelled because a payment against it indicated
+        that the customer is deceased.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>bacs</td>
+      <td>ARUDD-B</td>
+      <td>The bank account for this mandate has been closed.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>refer_to_payer</td>
+      <td>bacs</td>
+      <td>ARUDD-6</td>
+      <td>
+        This mandate has been cancelled because a payment under it failed.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>bacs</td>
+      <td>DDICA-4</td>
+      <td>
+        The customer claims that they asked you to cancel their mandate before
+        you took the payment.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>bacs</td>
+      <td>DDICA-5DDICA-6DDICA-8</td>
+      <td>
+        The customer disputes having authorised you to set up a mandate with
+        them.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>invalid_bank_details</td>
+      <td>sepa_core</td>
+      <td>AC01BE06</td>
+      <td>
+        The bank account specified does not exist. Any subscriptions and pending
+        payments will also be cancelled.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>sepa_core</td>
+      <td>AC04</td>
+      <td>
+        The bank account for this mandate has been closed. Any subscriptions and
+        pending payment will also be cancelled.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>direct_debit_not_enabled</td>
+      <td>sepa_core</td>
+      <td>AG01AC06</td>
+      <td>
+        The bank account for this mandate does not support SEPA direct debit.
+        Any subscriptions and pending payments will also be cancelled.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>account_blocked_for_any_financial_transaction</td>
+      <td>sepa_core</td>
+      <td>AC06</td>
+      <td>
+        The bank account for this mandate was blocked. Any subscriptions and
+        pending payments will also be cancelled.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>sepa_core</td>
+      <td>MD01</td>
+      <td>
+        A payment under this mandate failed indicating that the mandate has been
+        cancelled at the customer's bank. Any subscriptions and pending payments
+        will also be cancelled.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>sepa_core</td>
+      <td>MD07</td>
+      <td>This mandate has been cancelled because the customer is deceased.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>betalingsservice</td>
+      <td>
+        MANDATE_INFORMATION-0232MANDATE_INFORMATION-0233MANDATE_INFORMATION-0234
+      </td>
+      <td>This mandate was cancelled by the customer or their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>betalingsservice</td>
+      <td>INFORMATION_LIST-0257</td>
+      <td>This mandate was cancelled by the customer or their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>direct_debit_not_enabled</td>
+      <td>becs</td>
+      <td>2</td>
+      <td>The bank account does not support Direct Debit.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>payment_stopped</td>
+      <td>becs</td>
+      <td>2</td>
+      <td>The payment was stopped by the payer or their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>other</td>
+      <td>becs</td>
+      <td>2</td>
+      <td>
+        This mandate has been cancelled because a payment under it failed.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>becs</td>
+      <td>3</td>
+      <td>The bank account for this mandate has been closed.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>becs</td>
+      <td>4</td>
+      <td>This bank account has been closed as the customer is deceased.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>becs</td>
+      <td>UDUNAUT</td>
+      <td>
+        The customer disputes having authorised you to set up a mandate with
+        them.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>becs</td>
+      <td>CBC</td>
+      <td>This mandate was cancelled by the customer or their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>invalid_bank_details</td>
+      <td>becs</td>
+      <td>RC02</td>
+      <td>The bank account specified does not exist.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>becs</td>
+      <td>MD01</td>
+      <td>
+        The customer disputes having authorised you to set up a mandate with
+        them.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>becs</td>
+      <td>AC04</td>
+      <td>The customer's account was closed at their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>becs</td>
+      <td>MD07</td>
+      <td>This bank account has been closed as the customer is deceased.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>invalid_bank_details</td>
+      <td>becs</td>
+      <td>AC01</td>
+      <td>
+        The bank account specified does not exist. Any subscriptions and pending
+        payments will also be cancelled.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>refer_to_payer</td>
+      <td>becs</td>
+      <td>NARR</td>
+      <td>There was an internal error processing this mandate.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>pay_to</td>
+      <td>MD16MS02</td>
+      <td>This mandate was cancelled by the customer or their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>pay_to</td>
+      <td>MD17</td>
+      <td>The mandate was cancelled at your request.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>pay_to</td>
+      <td>MD21</td>
+      <td>The mandate has been cancelled due to fraud.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>pay_to</td>
+      <td>MSUCMCFCMCOC</td>
+      <td>The mandate has been suspended.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>refer_to_payer</td>
+      <td>pay_to</td>
+      <td>UNKN</td>
+      <td>This mandate was cancelled by the customer or their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>invalid_bank_details</td>
+      <td>pay_to</td>
+      <td>AC02</td>
+      <td>
+        This mandate was cancelled due to a Notification of Change indicating
+        the customer's account number or branch number was incorrect please
+        contact the customer.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>other</td>
+      <td>pay_to</td>
+      <td>AC06</td>
+      <td>The account associated with the customer's mandate is blocked.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>invalid_bank_details</td>
+      <td>pay_to</td>
+      <td>AC13</td>
+      <td>
+        This mandate was cancelled due to a Notification of Change indicating
+        the customer's selected account type was incorrect please contact the
+        customer.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>pay_to</td>
+      <td>AC04AC05</td>
+      <td>The customer's account was closed at their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>pay_to</td>
+      <td>MD07</td>
+      <td>This mandate has been cancelled because the customer is deceased.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>other</td>
+      <td>pay_to</td>
+      <td>SL11SL12</td>
+      <td>
+        The customer's account is not permitted to send funds to the
+        beneficiary.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>becs_nz</td>
+      <td>DISHONOUR-AC04</td>
+      <td>The customer's account was closed at their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>invalid_bank_details</td>
+      <td>becs_nz</td>
+      <td>DISHONOUR-AC05NEGATIVE_ACKNOWLEDGEMENT-AC05</td>
+      <td>
+        The bank account specified does not exist. Any subscriptions and pending
+        payments will also be cancelled.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>pad</td>
+      <td>PAYMENT_STATUS_REPORT-905</td>
+      <td>The customer's account was closed at their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_closed</td>
+      <td>pad</td>
+      <td>PAYMENT_STATUS_REPORT-910</td>
+      <td>This bank account has been closed as the customer is deceased.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>authorisation_disputed</td>
+      <td>pad</td>
+      <td>PAYMENT_STATUS_REPORT-915</td>
+      <td>
+        The customer disputes having authorised you to set up a mandate with
+        them.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>pad</td>
+      <td>PAYMENT_STATUS_REPORT-917PAYMENT_STATUS_REPORT-920</td>
+      <td>This mandate was cancelled by the customer or their bank.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>invalid_bank_details</td>
+      <td>pad</td>
+      <td>PAYMENT_STATUS_REPORT-0518PAYMENT_STATUS_REPORT-0567</td>
+      <td>The specified bank account does not exist or was closed.</td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>faster_payments</td>
+      <td>PAYER_MANDATE_CANCELLED</td>
+      <td>This mandate was cancelled by the customer or their bank.</td>
+    </tr>
+    <tr>
+      <td>gocardless</td>
+      <td>mandate_cancelled</td>
+      <td>faster_payments</td>
+      <td>MERCHANT_MANDATE_CANCELLED</td>
+      <td>The mandate was cancelled at your request.</td>
+    </tr>
+    <tr>
+      <td>gocardless</td>
+      <td>initial_one_off_payment_failed</td>
+      <td>-</td>
+      <td>-</td>
+      <td>
+        This mandate has been cancelled because the initial faster payment
+        failed
+      </td>
+    </tr>
+  </tbody>
+</table>

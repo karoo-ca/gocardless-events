@@ -1,0 +1,26 @@
+<h3><code>chargeback_cancelled</code></h3>
+<p>
+  The customer's bank has cancelled the chargeback request. This is almost
+  always at the request of the customer.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Cause</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>bank</td>
+      <td>payment_confirmed</td>
+      <td>The chargeback for this payment was reversed</td>
+    </tr>
+    <tr>
+      <td>gocardless</td>
+      <td>payment_confirmed</td>
+      <td>The chargeback for this payment was reversed</td>
+    </tr>
+  </tbody>
+</table>
