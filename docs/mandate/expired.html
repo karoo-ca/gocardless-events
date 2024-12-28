@@ -1,0 +1,39 @@
+<h3><code>expired</code></h3>
+<p>
+  No collection attempts were made against the mandate within the dormancy
+  period of your service user number. As a result it has expired and no further
+  collections can be taken against it. If you wish to continue taking payments
+  from this customer you should request their permission and use the reinstate
+  endpoint.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Cause</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>gocardless</td>
+      <td>mandate_expired</td>
+      <td>
+        The mandate is being marked as expired because no payments have been
+        collected against it for the dormancy period of your service user
+        number. If you have access to the mandate reinstation API endpoint you
+        can use this to attempt to set this mandate up again.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_cancelled</td>
+      <td>This mandate was cancelled by the customer or their bank.</td>
+    </tr>
+    <tr>
+      <td>gocardless</td>
+      <td>mandate_cancelled</td>
+      <td>The mandate has expired.</td>
+    </tr>
+  </tbody>
+</table>

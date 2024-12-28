@@ -1,0 +1,31 @@
+<h3><code>reinstated</code></h3>
+<p>
+  The mandate has become active again after it was cancelled or expired. This
+  can be due to the customer's bank wishing to undo a cancellation or expiry
+  notice they sent or because the mandate was successfully reinstated via the
+  reinstate endpoint.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Cause</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>gocardless</td>
+      <td>mandate_reinstated</td>
+      <td>
+        The time window after submission for the banks to refuse a mandate has
+        ended without any errors being received so this mandate is now active.
+      </td>
+    </tr>
+    <tr>
+      <td>bank</td>
+      <td>mandate_reinstated</td>
+      <td>A cancelled mandate has been re-instated by the customer's bank.</td>
+    </tr>
+  </tbody>
+</table>

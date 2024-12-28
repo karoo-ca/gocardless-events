@@ -1,0 +1,171 @@
+<article>
+    <h2>Instalment Schedule</h2>
+
+    <p>This is a list of all the different values for <code>action</code></p>
+
+    <h3><code>created</code></h3>
+
+    <p>The instalment schedule has been created.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Origin</th>
+                <th>Cause</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>api</td>
+                <td>instalment_schedule_created</td>
+                <td>Instalment schedule has been created via the API</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3><code>creation_failed</code></h3>
+
+    <p>
+        The instalment schedule failed to create due to validation errors when creating
+        the payments. The errors will be included in the event payload.
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Origin</th>
+                <th>Cause</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>api</td>
+                <td>instalment_schedule_creation_failed</td>
+                <td>Instalment schedule failed to be created</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3><code>cancelled</code></h3>
+
+    <p>
+        The instalment schedule has been cancelled. Any pending payments have also been
+        cancelled.
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Origin</th>
+                <th>Cause</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>api</td>
+                <td>instalment_schedule_cancelled</td>
+                <td>Instalment schedule has been cancelled</td>
+            </tr>
+            <tr>
+                <td>gocardless</td>
+                <td>mandate_cancelled</td>
+                <td>Instalment schedule has been cancelled</td>
+            </tr>
+            <tr>
+                <td>gocardless</td>
+                <td>mandate_failed</td>
+                <td>Instalment schedule has been cancelled</td>
+            </tr>
+            <tr>
+                <td>gocardless</td>
+                <td>mandate_suspended_by_payer</td>
+                <td>Instalment schedule has been cancelled</td>
+            </tr>
+            <tr>
+                <td>gocardless</td>
+                <td>mandate_expired</td>
+                <td>Instalment schedule has been cancelled</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3><code>errored</code></h3>
+
+    <p>
+        One or more instalments in this instalment schedule failed to collect
+        successfully.
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Origin</th>
+                <th>Cause</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>gocardless</td>
+                <td>instalment_schedule_errored</td>
+                <td>Instalment schedule has errored</td>
+            </tr>
+            <tr>
+                <td>gocardless</td>
+                <td>instalment_schedule_errored_late</td>
+                <td>
+                    One or more payments in the instalment schedule has had a late
+                    failure
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3><code>resumed</code></h3>
+
+    <p>The instalment schedule has been rectified by remedying any failed payments.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Origin</th>
+                <th>Cause</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>gocardless</td>
+                <td>instalment_schedule_resumed</td>
+                <td>Instalment schedule has resumed</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3><code>completed</code></h3>
+
+    <p>
+        This instalment schedule has concluded. No further instalments will be
+        collected.
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Origin</th>
+                <th>Cause</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>gocardless</td>
+                <td>instalment_schedule_completed</td>
+                <td>Instalment schedule has completed</td>
+            </tr>
+        </tbody>
+    </table>
+</article>

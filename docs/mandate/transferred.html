@@ -1,0 +1,37 @@
+<h3><code>transferred</code></h3>
+<p>
+  The mandate has been transferred to a different bank account either using a
+  bank switching service (where it is supported) or with help from GoCardless
+  Support when a customer asks to change their bank account (we can make the
+  switch after verifying the details). The event will include
+  <code>links[previous_customer_bank_account]</code> and
+  <code>links[new_customer_bank_account]</code>. When using a bank switching
+  service the mandate may have been submitted again depending on how the
+  involved banks handled the transfer.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Cause</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>bank</td>
+      <td>bank_account_transferred</td>
+      <td>
+        The customer's bank account was transferred to a different bank or
+        building society.
+      </td>
+    </tr>
+    <tr>
+      <td>api</td>
+      <td>mandate_transferred</td>
+      <td>
+        This mandate was transferred to a new bank account through GoCardless.
+      </td>
+    </tr>
+  </tbody>
+</table>

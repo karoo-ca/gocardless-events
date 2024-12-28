@@ -1,0 +1,29 @@
+<h3><code>resubmission_requested</code></h3>
+<p>
+  A request to resubmit the payment was made by the payment retry endpoint. This
+  can also mean that the payment was automatically scheduled for resubmission by
+  GoCardless if you have opted in for the intelligent retries feature.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Cause</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>api</td>
+      <td>payment_retried</td>
+      <td>An attempt to retry this payment was requested.</td>
+    </tr>
+    <tr>
+      <td>gocardless</td>
+      <td>payment_autoretried</td>
+      <td>
+        The payment was scheduled for resubmission automatically by GoCardless.
+      </td>
+    </tr>
+  </tbody>
+</table>

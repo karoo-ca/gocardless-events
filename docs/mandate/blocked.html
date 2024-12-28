@@ -1,0 +1,37 @@
+<h3><code>blocked</code></h3>
+<p>
+  The mandate has been blocked because the customer's details matched against an
+  entry in either our global blocklist or the blocklist populated by you. This
+  mandate cannot be unblocked and no payments can be created against it. If you
+  still wish to collect payments from this customer you will need to remove
+  their details from any blocks you have created and ask them to set up a new
+  mandate. If you contacted GoCardless to block the customer's details you will
+  need to make a request to unblock them.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Cause</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>gocardless</td>
+      <td>mandate_blocked</td>
+      <td>
+        The mandate has been blocked because the customer's details matched
+        against an entry in the blocklist populated by you.
+      </td>
+    </tr>
+    <tr>
+      <td>gocardless</td>
+      <td>mandate_blocked_by_gocardless</td>
+      <td>
+        The mandate has been blocked because the customer's details matched
+        against an entry in our global blocklist.
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,26 @@
+<h3><code>confirmed</code></h3>
+<p>
+  The payment has been collected from the customer's bank account and is now
+  being held by GoCardless. It can take up to 5 working days for a payment to be
+  collected and will then be held for a short time before becoming
+  <code>paid_out</code>.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Cause</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>gocardless</td>
+      <td>payment_confirmed</td>
+      <td>
+        Enough time has passed since the payment was submitted for the banks to
+        return an error so this payment is now confirmed.
+      </td>
+    </tr>
+  </tbody>
+</table>
