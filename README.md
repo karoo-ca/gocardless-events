@@ -1,11 +1,15 @@
 # gocardless event schemas
 
-Cleaned docs of all Gocardless events
+Type-safe Python models for for all GoCardless events (using Pydantic).
 
-1. collect html article snippets from gocardless API event docs for `./raw_data/`
+1. collect html article snippets from gocardless API event docs for `./raw_data/` and clean the html so it's minimal (no `<a>` tags, no `class=`, `id=`, etc.)
 1. run `split_simple.py` on each .html to split into 1 file per event into `./docs/`
-1. run `generate_schema.py` to convert all split elements into a json format `./schema.json`
-1. `generate_models.py` converts the json format into python modules with pydantic models in `./models/`
+1. run `generate_schema.py` to convert all split elements into a json blob `./schema.json`
+1. `generate_models.py` converts the json schema into python modules with pydantic models in `./models/`
+
+> [!NOTE]
+>
+> This doesn't use a standard json-schema, that seemed like more effort (although probably would be better)
 
 ```sh
 uv run ruff format .
