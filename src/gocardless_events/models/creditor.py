@@ -5,6 +5,77 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
+class AccountAutoFrozenAccountAutoFrozenGocardlessDetail(BaseModel):
+    """
+    This creditor account has been automatically frozen and had restrictions applied.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["account_auto_frozen"]
+    description: str
+
+
+AccountAutoFrozenAccountAutoFrozenDetail = (
+    AccountAutoFrozenAccountAutoFrozenGocardlessDetail
+)
+
+
+class UpdatedCreditorUpdatedGocardlessDetail(BaseModel):
+    """
+    This creditor has been updated.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["creditor_updated"]
+    description: str
+
+
+UpdatedCreditorUpdatedDetail = UpdatedCreditorUpdatedGocardlessDetail
+
+
+class AccountAutoFrozenRevertedAccountAutoFrozenRevertedGocardlessDetail(BaseModel):
+    """
+    The restrictions on this creditor account have been removed.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["account_auto_frozen_reverted"]
+    description: str
+
+
+AccountAutoFrozenRevertedAccountAutoFrozenRevertedDetail = (
+    AccountAutoFrozenRevertedAccountAutoFrozenRevertedGocardlessDetail
+)
+
+
+class BouncedPayoutBouncedPayoutGocardlessDetail(BaseModel):
+    """
+    A payout for this creditor has failed. Please retry the payout or contact your bank for more information.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["bounced_payout"]
+    description: str
+
+
+BouncedPayoutBouncedPayoutDetail = BouncedPayoutBouncedPayoutGocardlessDetail
+
+
+class NewPayoutCurrencyAddedNewPayoutCurrencyAddedGocardlessDetail(BaseModel):
+    """
+    This creditor has added a new payout currency.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["new_payout_currency_added"]
+    description: str
+
+
+NewPayoutCurrencyAddedNewPayoutCurrencyAddedDetail = (
+    NewPayoutCurrencyAddedNewPayoutCurrencyAddedGocardlessDetail
+)
+
+
 class CreditorAccountAutoFrozen(BaseModel):
     """
     This creditor account has been automatically frozen and had restrictions applied.
@@ -14,7 +85,7 @@ class CreditorAccountAutoFrozen(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["creditors"]
     action: Literal["account_auto_frozen"]
-    details: CreditorAccountAutoFrozenAccountAutoFrozenDetail
+    details: AccountAutoFrozenAccountAutoFrozenDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -29,7 +100,7 @@ class CreditorUpdated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["creditors"]
     action: Literal["updated"]
-    details: CreditorUpdatedCreditorUpdatedDetail
+    details: UpdatedCreditorUpdatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -44,7 +115,7 @@ class CreditorAccountAutoFrozenReverted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["creditors"]
     action: Literal["account_auto_frozen_reverted"]
-    details: CreditorAccountAutoFrozenRevertedAccountAutoFrozenRevertedDetail
+    details: AccountAutoFrozenRevertedAccountAutoFrozenRevertedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -59,7 +130,7 @@ class CreditorBouncedPayout(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["creditors"]
     action: Literal["bounced_payout"]
-    details: CreditorBouncedPayoutBouncedPayoutDetail
+    details: BouncedPayoutBouncedPayoutDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -74,60 +145,10 @@ class CreditorNewPayoutCurrencyAdded(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["creditors"]
     action: Literal["new_payout_currency_added"]
-    details: CreditorNewPayoutCurrencyAddedNewPayoutCurrencyAddedDetail
+    details: NewPayoutCurrencyAddedNewPayoutCurrencyAddedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
-
-
-class CreditorAccountAutoFrozenAccountAutoFrozenDetail(BaseModel):
-    """
-    This creditor account has been automatically frozen and had restrictions applied.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["account_auto_frozen"]
-    description: str
-
-
-class CreditorUpdatedCreditorUpdatedDetail(BaseModel):
-    """
-    This creditor has been updated.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["creditor_updated"]
-    description: str
-
-
-class CreditorAccountAutoFrozenRevertedAccountAutoFrozenRevertedDetail(BaseModel):
-    """
-    The restrictions on this creditor account have been removed.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["account_auto_frozen_reverted"]
-    description: str
-
-
-class CreditorBouncedPayoutBouncedPayoutDetail(BaseModel):
-    """
-    A payout for this creditor has failed. Please retry the payout or contact your bank for more information.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["bounced_payout"]
-    description: str
-
-
-class CreditorNewPayoutCurrencyAddedNewPayoutCurrencyAddedDetail(BaseModel):
-    """
-    This creditor has added a new payout currency.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["new_payout_currency_added"]
-    description: str
 
 
 CreditorType = Annotated[
@@ -138,5 +159,4 @@ CreditorType = Annotated[
     | CreditorNewPayoutCurrencyAdded,
     Field(..., discriminator="action"),
 ]
-
 Creditor = RootModel[CreditorType]

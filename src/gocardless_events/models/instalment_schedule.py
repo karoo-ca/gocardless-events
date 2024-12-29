@@ -5,6 +5,163 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
+class ResumedInstalmentScheduleResumedGocardlessDetail(BaseModel):
+    """
+    Instalment schedule has resumed
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["instalment_schedule_resumed"]
+    description: str
+
+
+ResumedInstalmentScheduleResumedDetail = (
+    ResumedInstalmentScheduleResumedGocardlessDetail
+)
+
+
+class CreationFailedInstalmentScheduleCreationFailedApiDetail(BaseModel):
+    """
+    Instalment schedule failed to be created
+    """
+
+    origin: Literal["api"]
+    cause: Literal["instalment_schedule_creation_failed"]
+    description: str
+
+
+CreationFailedInstalmentScheduleCreationFailedDetail = (
+    CreationFailedInstalmentScheduleCreationFailedApiDetail
+)
+
+
+class ErroredInstalmentScheduleErroredGocardlessDetail(BaseModel):
+    """
+    Instalment schedule has errored
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["instalment_schedule_errored"]
+    description: str
+
+
+ErroredInstalmentScheduleErroredDetail = (
+    ErroredInstalmentScheduleErroredGocardlessDetail
+)
+
+
+class ErroredInstalmentScheduleErroredLateGocardlessDetail(BaseModel):
+    """
+    One or more payments in the instalment schedule has had a late failure
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["instalment_schedule_errored_late"]
+    description: str
+
+
+ErroredInstalmentScheduleErroredLateDetail = (
+    ErroredInstalmentScheduleErroredLateGocardlessDetail
+)
+
+
+class CompletedInstalmentScheduleCompletedGocardlessDetail(BaseModel):
+    """
+    Instalment schedule has completed
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["instalment_schedule_completed"]
+    description: str
+
+
+CompletedInstalmentScheduleCompletedDetail = (
+    CompletedInstalmentScheduleCompletedGocardlessDetail
+)
+
+
+class CreatedInstalmentScheduleCreatedApiDetail(BaseModel):
+    """
+    Instalment schedule has been created via the API
+    """
+
+    origin: Literal["api"]
+    cause: Literal["instalment_schedule_created"]
+    description: str
+
+
+CreatedInstalmentScheduleCreatedDetail = CreatedInstalmentScheduleCreatedApiDetail
+
+
+class CancelledInstalmentScheduleCancelledApiDetail(BaseModel):
+    """
+    Instalment schedule has been cancelled
+    """
+
+    origin: Literal["api"]
+    cause: Literal["instalment_schedule_cancelled"]
+    description: str
+
+
+CancelledInstalmentScheduleCancelledDetail = (
+    CancelledInstalmentScheduleCancelledApiDetail
+)
+
+
+class CancelledMandateCancelledGocardlessDetail(BaseModel):
+    """
+    Instalment schedule has been cancelled
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_cancelled"]
+    description: str
+
+
+CancelledMandateCancelledDetail = CancelledMandateCancelledGocardlessDetail
+
+
+class CancelledMandateFailedGocardlessDetail(BaseModel):
+    """
+    Instalment schedule has been cancelled
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_failed"]
+    description: str
+
+
+CancelledMandateFailedDetail = CancelledMandateFailedGocardlessDetail
+
+
+class CancelledMandateSuspendedByPayerGocardlessDetail(BaseModel):
+    """
+    Instalment schedule has been cancelled
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_suspended_by_payer"]
+    description: str
+
+
+CancelledMandateSuspendedByPayerDetail = (
+    CancelledMandateSuspendedByPayerGocardlessDetail
+)
+
+
+class CancelledMandateExpiredGocardlessDetail(BaseModel):
+    """
+    Instalment schedule has been cancelled
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_expired"]
+    description: str
+
+
+CancelledMandateExpiredDetail = CancelledMandateExpiredGocardlessDetail
+
+
 class InstalmentScheduleResumed(BaseModel):
     """
     The instalment schedule has been rectified by remedying any failed payments.
@@ -14,7 +171,7 @@ class InstalmentScheduleResumed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["instalment_schedules"]
     action: Literal["resumed"]
-    details: InstalmentScheduleResumedInstalmentScheduleResumedDetail
+    details: ResumedInstalmentScheduleResumedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -29,7 +186,7 @@ class InstalmentScheduleCreationFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["instalment_schedules"]
     action: Literal["creation_failed"]
-    details: InstalmentScheduleCreationFailedInstalmentScheduleCreationFailedDetail
+    details: CreationFailedInstalmentScheduleCreationFailedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -45,8 +202,8 @@ class InstalmentScheduleErrored(BaseModel):
     resource_type: Literal["instalment_schedules"]
     action: Literal["errored"]
     details: Annotated[
-        InstalmentScheduleErroredInstalmentScheduleErroredDetail
-        | InstalmentScheduleErroredInstalmentScheduleErroredLateDetail,
+        ErroredInstalmentScheduleErroredDetail
+        | ErroredInstalmentScheduleErroredLateDetail,
         Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
@@ -63,7 +220,7 @@ class InstalmentScheduleCompleted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["instalment_schedules"]
     action: Literal["completed"]
-    details: InstalmentScheduleCompletedInstalmentScheduleCompletedDetail
+    details: CompletedInstalmentScheduleCompletedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -78,7 +235,7 @@ class InstalmentScheduleCreated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["instalment_schedules"]
     action: Literal["created"]
-    details: InstalmentScheduleCreatedInstalmentScheduleCreatedDetail
+    details: CreatedInstalmentScheduleCreatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -94,126 +251,16 @@ class InstalmentScheduleCancelled(BaseModel):
     resource_type: Literal["instalment_schedules"]
     action: Literal["cancelled"]
     details: Annotated[
-        InstalmentScheduleCancelledInstalmentScheduleCancelledDetail
-        | InstalmentScheduleCancelledMandateCancelledDetail
-        | InstalmentScheduleCancelledMandateFailedDetail
-        | InstalmentScheduleCancelledMandateSuspendedByPayerDetail
-        | InstalmentScheduleCancelledMandateExpiredDetail,
+        CancelledInstalmentScheduleCancelledDetail
+        | CancelledMandateCancelledDetail
+        | CancelledMandateFailedDetail
+        | CancelledMandateSuspendedByPayerDetail
+        | CancelledMandateExpiredDetail,
         Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
-
-
-class InstalmentScheduleResumedInstalmentScheduleResumedDetail(BaseModel):
-    """
-    Instalment schedule has resumed
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["instalment_schedule_resumed"]
-    description: str
-
-
-class InstalmentScheduleCreationFailedInstalmentScheduleCreationFailedDetail(BaseModel):
-    """
-    Instalment schedule failed to be created
-    """
-
-    origin: Literal["api"]
-    cause: Literal["instalment_schedule_creation_failed"]
-    description: str
-
-
-class InstalmentScheduleErroredInstalmentScheduleErroredDetail(BaseModel):
-    """
-    Instalment schedule has errored
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["instalment_schedule_errored"]
-    description: str
-
-
-class InstalmentScheduleErroredInstalmentScheduleErroredLateDetail(BaseModel):
-    """
-    One or more payments in the instalment schedule has had a late failure
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["instalment_schedule_errored_late"]
-    description: str
-
-
-class InstalmentScheduleCompletedInstalmentScheduleCompletedDetail(BaseModel):
-    """
-    Instalment schedule has completed
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["instalment_schedule_completed"]
-    description: str
-
-
-class InstalmentScheduleCreatedInstalmentScheduleCreatedDetail(BaseModel):
-    """
-    Instalment schedule has been created via the API
-    """
-
-    origin: Literal["api"]
-    cause: Literal["instalment_schedule_created"]
-    description: str
-
-
-class InstalmentScheduleCancelledInstalmentScheduleCancelledDetail(BaseModel):
-    """
-    Instalment schedule has been cancelled
-    """
-
-    origin: Literal["api"]
-    cause: Literal["instalment_schedule_cancelled"]
-    description: str
-
-
-class InstalmentScheduleCancelledMandateCancelledDetail(BaseModel):
-    """
-    Instalment schedule has been cancelled
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["mandate_cancelled"]
-    description: str
-
-
-class InstalmentScheduleCancelledMandateFailedDetail(BaseModel):
-    """
-    Instalment schedule has been cancelled
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["mandate_failed"]
-    description: str
-
-
-class InstalmentScheduleCancelledMandateSuspendedByPayerDetail(BaseModel):
-    """
-    Instalment schedule has been cancelled
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["mandate_suspended_by_payer"]
-    description: str
-
-
-class InstalmentScheduleCancelledMandateExpiredDetail(BaseModel):
-    """
-    Instalment schedule has been cancelled
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["mandate_expired"]
-    description: str
 
 
 InstalmentScheduleType = Annotated[
@@ -225,5 +272,4 @@ InstalmentScheduleType = Annotated[
     | InstalmentScheduleCancelled,
     Field(..., discriminator="action"),
 ]
-
 InstalmentSchedule = RootModel[InstalmentScheduleType]

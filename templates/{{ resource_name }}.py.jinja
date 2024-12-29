@@ -1,4 +1,96 @@
-{%- for resource_name, resource_list in schema.items() -%}
+{% macro generate_resource_item_class(resource_item, resource_singular, resource_name, resource_list) %}
+class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
+    """
+    {{ resource_item.description.replace("‘", "'") }}
+    """
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["{{ resource_name }}"]
+    action: Literal["{{ resource_item.action }}"]
+    {%- set causes = [] -%} {# Collect unique causes for the current action #}
+    {%- for item in resource_list if item.action == resource_item.action %}
+        {%- for detail in item.details %}
+            {%- if detail.cause not in causes %}
+                {%- do causes.append(detail.cause) -%}
+            {%- endif %}
+        {%- endfor %}
+    {%- endfor %}
+    {%- if causes|length == 1 %} {# Define the details field based on the number of causes #}
+    details: {{ resource_item.action | to_pascal }}{{ causes[0] | to_pascal }}Detail
+    {%- else %}
+    details: Annotated[
+        {%- for cause in causes %}
+        {{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail{% if not loop.last %} |{% endif %}
+        {%- endfor %},
+        Field(..., discriminator="cause")
+    ]
+    {%- endif %}
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
+    links: dict[str, Any]
+{% endmacro %}
+
+{% macro generate_detail_classes(resource_list, resource_item, resource_singular) %}
+{# Collect all details for the current action, grouped by cause #}
+{%- set causes_details = {} -%}
+{%- for item in resource_list if item.action == resource_item.action %}
+    {%- for detail in item.details %}
+        {%- set cause = detail.cause %}
+        {%- if causes_details[cause] is defined %}
+            {%- do causes_details[cause].append(detail) %}
+        {%- else %}
+            {%- set causes_details = causes_details.update({cause: [detail]}) or causes_details %}
+        {%- endif %}
+    {%- endfor %}
+{%- endfor %}
+{# Generate the detail classes for each cause #}
+{%- for cause, details in causes_details.items() %}
+{# Now group details by origin #}
+{%- set origins_details = {} -%}
+{%- for detail in details %}
+    {%- set origin = detail.origin %}
+    {%- if origins_details[origin] is defined %}
+        {%- do origins_details[origin].append(detail) %}
+    {%- else %}
+        {%- set origins_details = origins_details.update({origin: [detail]}) or origins_details %}
+    {%- endif %}
+{%- endfor %}
+{%- for origin, origin_details in origins_details.items() %}
+class {{ resource_item.action | to_pascal }}{{ cause | to_pascal }}{{ origin | to_pascal }}Detail(BaseModel):
+    """
+    {{ origin_details[0].description.replace("‘", "'") }}
+    """
+    origin: Literal["{{ origin }}"]
+    cause: Literal["{{ cause }}"]
+    {%- for key in origin_details[0].keys() %}
+        {%- if key not in ['origin', 'cause'] %}
+    {{ key }}: str
+        {%- endif %}
+    {%- endfor %}
+{%- endfor %}
+{# Now, define the Detail type for this cause #}
+{%- if origins_details | length == 1 %}
+{{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail = {{ resource_item.action | to_pascal }}{{ cause | to_pascal }}{{ origins_details.keys() | list | first | to_pascal }}Detail
+{%- else %}
+{{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail = Annotated[
+    {%- for origin in origins_details.keys() %}
+    {{ resource_item.action | to_pascal }}{{ cause | to_pascal }}{{ origin | to_pascal }}Detail{% if not loop.last %} |{% endif %}
+    {%- endfor %},
+    Field(..., discriminator="origin"),
+]
+{%- endif %}
+{%- endfor %}
+{% endmacro %}
+
+{% macro generate_types(resource_list, resource_singular) %}
+{{ resource_singular }}Type = Annotated[
+    {%- for resource_item in resource_list %}
+    {{ resource_singular }}{{ resource_item.action | to_pascal }}{% if not loop.last %} |{% endif %}
+    {%- endfor %},
+    Field(..., discriminator="action")
+]
+{{ resource_singular }} = RootModel[{{ resource_singular }}Type]
+{% endmacro %}
 {# just for debugging, this shows the json input
 """
 "{{ resource_name }}": [
@@ -26,97 +118,20 @@ from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
-{% macro generate_resource_item_class(resource_item, resource_singular, resource_name, resource_list) %}
-class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
-    """
-    {{ resource_item.description.replace("‘", "'") }}
-    """
-    id: str
-    created_at: AwareDatetime
-    resource_type: Literal["{{ resource_name }}"]
-    action: Literal["{{ resource_item.action }}"]
-    {%- set causes = [] -%} {# Collect unique causes for the current action #}
-    {%- for item in resource_list if item.action == resource_item.action %}
-        {%- for detail in item.details %}
-            {%- if detail.cause not in causes %}
-                {%- do causes.append(detail.cause) -%}
-            {%- endif %}
-        {%- endfor %}
-    {%- endfor %}
-    {%- if causes|length == 1 %} {# Define the details field based on the number of causes #}
-    details: {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ causes[0] | to_pascal }}Detail
-    {%- else %}
-    details: Annotated[
-        {%- for cause in causes %}
-        {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail{% if not loop.last %} |{% endif %}
-        {%- endfor %},
-        Field(..., discriminator="cause")
-    ]
-    {%- endif %}
-    metadata: dict[str, Any]
-    resource_metadata: dict[str, Any] | None = None
-    links: dict[str, Any]
-{% endmacro %}
-
-{% macro generate_detail_classes(resource_list, resource_item, resource_singular) %}
-{# Collect all details for the current action, grouped by cause #}
-{%- set causes_details = {} -%}
-{%- for item in resource_list if item.action == resource_item.action %}
-    {%- for detail in item.details %}
-        {%- set cause = detail.cause %}
-        {%- if causes_details[cause] is defined %}
-            {%- do causes_details[cause].append(detail) %}
-        {%- else %}
-            {%- set causes_details = causes_details.update({cause: [detail]}) or causes_details %}
-        {%- endif %}
-    {%- endfor %}
-{%- endfor %}
-
-{# Generate the detail classes for each cause #}
-{%- for cause, details in causes_details.items() %}
-class {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail(BaseModel):
-    """
-    {{ details[0].description.replace("‘", "'") }}
-    """
-    {# Collect all unique origins #}
-    {%- set origins = details | map(attribute='origin') | list %}
-    {%- set unique_origins = origins | unique %}
-    {%- set origins_literal = unique_origins | join('", "') %}
-    origin: Literal["{{ origins_literal }}"]
-    cause: Literal["{{ cause }}"]
-    {%- for key in details[0].keys() %} {# Include other fields #}
-        {%- if key not in ['origin', 'cause'] %}
-    {{ key }}: str
-        {%- endif %}
-    {%- endfor %}
-{%- endfor %}
-{% endmacro %}
-
-{% macro generate_types(resource_list, resource_singular) %}
-{{ resource_singular }}Type = Annotated[
-    {%- for resource_item in resource_list %}
-    {{ resource_singular }}{{ resource_item.action | to_pascal }}{% if not loop.last %} |{% endif %}
-    {%- endfor %},
-    Field(..., discriminator="action")
-]
-
-{{ resource_singular }} = RootModel[{{ resource_singular }}Type]
-{% endmacro %}
-
+{%- for resource_name, resource_list in schema.items() -%}
 {%- set resource_singular = resource_name.rstrip('s') | to_pascal %}
 {%- set actions = resource_list | map(attribute='action') | list %}
-
-{# Generate the resource item classes #}
-{%- for resource_item in resource_list %}
-{{ generate_resource_item_class(resource_item, resource_singular, resource_name, resource_list) }}
-{%- endfor %}
 
 {# Generate the detail classes #}
 {%- for resource_item in resource_list %}
 {{ generate_detail_classes(resource_list, resource_item, resource_singular) }}
 {%- endfor %}
 
+{# Generate the resource item classes #}
+{%- for resource_item in resource_list %}
+{{ generate_resource_item_class(resource_item, resource_singular, resource_name, resource_list) }}
+{%- endfor %}
+
 {# Generate the type annotations #}
 {{ generate_types(resource_list, resource_singular) }}
-
 {%- endfor %}

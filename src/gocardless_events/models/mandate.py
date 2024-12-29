@@ -5,6 +5,667 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
+class ReinstatedMandateReinstatedGocardlessDetail(BaseModel):
+    """
+    The time window after submission for the banks to refuse a mandate has ended without any errors being received so this mandate is now active.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_reinstated"]
+    description: str
+
+
+class ReinstatedMandateReinstatedBankDetail(BaseModel):
+    """
+    A cancelled mandate has been re-instated by the customer's bank.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["mandate_reinstated"]
+    description: str
+
+
+ReinstatedMandateReinstatedDetail = Annotated[
+    ReinstatedMandateReinstatedGocardlessDetail | ReinstatedMandateReinstatedBankDetail,
+    Field(..., discriminator="origin"),
+]
+
+
+class CustomerApprovalGrantedCustomerApprovalGrantedCustomerDetail(BaseModel):
+    """
+    The customer has granted approval for this mandate
+    """
+
+    origin: Literal["customer"]
+    cause: Literal["customer_approval_granted"]
+    description: str
+
+
+CustomerApprovalGrantedCustomerApprovalGrantedDetail = (
+    CustomerApprovalGrantedCustomerApprovalGrantedCustomerDetail
+)
+
+
+class ExpiredMandateExpiredGocardlessDetail(BaseModel):
+    """
+    The mandate is being marked as expired because no payments have been collected against it for the dormancy period of your service user number. If you have access to the mandate reinstation API endpoint you can use this to attempt to set this mandate up again.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_expired"]
+    description: str
+
+
+ExpiredMandateExpiredDetail = ExpiredMandateExpiredGocardlessDetail
+
+
+class ExpiredMandateCancelledBankDetail(BaseModel):
+    """
+    This mandate was cancelled by the customer or their bank.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["mandate_cancelled"]
+    description: str
+
+
+class ExpiredMandateCancelledGocardlessDetail(BaseModel):
+    """
+    The mandate has expired.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_cancelled"]
+    description: str
+
+
+ExpiredMandateCancelledDetail = Annotated[
+    ExpiredMandateCancelledBankDetail | ExpiredMandateCancelledGocardlessDetail,
+    Field(..., discriminator="origin"),
+]
+
+
+class ResubmissionRequestedResubmissionRequestedApiDetail(BaseModel):
+    """
+    An attempt to reinstate this mandate was requested.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["resubmission_requested"]
+    description: str
+
+
+ResubmissionRequestedResubmissionRequestedDetail = (
+    ResubmissionRequestedResubmissionRequestedApiDetail
+)
+
+
+class ResubmissionRequestedBankAccountTransferredBankDetail(BaseModel):
+    """
+    The customer's bank account was transferred to a different bank or building society.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["bank_account_transferred"]
+    description: str
+
+
+ResubmissionRequestedBankAccountTransferredDetail = (
+    ResubmissionRequestedBankAccountTransferredBankDetail
+)
+
+
+class FailedBankAccountClosedBankDetail(BaseModel):
+    """
+    This bank account has been closed as the customer is deceased.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["bank_account_closed"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+FailedBankAccountClosedDetail = FailedBankAccountClosedBankDetail
+
+
+class FailedReferToPayerBankDetail(BaseModel):
+    """
+    This mandate was cancelled due to a Notification of Change indicating the customer's account number or branch number was incorrect please contact the customer.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["refer_to_payer"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+FailedReferToPayerDetail = FailedReferToPayerBankDetail
+
+
+class FailedMandateCancelledBankDetail(BaseModel):
+    """
+    The mandate was already cancelled.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["mandate_cancelled"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+FailedMandateCancelledDetail = FailedMandateCancelledBankDetail
+
+
+class FailedAuthorisationDisputedBankDetail(BaseModel):
+    """
+    The mandate was already cancelled.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["authorisation_disputed"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+FailedAuthorisationDisputedDetail = FailedAuthorisationDisputedBankDetail
+
+
+class FailedInvalidBankDetailsBankDetail(BaseModel):
+    """
+    The specified bank account does not exist or was closed.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["invalid_bank_details"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+FailedInvalidBankDetailsDetail = FailedInvalidBankDetailsBankDetail
+
+
+class FailedDirectDebitNotEnabledBankDetail(BaseModel):
+    """
+    The bank account does not support Direct Debit.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["direct_debit_not_enabled"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+FailedDirectDebitNotEnabledDetail = FailedDirectDebitNotEnabledBankDetail
+
+
+class FailedOtherBankDetail(BaseModel):
+    """
+    This mandate has been cancelled because a payment under it failed.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["other"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+FailedOtherDetail = FailedOtherBankDetail
+
+
+class FailedReturnOnOdfiRequestBankDetail(BaseModel):
+    """
+    The mandate has been cancelled because a payment under it was charged back.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["return_on_odfi_request"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+FailedReturnOnOdfiRequestDetail = FailedReturnOnOdfiRequestBankDetail
+
+
+class FailedBankAccountTransferredBankDetail(BaseModel):
+    """
+    The customer's bank account was transferred to a different bank or building society.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["bank_account_transferred"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+FailedBankAccountTransferredDetail = FailedBankAccountTransferredBankDetail
+
+
+class FailedPaymentStoppedBankDetail(BaseModel):
+    """
+    The payment was stopped by the payer or their bank.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["payment_stopped"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+FailedPaymentStoppedDetail = FailedPaymentStoppedBankDetail
+
+
+class SubmittedMandateSubmittedGocardlessDetail(BaseModel):
+    """
+    The mandate has been submitted to the banks.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_submitted"]
+    description: str
+
+
+SubmittedMandateSubmittedDetail = SubmittedMandateSubmittedGocardlessDetail
+
+
+class SubmittedBankAccountTransferredBankDetail(BaseModel):
+    """
+    The customer's bank account was transferred to a different bank or building society.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["bank_account_transferred"]
+    description: str
+
+
+SubmittedBankAccountTransferredDetail = SubmittedBankAccountTransferredBankDetail
+
+
+class TransferredBankAccountTransferredBankDetail(BaseModel):
+    """
+    The customer's bank account was transferred to a different bank or building society.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["bank_account_transferred"]
+    description: str
+
+
+TransferredBankAccountTransferredDetail = TransferredBankAccountTransferredBankDetail
+
+
+class TransferredMandateTransferredApiDetail(BaseModel):
+    """
+    This mandate was transferred to a new bank account through GoCardless.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["mandate_transferred"]
+    description: str
+
+
+TransferredMandateTransferredDetail = TransferredMandateTransferredApiDetail
+
+
+class ConsumedMandateConsumedGocardlessDetail(BaseModel):
+    """
+    The mandate has been used to create a payment and has now been consumed. It cannot be used again.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_consumed"]
+    description: str
+
+
+ConsumedMandateConsumedDetail = ConsumedMandateConsumedGocardlessDetail
+
+
+class CustomerApprovalSkippedCustomerApprovalSkippedCustomerDetail(BaseModel):
+    """
+    The customer has skipped approval for this mandate
+    """
+
+    origin: Literal["customer"]
+    cause: Literal["customer_approval_skipped"]
+    description: str
+
+
+CustomerApprovalSkippedCustomerApprovalSkippedDetail = (
+    CustomerApprovalSkippedCustomerApprovalSkippedCustomerDetail
+)
+
+
+class ActiveMandateActivatedGocardlessDetail(BaseModel):
+    """
+    The time window after submission for the banks to refuse a mandate has ended without any errors being received so this mandate is now active.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_activated"]
+    description: str
+
+
+class ActiveMandateActivatedBankDetail(BaseModel):
+    """
+    The customer's bank has confirmed that this mandate has been activated.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["mandate_activated"]
+    description: str
+
+
+ActiveMandateActivatedDetail = Annotated[
+    ActiveMandateActivatedGocardlessDetail | ActiveMandateActivatedBankDetail,
+    Field(..., discriminator="origin"),
+]
+
+
+class CreatedMandateCreatedApiDetail(BaseModel):
+    """
+    Mandate created via the API.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["mandate_created"]
+    description: str
+
+
+class CreatedMandateCreatedGocardlessDetail(BaseModel):
+    """
+    Mandate created by a bulk change
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_created"]
+    description: str
+
+
+CreatedMandateCreatedDetail = Annotated[
+    CreatedMandateCreatedApiDetail | CreatedMandateCreatedGocardlessDetail,
+    Field(..., discriminator="origin"),
+]
+
+
+class BlockedMandateBlockedGocardlessDetail(BaseModel):
+    """
+    The mandate has been blocked because the customer's details matched against an entry in the blocklist populated by you.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_blocked"]
+    description: str
+
+
+BlockedMandateBlockedDetail = BlockedMandateBlockedGocardlessDetail
+
+
+class BlockedMandateBlockedByGocardlessGocardlessDetail(BaseModel):
+    """
+    The mandate has been blocked because the customer's details matched against an entry in our global blocklist.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_blocked_by_gocardless"]
+    description: str
+
+
+BlockedMandateBlockedByGocardlessDetail = (
+    BlockedMandateBlockedByGocardlessGocardlessDetail
+)
+
+
+class ReplacedSchemeIdentifierChangedGocardlessDetail(BaseModel):
+    """
+    The creditor has changed to a different scheme identifier so this mandate has been cancelled and replaced by a new one.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["scheme_identifier_changed"]
+    description: str
+
+
+ReplacedSchemeIdentifierChangedDetail = ReplacedSchemeIdentifierChangedGocardlessDetail
+
+
+class CancelledBankAccountClosedBankDetail(BaseModel):
+    """
+    This bank account has been closed as the customer is deceased.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["bank_account_closed"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+class CancelledBankAccountClosedApiDetail(BaseModel):
+    """
+    The customer's account was disabled at your request.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["bank_account_closed"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledBankAccountClosedDetail = Annotated[
+    CancelledBankAccountClosedBankDetail | CancelledBankAccountClosedApiDetail,
+    Field(..., discriminator="origin"),
+]
+
+
+class CancelledMandateCancelledBankDetail(BaseModel):
+    """
+    The mandate was cancelled at a bank branch.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["mandate_cancelled"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+class CancelledMandateCancelledApiDetail(BaseModel):
+    """
+    The mandate was cancelled at your request.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["mandate_cancelled"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+class CancelledMandateCancelledGocardlessDetail(BaseModel):
+    """
+    The mandate was cancelled at your request.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_cancelled"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledMandateCancelledDetail = Annotated[
+    CancelledMandateCancelledBankDetail
+    | CancelledMandateCancelledApiDetail
+    | CancelledMandateCancelledGocardlessDetail,
+    Field(..., discriminator="origin"),
+]
+
+
+class CancelledAuthorisationDisputedBankDetail(BaseModel):
+    """
+    The customer disputes having authorised you to set up a mandate with them.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["authorisation_disputed"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledAuthorisationDisputedDetail = CancelledAuthorisationDisputedBankDetail
+
+
+class CancelledInvalidBankDetailsBankDetail(BaseModel):
+    """
+    The specified bank account does not exist or was closed.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["invalid_bank_details"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledInvalidBankDetailsDetail = CancelledInvalidBankDetailsBankDetail
+
+
+class CancelledDirectDebitNotEnabledBankDetail(BaseModel):
+    """
+    The bank account does not support Direct Debit.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["direct_debit_not_enabled"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledDirectDebitNotEnabledDetail = CancelledDirectDebitNotEnabledBankDetail
+
+
+class CancelledReferToPayerBankDetail(BaseModel):
+    """
+    This mandate has been cancelled because a payment under it failed.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["refer_to_payer"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledReferToPayerDetail = CancelledReferToPayerBankDetail
+
+
+class CancelledReturnOnOdfiRequestBankDetail(BaseModel):
+    """
+    mandate_cancelled_because_payment_charged_back
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["return_on_odfi_request"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledReturnOnOdfiRequestDetail = CancelledReturnOnOdfiRequestBankDetail
+
+
+class CancelledBankAccountTransferredBankDetail(BaseModel):
+    """
+    The customer's bank account was transferred to a different bank or building society.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["bank_account_transferred"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledBankAccountTransferredDetail = CancelledBankAccountTransferredBankDetail
+
+
+class CancelledAccountBlockedForAnyFinancialTransactionBankDetail(BaseModel):
+    """
+    The bank account for this mandate was blocked. Any subscriptions and pending payments will also be cancelled.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["account_blocked_for_any_financial_transaction"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledAccountBlockedForAnyFinancialTransactionDetail = (
+    CancelledAccountBlockedForAnyFinancialTransactionBankDetail
+)
+
+
+class CancelledPaymentStoppedBankDetail(BaseModel):
+    """
+    The payment was stopped by the payer or their bank.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["payment_stopped"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledPaymentStoppedDetail = CancelledPaymentStoppedBankDetail
+
+
+class CancelledOtherBankDetail(BaseModel):
+    """
+    This mandate has been cancelled because a payment under it failed.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["other"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledOtherDetail = CancelledOtherBankDetail
+
+
+class CancelledInitialOneOffPaymentFailedGocardlessDetail(BaseModel):
+    """
+    This mandate has been cancelled because the initial faster payment failed
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["initial_one_off_payment_failed"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledInitialOneOffPaymentFailedDetail = (
+    CancelledInitialOneOffPaymentFailedGocardlessDetail
+)
+
+
 class MandateReinstated(BaseModel):
     """
     The mandate has become active again after it was cancelled or expired. This can be due to the customer's bank wishing to undo a cancellation or expiry notice they sent or because the mandate was successfully reinstated via the reinstate endpoint.
@@ -14,7 +675,7 @@ class MandateReinstated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["reinstated"]
-    details: MandateReinstatedMandateReinstatedDetail
+    details: ReinstatedMandateReinstatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -29,7 +690,7 @@ class MandateCustomerApprovalGranted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["customer_approval_granted"]
-    details: MandateCustomerApprovalGrantedCustomerApprovalGrantedDetail
+    details: CustomerApprovalGrantedCustomerApprovalGrantedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -45,7 +706,7 @@ class MandateExpired(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["expired"]
     details: Annotated[
-        MandateExpiredMandateExpiredDetail | MandateExpiredMandateCancelledDetail,
+        ExpiredMandateExpiredDetail | ExpiredMandateCancelledDetail,
         Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
@@ -63,8 +724,8 @@ class MandateResubmissionRequested(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["resubmission_requested"]
     details: Annotated[
-        MandateResubmissionRequestedResubmissionRequestedDetail
-        | MandateResubmissionRequestedBankAccountTransferredDetail,
+        ResubmissionRequestedResubmissionRequestedDetail
+        | ResubmissionRequestedBankAccountTransferredDetail,
         Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
@@ -82,16 +743,16 @@ class MandateFailed(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["failed"]
     details: Annotated[
-        MandateFailedBankAccountClosedDetail
-        | MandateFailedReferToPayerDetail
-        | MandateFailedMandateCancelledDetail
-        | MandateFailedAuthorisationDisputedDetail
-        | MandateFailedInvalidBankDetailsDetail
-        | MandateFailedDirectDebitNotEnabledDetail
-        | MandateFailedOtherDetail
-        | MandateFailedReturnOnOdfiRequestDetail
-        | MandateFailedBankAccountTransferredDetail
-        | MandateFailedPaymentStoppedDetail,
+        FailedBankAccountClosedDetail
+        | FailedReferToPayerDetail
+        | FailedMandateCancelledDetail
+        | FailedAuthorisationDisputedDetail
+        | FailedInvalidBankDetailsDetail
+        | FailedDirectDebitNotEnabledDetail
+        | FailedOtherDetail
+        | FailedReturnOnOdfiRequestDetail
+        | FailedBankAccountTransferredDetail
+        | FailedPaymentStoppedDetail,
         Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
@@ -109,8 +770,7 @@ class MandateSubmitted(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["submitted"]
     details: Annotated[
-        MandateSubmittedMandateSubmittedDetail
-        | MandateSubmittedBankAccountTransferredDetail,
+        SubmittedMandateSubmittedDetail | SubmittedBankAccountTransferredDetail,
         Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
@@ -128,8 +788,7 @@ class MandateTransferred(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["transferred"]
     details: Annotated[
-        MandateTransferredBankAccountTransferredDetail
-        | MandateTransferredMandateTransferredDetail,
+        TransferredBankAccountTransferredDetail | TransferredMandateTransferredDetail,
         Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
@@ -146,7 +805,7 @@ class MandateConsumed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["consumed"]
-    details: MandateConsumedMandateConsumedDetail
+    details: ConsumedMandateConsumedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -161,7 +820,7 @@ class MandateCustomerApprovalSkipped(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["customer_approval_skipped"]
-    details: MandateCustomerApprovalSkippedCustomerApprovalSkippedDetail
+    details: CustomerApprovalSkippedCustomerApprovalSkippedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -176,7 +835,7 @@ class MandateActive(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["active"]
-    details: MandateActiveMandateActivatedDetail
+    details: ActiveMandateActivatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -191,7 +850,7 @@ class MandateCreated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["created"]
-    details: MandateCreatedMandateCreatedDetail
+    details: CreatedMandateCreatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -207,8 +866,7 @@ class MandateBlocked(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["blocked"]
     details: Annotated[
-        MandateBlockedMandateBlockedDetail
-        | MandateBlockedMandateBlockedByGocardlessDetail,
+        BlockedMandateBlockedDetail | BlockedMandateBlockedByGocardlessDetail,
         Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
@@ -225,7 +883,7 @@ class MandateReplaced(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["replaced"]
-    details: MandateReplacedSchemeIdentifierChangedDetail
+    details: ReplacedSchemeIdentifierChangedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -241,457 +899,23 @@ class MandateCancelled(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["cancelled"]
     details: Annotated[
-        MandateCancelledBankAccountClosedDetail
-        | MandateCancelledMandateCancelledDetail
-        | MandateCancelledAuthorisationDisputedDetail
-        | MandateCancelledInvalidBankDetailsDetail
-        | MandateCancelledDirectDebitNotEnabledDetail
-        | MandateCancelledReferToPayerDetail
-        | MandateCancelledReturnOnOdfiRequestDetail
-        | MandateCancelledBankAccountTransferredDetail
-        | MandateCancelledAccountBlockedForAnyFinancialTransactionDetail
-        | MandateCancelledPaymentStoppedDetail
-        | MandateCancelledOtherDetail
-        | MandateCancelledInitialOneOffPaymentFailedDetail,
+        CancelledBankAccountClosedDetail
+        | CancelledMandateCancelledDetail
+        | CancelledAuthorisationDisputedDetail
+        | CancelledInvalidBankDetailsDetail
+        | CancelledDirectDebitNotEnabledDetail
+        | CancelledReferToPayerDetail
+        | CancelledReturnOnOdfiRequestDetail
+        | CancelledBankAccountTransferredDetail
+        | CancelledAccountBlockedForAnyFinancialTransactionDetail
+        | CancelledPaymentStoppedDetail
+        | CancelledOtherDetail
+        | CancelledInitialOneOffPaymentFailedDetail,
         Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
-
-
-class MandateReinstatedMandateReinstatedDetail(BaseModel):
-    """
-    The time window after submission for the banks to refuse a mandate has ended without any errors being received so this mandate is now active.
-    """
-
-    origin: Literal["gocardless", "bank"]
-    cause: Literal["mandate_reinstated"]
-    description: str
-
-
-class MandateCustomerApprovalGrantedCustomerApprovalGrantedDetail(BaseModel):
-    """
-    The customer has granted approval for this mandate
-    """
-
-    origin: Literal["customer"]
-    cause: Literal["customer_approval_granted"]
-    description: str
-
-
-class MandateExpiredMandateExpiredDetail(BaseModel):
-    """
-    The mandate is being marked as expired because no payments have been collected against it for the dormancy period of your service user number. If you have access to the mandate reinstation API endpoint you can use this to attempt to set this mandate up again.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["mandate_expired"]
-    description: str
-
-
-class MandateExpiredMandateCancelledDetail(BaseModel):
-    """
-    This mandate was cancelled by the customer or their bank.
-    """
-
-    origin: Literal["bank", "gocardless"]
-    cause: Literal["mandate_cancelled"]
-    description: str
-
-
-class MandateResubmissionRequestedResubmissionRequestedDetail(BaseModel):
-    """
-    An attempt to reinstate this mandate was requested.
-    """
-
-    origin: Literal["api"]
-    cause: Literal["resubmission_requested"]
-    description: str
-
-
-class MandateResubmissionRequestedBankAccountTransferredDetail(BaseModel):
-    """
-    The customer's bank account was transferred to a different bank or building society.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["bank_account_transferred"]
-    description: str
-
-
-class MandateFailedBankAccountClosedDetail(BaseModel):
-    """
-    This bank account has been closed as the customer is deceased.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["bank_account_closed"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateFailedReferToPayerDetail(BaseModel):
-    """
-    This mandate was cancelled due to a Notification of Change indicating the customer's account number or branch number was incorrect please contact the customer.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["refer_to_payer"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateFailedMandateCancelledDetail(BaseModel):
-    """
-    The mandate was already cancelled.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["mandate_cancelled"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateFailedAuthorisationDisputedDetail(BaseModel):
-    """
-    The mandate was already cancelled.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["authorisation_disputed"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateFailedInvalidBankDetailsDetail(BaseModel):
-    """
-    The specified bank account does not exist or was closed.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["invalid_bank_details"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateFailedDirectDebitNotEnabledDetail(BaseModel):
-    """
-    The bank account does not support Direct Debit.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["direct_debit_not_enabled"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateFailedOtherDetail(BaseModel):
-    """
-    This mandate has been cancelled because a payment under it failed.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["other"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateFailedReturnOnOdfiRequestDetail(BaseModel):
-    """
-    The mandate has been cancelled because a payment under it was charged back.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["return_on_odfi_request"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateFailedBankAccountTransferredDetail(BaseModel):
-    """
-    The customer's bank account was transferred to a different bank or building society.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["bank_account_transferred"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateFailedPaymentStoppedDetail(BaseModel):
-    """
-    The payment was stopped by the payer or their bank.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["payment_stopped"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateSubmittedMandateSubmittedDetail(BaseModel):
-    """
-    The mandate has been submitted to the banks.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["mandate_submitted"]
-    description: str
-
-
-class MandateSubmittedBankAccountTransferredDetail(BaseModel):
-    """
-    The customer's bank account was transferred to a different bank or building society.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["bank_account_transferred"]
-    description: str
-
-
-class MandateTransferredBankAccountTransferredDetail(BaseModel):
-    """
-    The customer's bank account was transferred to a different bank or building society.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["bank_account_transferred"]
-    description: str
-
-
-class MandateTransferredMandateTransferredDetail(BaseModel):
-    """
-    This mandate was transferred to a new bank account through GoCardless.
-    """
-
-    origin: Literal["api"]
-    cause: Literal["mandate_transferred"]
-    description: str
-
-
-class MandateConsumedMandateConsumedDetail(BaseModel):
-    """
-    The mandate has been used to create a payment and has now been consumed. It cannot be used again.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["mandate_consumed"]
-    description: str
-
-
-class MandateCustomerApprovalSkippedCustomerApprovalSkippedDetail(BaseModel):
-    """
-    The customer has skipped approval for this mandate
-    """
-
-    origin: Literal["customer"]
-    cause: Literal["customer_approval_skipped"]
-    description: str
-
-
-class MandateActiveMandateActivatedDetail(BaseModel):
-    """
-    The time window after submission for the banks to refuse a mandate has ended without any errors being received so this mandate is now active.
-    """
-
-    origin: Literal["gocardless", "bank"]
-    cause: Literal["mandate_activated"]
-    description: str
-
-
-class MandateCreatedMandateCreatedDetail(BaseModel):
-    """
-    Mandate created via the API.
-    """
-
-    origin: Literal["api", "gocardless"]
-    cause: Literal["mandate_created"]
-    description: str
-
-
-class MandateBlockedMandateBlockedDetail(BaseModel):
-    """
-    The mandate has been blocked because the customer's details matched against an entry in the blocklist populated by you.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["mandate_blocked"]
-    description: str
-
-
-class MandateBlockedMandateBlockedByGocardlessDetail(BaseModel):
-    """
-    The mandate has been blocked because the customer's details matched against an entry in our global blocklist.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["mandate_blocked_by_gocardless"]
-    description: str
-
-
-class MandateReplacedSchemeIdentifierChangedDetail(BaseModel):
-    """
-    The creditor has changed to a different scheme identifier so this mandate has been cancelled and replaced by a new one.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["scheme_identifier_changed"]
-    description: str
-
-
-class MandateCancelledBankAccountClosedDetail(BaseModel):
-    """
-    This bank account has been closed as the customer is deceased.
-    """
-
-    origin: Literal["bank", "api"]
-    cause: Literal["bank_account_closed"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateCancelledMandateCancelledDetail(BaseModel):
-    """
-    The mandate was cancelled at a bank branch.
-    """
-
-    origin: Literal["bank", "api", "gocardless"]
-    cause: Literal["mandate_cancelled"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateCancelledAuthorisationDisputedDetail(BaseModel):
-    """
-    The customer disputes having authorised you to set up a mandate with them.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["authorisation_disputed"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateCancelledInvalidBankDetailsDetail(BaseModel):
-    """
-    The specified bank account does not exist or was closed.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["invalid_bank_details"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateCancelledDirectDebitNotEnabledDetail(BaseModel):
-    """
-    The bank account does not support Direct Debit.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["direct_debit_not_enabled"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateCancelledReferToPayerDetail(BaseModel):
-    """
-    This mandate has been cancelled because a payment under it failed.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["refer_to_payer"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateCancelledReturnOnOdfiRequestDetail(BaseModel):
-    """
-    mandate_cancelled_because_payment_charged_back
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["return_on_odfi_request"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateCancelledBankAccountTransferredDetail(BaseModel):
-    """
-    The customer's bank account was transferred to a different bank or building society.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["bank_account_transferred"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateCancelledAccountBlockedForAnyFinancialTransactionDetail(BaseModel):
-    """
-    The bank account for this mandate was blocked. Any subscriptions and pending payments will also be cancelled.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["account_blocked_for_any_financial_transaction"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateCancelledPaymentStoppedDetail(BaseModel):
-    """
-    The payment was stopped by the payer or their bank.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["payment_stopped"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateCancelledOtherDetail(BaseModel):
-    """
-    This mandate has been cancelled because a payment under it failed.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["other"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class MandateCancelledInitialOneOffPaymentFailedDetail(BaseModel):
-    """
-    This mandate has been cancelled because the initial faster payment failed
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["initial_one_off_payment_failed"]
-    scheme: str
-    reason_code: str
-    description: str
 
 
 MandateType = Annotated[
@@ -711,5 +935,4 @@ MandateType = Annotated[
     | MandateCancelled,
     Field(..., discriminator="action"),
 ]
-
 Mandate = RootModel[MandateType]

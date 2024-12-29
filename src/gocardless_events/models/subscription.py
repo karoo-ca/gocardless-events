@@ -5,6 +5,469 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
+class CustomerApprovalGrantedCustomerApprovalGrantedCustomerDetail(BaseModel):
+    """
+    The customer granted approval for this subscription
+    """
+
+    origin: Literal["customer"]
+    cause: Literal["customer_approval_granted"]
+    description: str
+
+
+CustomerApprovalGrantedCustomerApprovalGrantedDetail = (
+    CustomerApprovalGrantedCustomerApprovalGrantedCustomerDetail
+)
+
+
+class FinishedSubscriptionFinishedGocardlessDetail(BaseModel):
+    """
+    The subscription has finished.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["subscription_finished"]
+    description: str
+
+
+FinishedSubscriptionFinishedDetail = FinishedSubscriptionFinishedGocardlessDetail
+
+
+class ResumedSubscriptionResumedApiDetail(BaseModel):
+    """
+    The subscription was resumed.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["subscription_resumed"]
+    description: str
+
+
+class ResumedSubscriptionResumedGocardlessDetail(BaseModel):
+    """
+    The subscription was resumed.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["subscription_resumed"]
+    description: str
+
+
+ResumedSubscriptionResumedDetail = Annotated[
+    ResumedSubscriptionResumedApiDetail | ResumedSubscriptionResumedGocardlessDetail,
+    Field(..., discriminator="origin"),
+]
+
+
+class AmendedSubscriptionAmendedApiDetail(BaseModel):
+    """
+    Subscription amount has been amended.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["subscription_amended"]
+    description: str
+
+
+AmendedSubscriptionAmendedDetail = AmendedSubscriptionAmendedApiDetail
+
+
+class CustomerApprovalDeniedCustomerApprovalDeniedCustomerDetail(BaseModel):
+    """
+    The customer denied approval for this subscription
+    """
+
+    origin: Literal["customer"]
+    cause: Literal["customer_approval_denied"]
+    description: str
+
+
+CustomerApprovalDeniedCustomerApprovalDeniedDetail = (
+    CustomerApprovalDeniedCustomerApprovalDeniedCustomerDetail
+)
+
+
+class PausedSubscriptionPausedApiDetail(BaseModel):
+    """
+    The subscription has been paused.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["subscription_paused"]
+    description: str
+
+
+class PausedSubscriptionPausedGocardlessDetail(BaseModel):
+    """
+    The subscription has been paused.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["subscription_paused"]
+    description: str
+
+
+PausedSubscriptionPausedDetail = Annotated[
+    PausedSubscriptionPausedApiDetail | PausedSubscriptionPausedGocardlessDetail,
+    Field(..., discriminator="origin"),
+]
+
+
+class ScheduledPauseCancelledScheduledPauseCancelledApiDetail(BaseModel):
+    """
+    An upcoming pause for this subscription has been cancelled.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["scheduled_pause_cancelled"]
+    description: str
+
+
+ScheduledPauseCancelledScheduledPauseCancelledDetail = (
+    ScheduledPauseCancelledScheduledPauseCancelledApiDetail
+)
+
+
+class ScheduledPauseScheduledPauseApiDetail(BaseModel):
+    """
+    The subscription has been scheduled to be paused at a future date.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["scheduled_pause"]
+    description: str
+
+
+ScheduledPauseScheduledPauseDetail = ScheduledPauseScheduledPauseApiDetail
+
+
+class CreatedSubscriptionCreatedApiDetail(BaseModel):
+    """
+    Subscription created via the API.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["subscription_created"]
+    description: str
+
+
+CreatedSubscriptionCreatedDetail = CreatedSubscriptionCreatedApiDetail
+
+
+class PaymentCreatedPaymentCreatedGocardlessDetail(BaseModel):
+    """
+    Payment created by a subscription.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["payment_created"]
+    description: str
+
+
+PaymentCreatedPaymentCreatedDetail = PaymentCreatedPaymentCreatedGocardlessDetail
+
+
+class ScheduledResumeScheduledResumeApiDetail(BaseModel):
+    """
+    This paused subscription has been scheduled to be resumed at a future date.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["scheduled_resume"]
+    description: str
+
+
+ScheduledResumeScheduledResumeDetail = ScheduledResumeScheduledResumeApiDetail
+
+
+class CancelledBankAccountClosedBankDetail(BaseModel):
+    """
+    This subscription was cancelled because the customer is deceased.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["bank_account_closed"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+class CancelledBankAccountClosedApiDetail(BaseModel):
+    """
+    The mandate for this subscription was cancelled at your request.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["bank_account_closed"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledBankAccountClosedDetail = Annotated[
+    CancelledBankAccountClosedBankDetail | CancelledBankAccountClosedApiDetail,
+    Field(..., discriminator="origin"),
+]
+
+
+class CancelledReturnOnOdfiRequestBankDetail(BaseModel):
+    """
+    This subscription has been cancelled because its mandate was cancelled.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["return_on_odfi_request"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledReturnOnOdfiRequestDetail = CancelledReturnOnOdfiRequestBankDetail
+
+
+class CancelledReferToPayerBankDetail(BaseModel):
+    """
+    This subscription has been cancelled because the bank details for its mandate are incorrect.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["refer_to_payer"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledReferToPayerDetail = CancelledReferToPayerBankDetail
+
+
+class CancelledMandateCancelledBankDetail(BaseModel):
+    """
+    This subscription was canceled because the customer cancelled the mandate at their bank.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["mandate_cancelled"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+class CancelledMandateCancelledApiDetail(BaseModel):
+    """
+    The subscription was cancelled because its mandate was cancelled at your request.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["mandate_cancelled"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+class CancelledMandateCancelledGocardlessDetail(BaseModel):
+    """
+    The mandate for this subscription was cancelled at your request.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_cancelled"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledMandateCancelledDetail = Annotated[
+    CancelledMandateCancelledBankDetail
+    | CancelledMandateCancelledApiDetail
+    | CancelledMandateCancelledGocardlessDetail,
+    Field(..., discriminator="origin"),
+]
+
+
+class CancelledInvalidBankDetailsBankDetail(BaseModel):
+    """
+    This subscription has been cancelled because the bank details for its mandate are incorrect.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["invalid_bank_details"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledInvalidBankDetailsDetail = CancelledInvalidBankDetailsBankDetail
+
+
+class CancelledDirectDebitNotEnabledBankDetail(BaseModel):
+    """
+    This subscription has been cancelled because the bank account it was going to be taken from does not support direct debit.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["direct_debit_not_enabled"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledDirectDebitNotEnabledDetail = CancelledDirectDebitNotEnabledBankDetail
+
+
+class CancelledAuthorisationDisputedBankDetail(BaseModel):
+    """
+    This subscription has been cancelled because the customer disputes authorising its mandate.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["authorisation_disputed"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledAuthorisationDisputedDetail = CancelledAuthorisationDisputedBankDetail
+
+
+class CancelledSubscriptionCancelledApiDetail(BaseModel):
+    """
+    The subscription has been cancelled at your request.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["subscription_cancelled"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledSubscriptionCancelledDetail = CancelledSubscriptionCancelledApiDetail
+
+
+class CancelledMandateExpiredGocardlessDetail(BaseModel):
+    """
+    The subscription was cancelled because its mandate has expired.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["mandate_expired"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledMandateExpiredDetail = CancelledMandateExpiredGocardlessDetail
+
+
+class CancelledBankAccountTransferredBankDetail(BaseModel):
+    """
+    The mandate for this subscription was cancelled as the customer asked their bank to transfer the mandate to a new account but the bank has failed to send GoCardless the new bank details.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["bank_account_transferred"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledBankAccountTransferredDetail = CancelledBankAccountTransferredBankDetail
+
+
+class CancelledAccountBlockedForAnyFinancialTransactionBankDetail(BaseModel):
+    """
+    This subscription has been cancelled because the bank account for its mandate was blocked.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["account_blocked_for_any_financial_transaction"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledAccountBlockedForAnyFinancialTransactionDetail = (
+    CancelledAccountBlockedForAnyFinancialTransactionBankDetail
+)
+
+
+class CancelledPlanCancelledApiDetail(BaseModel):
+    """
+    The subscription has been cancelled because the associated plan was cancelled.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["plan_cancelled"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledPlanCancelledDetail = CancelledPlanCancelledApiDetail
+
+
+class CancelledPaymentStoppedBankDetail(BaseModel):
+    """
+    The subscription was cancelled because the payment was stopped by the payer or their bank.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["payment_stopped"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledPaymentStoppedDetail = CancelledPaymentStoppedBankDetail
+
+
+class CancelledOtherBankDetail(BaseModel):
+    """
+    An error was received from the banks while setting up the mandate for this subscription.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["other"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledOtherDetail = CancelledOtherBankDetail
+
+
+class CancelledMandateSuspendedByPayerBankDetail(BaseModel):
+    """
+    The subscription has been cancelled because its mandate was suspended by payer.
+    """
+
+    origin: Literal["bank"]
+    cause: Literal["mandate_suspended_by_payer"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledMandateSuspendedByPayerDetail = CancelledMandateSuspendedByPayerBankDetail
+
+
+class CancelledInitialOneOffPaymentFailedGocardlessDetail(BaseModel):
+    """
+    This subscription has been cancelled because its mandate was cancelled.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["initial_one_off_payment_failed"]
+    scheme: str
+    reason_code: str
+    description: str
+
+
+CancelledInitialOneOffPaymentFailedDetail = (
+    CancelledInitialOneOffPaymentFailedGocardlessDetail
+)
+
+
 class SubscriptionCustomerApprovalGranted(BaseModel):
     """
     The subscription required additional approval from the customer before it could become active and that approval has been granted.
@@ -14,7 +477,7 @@ class SubscriptionCustomerApprovalGranted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["subscriptions"]
     action: Literal["customer_approval_granted"]
-    details: SubscriptionCustomerApprovalGrantedCustomerApprovalGrantedDetail
+    details: CustomerApprovalGrantedCustomerApprovalGrantedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -29,7 +492,7 @@ class SubscriptionFinished(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["subscriptions"]
     action: Literal["finished"]
-    details: SubscriptionFinishedSubscriptionFinishedDetail
+    details: FinishedSubscriptionFinishedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -44,7 +507,7 @@ class SubscriptionResumed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["subscriptions"]
     action: Literal["resumed"]
-    details: SubscriptionResumedSubscriptionResumedDetail
+    details: ResumedSubscriptionResumedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -59,7 +522,7 @@ class SubscriptionAmended(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["subscriptions"]
     action: Literal["amended"]
-    details: SubscriptionAmendedSubscriptionAmendedDetail
+    details: AmendedSubscriptionAmendedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -74,7 +537,7 @@ class SubscriptionCustomerApprovalDenied(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["subscriptions"]
     action: Literal["customer_approval_denied"]
-    details: SubscriptionCustomerApprovalDeniedCustomerApprovalDeniedDetail
+    details: CustomerApprovalDeniedCustomerApprovalDeniedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -89,7 +552,7 @@ class SubscriptionPaused(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["subscriptions"]
     action: Literal["paused"]
-    details: SubscriptionPausedSubscriptionPausedDetail
+    details: PausedSubscriptionPausedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -104,7 +567,7 @@ class SubscriptionScheduledPauseCancelled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["subscriptions"]
     action: Literal["scheduled_pause_cancelled"]
-    details: SubscriptionScheduledPauseCancelledScheduledPauseCancelledDetail
+    details: ScheduledPauseCancelledScheduledPauseCancelledDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -119,7 +582,7 @@ class SubscriptionScheduledPause(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["subscriptions"]
     action: Literal["scheduled_pause"]
-    details: SubscriptionScheduledPauseScheduledPauseDetail
+    details: ScheduledPauseScheduledPauseDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -134,7 +597,7 @@ class SubscriptionCreated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["subscriptions"]
     action: Literal["created"]
-    details: SubscriptionCreatedSubscriptionCreatedDetail
+    details: CreatedSubscriptionCreatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -149,7 +612,7 @@ class SubscriptionPaymentCreated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["subscriptions"]
     action: Literal["payment_created"]
-    details: SubscriptionPaymentCreatedPaymentCreatedDetail
+    details: PaymentCreatedPaymentCreatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -164,7 +627,7 @@ class SubscriptionScheduledResume(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["subscriptions"]
     action: Literal["scheduled_resume"]
-    details: SubscriptionScheduledResumeScheduledResumeDetail
+    details: ScheduledResumeScheduledResumeDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -180,329 +643,27 @@ class SubscriptionCancelled(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["cancelled"]
     details: Annotated[
-        SubscriptionCancelledBankAccountClosedDetail
-        | SubscriptionCancelledReturnOnOdfiRequestDetail
-        | SubscriptionCancelledReferToPayerDetail
-        | SubscriptionCancelledMandateCancelledDetail
-        | SubscriptionCancelledInvalidBankDetailsDetail
-        | SubscriptionCancelledDirectDebitNotEnabledDetail
-        | SubscriptionCancelledAuthorisationDisputedDetail
-        | SubscriptionCancelledSubscriptionCancelledDetail
-        | SubscriptionCancelledMandateExpiredDetail
-        | SubscriptionCancelledBankAccountTransferredDetail
-        | SubscriptionCancelledAccountBlockedForAnyFinancialTransactionDetail
-        | SubscriptionCancelledPlanCancelledDetail
-        | SubscriptionCancelledPaymentStoppedDetail
-        | SubscriptionCancelledOtherDetail
-        | SubscriptionCancelledMandateSuspendedByPayerDetail
-        | SubscriptionCancelledInitialOneOffPaymentFailedDetail,
+        CancelledBankAccountClosedDetail
+        | CancelledReturnOnOdfiRequestDetail
+        | CancelledReferToPayerDetail
+        | CancelledMandateCancelledDetail
+        | CancelledInvalidBankDetailsDetail
+        | CancelledDirectDebitNotEnabledDetail
+        | CancelledAuthorisationDisputedDetail
+        | CancelledSubscriptionCancelledDetail
+        | CancelledMandateExpiredDetail
+        | CancelledBankAccountTransferredDetail
+        | CancelledAccountBlockedForAnyFinancialTransactionDetail
+        | CancelledPlanCancelledDetail
+        | CancelledPaymentStoppedDetail
+        | CancelledOtherDetail
+        | CancelledMandateSuspendedByPayerDetail
+        | CancelledInitialOneOffPaymentFailedDetail,
         Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
-
-
-class SubscriptionCustomerApprovalGrantedCustomerApprovalGrantedDetail(BaseModel):
-    """
-    The customer granted approval for this subscription
-    """
-
-    origin: Literal["customer"]
-    cause: Literal["customer_approval_granted"]
-    description: str
-
-
-class SubscriptionFinishedSubscriptionFinishedDetail(BaseModel):
-    """
-    The subscription has finished.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["subscription_finished"]
-    description: str
-
-
-class SubscriptionResumedSubscriptionResumedDetail(BaseModel):
-    """
-    The subscription was resumed.
-    """
-
-    origin: Literal["api", "gocardless"]
-    cause: Literal["subscription_resumed"]
-    description: str
-
-
-class SubscriptionAmendedSubscriptionAmendedDetail(BaseModel):
-    """
-    Subscription amount has been amended.
-    """
-
-    origin: Literal["api"]
-    cause: Literal["subscription_amended"]
-    description: str
-
-
-class SubscriptionCustomerApprovalDeniedCustomerApprovalDeniedDetail(BaseModel):
-    """
-    The customer denied approval for this subscription
-    """
-
-    origin: Literal["customer"]
-    cause: Literal["customer_approval_denied"]
-    description: str
-
-
-class SubscriptionPausedSubscriptionPausedDetail(BaseModel):
-    """
-    The subscription has been paused.
-    """
-
-    origin: Literal["api", "gocardless"]
-    cause: Literal["subscription_paused"]
-    description: str
-
-
-class SubscriptionScheduledPauseCancelledScheduledPauseCancelledDetail(BaseModel):
-    """
-    An upcoming pause for this subscription has been cancelled.
-    """
-
-    origin: Literal["api"]
-    cause: Literal["scheduled_pause_cancelled"]
-    description: str
-
-
-class SubscriptionScheduledPauseScheduledPauseDetail(BaseModel):
-    """
-    The subscription has been scheduled to be paused at a future date.
-    """
-
-    origin: Literal["api"]
-    cause: Literal["scheduled_pause"]
-    description: str
-
-
-class SubscriptionCreatedSubscriptionCreatedDetail(BaseModel):
-    """
-    Subscription created via the API.
-    """
-
-    origin: Literal["api"]
-    cause: Literal["subscription_created"]
-    description: str
-
-
-class SubscriptionPaymentCreatedPaymentCreatedDetail(BaseModel):
-    """
-    Payment created by a subscription.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["payment_created"]
-    description: str
-
-
-class SubscriptionScheduledResumeScheduledResumeDetail(BaseModel):
-    """
-    This paused subscription has been scheduled to be resumed at a future date.
-    """
-
-    origin: Literal["api"]
-    cause: Literal["scheduled_resume"]
-    description: str
-
-
-class SubscriptionCancelledBankAccountClosedDetail(BaseModel):
-    """
-    This subscription was cancelled because the customer is deceased.
-    """
-
-    origin: Literal["bank", "api"]
-    cause: Literal["bank_account_closed"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledReturnOnOdfiRequestDetail(BaseModel):
-    """
-    This subscription has been cancelled because its mandate was cancelled.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["return_on_odfi_request"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledReferToPayerDetail(BaseModel):
-    """
-    This subscription has been cancelled because the bank details for its mandate are incorrect.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["refer_to_payer"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledMandateCancelledDetail(BaseModel):
-    """
-    This subscription was canceled because the customer cancelled the mandate at their bank.
-    """
-
-    origin: Literal["bank", "api", "gocardless"]
-    cause: Literal["mandate_cancelled"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledInvalidBankDetailsDetail(BaseModel):
-    """
-    This subscription has been cancelled because the bank details for its mandate are incorrect.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["invalid_bank_details"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledDirectDebitNotEnabledDetail(BaseModel):
-    """
-    This subscription has been cancelled because the bank account it was going to be taken from does not support direct debit.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["direct_debit_not_enabled"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledAuthorisationDisputedDetail(BaseModel):
-    """
-    This subscription has been cancelled because the customer disputes authorising its mandate.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["authorisation_disputed"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledSubscriptionCancelledDetail(BaseModel):
-    """
-    The subscription has been cancelled at your request.
-    """
-
-    origin: Literal["api"]
-    cause: Literal["subscription_cancelled"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledMandateExpiredDetail(BaseModel):
-    """
-    The subscription was cancelled because its mandate has expired.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["mandate_expired"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledBankAccountTransferredDetail(BaseModel):
-    """
-    The mandate for this subscription was cancelled as the customer asked their bank to transfer the mandate to a new account but the bank has failed to send GoCardless the new bank details.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["bank_account_transferred"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledAccountBlockedForAnyFinancialTransactionDetail(BaseModel):
-    """
-    This subscription has been cancelled because the bank account for its mandate was blocked.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["account_blocked_for_any_financial_transaction"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledPlanCancelledDetail(BaseModel):
-    """
-    The subscription has been cancelled because the associated plan was cancelled.
-    """
-
-    origin: Literal["api"]
-    cause: Literal["plan_cancelled"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledPaymentStoppedDetail(BaseModel):
-    """
-    The subscription was cancelled because the payment was stopped by the payer or their bank.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["payment_stopped"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledOtherDetail(BaseModel):
-    """
-    An error was received from the banks while setting up the mandate for this subscription.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["other"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledMandateSuspendedByPayerDetail(BaseModel):
-    """
-    The subscription has been cancelled because its mandate was suspended by payer.
-    """
-
-    origin: Literal["bank"]
-    cause: Literal["mandate_suspended_by_payer"]
-    scheme: str
-    reason_code: str
-    description: str
-
-
-class SubscriptionCancelledInitialOneOffPaymentFailedDetail(BaseModel):
-    """
-    This subscription has been cancelled because its mandate was cancelled.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["initial_one_off_payment_failed"]
-    scheme: str
-    reason_code: str
-    description: str
 
 
 SubscriptionType = Annotated[
@@ -520,5 +681,4 @@ SubscriptionType = Annotated[
     | SubscriptionCancelled,
     Field(..., discriminator="action"),
 ]
-
 Subscription = RootModel[SubscriptionType]

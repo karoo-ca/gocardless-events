@@ -5,22 +5,7 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
-class SchemeIdentifierActivated(BaseModel):
-    """
-    This scheme identifier has been activated.
-    """
-
-    id: str
-    created_at: AwareDatetime
-    resource_type: Literal["scheme_identifiers"]
-    action: Literal["activated"]
-    details: SchemeIdentifierActivatedSchemeIdentifierActivatedDetail
-    metadata: dict[str, Any]
-    resource_metadata: dict[str, Any] | None = None
-    links: dict[str, Any]
-
-
-class SchemeIdentifierActivatedSchemeIdentifierActivatedDetail(BaseModel):
+class ActivatedSchemeIdentifierActivatedGocardlessDetail(BaseModel):
     """
     This scheme identifier has been activated.
     """
@@ -30,8 +15,27 @@ class SchemeIdentifierActivatedSchemeIdentifierActivatedDetail(BaseModel):
     description: str
 
 
+ActivatedSchemeIdentifierActivatedDetail = (
+    ActivatedSchemeIdentifierActivatedGocardlessDetail
+)
+
+
+class SchemeIdentifierActivated(BaseModel):
+    """
+    This scheme identifier has been activated.
+    """
+
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["scheme_identifiers"]
+    action: Literal["activated"]
+    details: ActivatedSchemeIdentifierActivatedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
+    links: dict[str, Any]
+
+
 SchemeIdentifierType = Annotated[
     SchemeIdentifierActivated, Field(..., discriminator="action")
 ]
-
 SchemeIdentifier = RootModel[SchemeIdentifierType]

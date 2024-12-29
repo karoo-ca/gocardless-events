@@ -5,6 +5,86 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
+class FundsReturnedRefundFundsReturnedGocardlessDetail(BaseModel):
+    """
+    The funds for the refund have been returned to you.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["refund_funds_returned"]
+    description: str
+
+
+FundsReturnedRefundFundsReturnedDetail = (
+    FundsReturnedRefundFundsReturnedGocardlessDetail
+)
+
+
+class FailedRefundFailedGocardlessDetail(BaseModel):
+    """
+    The refund did not reach your customer the funds will be returned to you.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["refund_failed"]
+    description: str
+
+
+FailedRefundFailedDetail = FailedRefundFailedGocardlessDetail
+
+
+class PaidRefundPaidGocardlessDetail(BaseModel):
+    """
+    The refund has been paid to your customer.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["refund_paid"]
+    description: str
+
+
+PaidRefundPaidDetail = PaidRefundPaidGocardlessDetail
+
+
+class CreatedPaymentRefundedApiDetail(BaseModel):
+    """
+    The refund has been created and will be submitted in the next batch.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["payment_refunded"]
+    description: str
+
+
+CreatedPaymentRefundedDetail = CreatedPaymentRefundedApiDetail
+
+
+class CreatedRefundCreatedApiDetail(BaseModel):
+    """
+    The refund has been created and will be submitted in the next batch.
+    """
+
+    origin: Literal["api"]
+    cause: Literal["refund_created"]
+    description: str
+
+
+CreatedRefundCreatedDetail = CreatedRefundCreatedApiDetail
+
+
+class RefundSettledRefundSettledGocardlessDetail(BaseModel):
+    """
+    The refund has been deducted from a payout.
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["refund_settled"]
+    description: str
+
+
+RefundSettledRefundSettledDetail = RefundSettledRefundSettledGocardlessDetail
+
+
 class RefundFundsReturned(BaseModel):
     """
     The refund has been credited in a payout. Thedetails[cause]will berefund_funds_returnedand thedetails[origin]will begocardless.
@@ -14,7 +94,7 @@ class RefundFundsReturned(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["refunds"]
     action: Literal["funds_returned"]
-    details: RefundFundsReturnedRefundFundsReturnedDetail
+    details: FundsReturnedRefundFundsReturnedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -29,7 +109,7 @@ class RefundFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["refunds"]
     action: Literal["failed"]
-    details: RefundFailedRefundFailedDetail
+    details: FailedRefundFailedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -44,7 +124,7 @@ class RefundPaid(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["refunds"]
     action: Literal["paid"]
-    details: RefundPaidRefundPaidDetail
+    details: PaidRefundPaidDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -60,7 +140,7 @@ class RefundCreated(BaseModel):
     resource_type: Literal["refunds"]
     action: Literal["created"]
     details: Annotated[
-        RefundCreatedPaymentRefundedDetail | RefundCreatedRefundCreatedDetail,
+        CreatedPaymentRefundedDetail | CreatedRefundCreatedDetail,
         Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
@@ -77,70 +157,10 @@ class RefundRefundSettled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["refunds"]
     action: Literal["refund_settled"]
-    details: RefundRefundSettledRefundSettledDetail
+    details: RefundSettledRefundSettledDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
-
-
-class RefundFundsReturnedRefundFundsReturnedDetail(BaseModel):
-    """
-    The funds for the refund have been returned to you.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["refund_funds_returned"]
-    description: str
-
-
-class RefundFailedRefundFailedDetail(BaseModel):
-    """
-    The refund did not reach your customer the funds will be returned to you.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["refund_failed"]
-    description: str
-
-
-class RefundPaidRefundPaidDetail(BaseModel):
-    """
-    The refund has been paid to your customer.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["refund_paid"]
-    description: str
-
-
-class RefundCreatedPaymentRefundedDetail(BaseModel):
-    """
-    The refund has been created and will be submitted in the next batch.
-    """
-
-    origin: Literal["api"]
-    cause: Literal["payment_refunded"]
-    description: str
-
-
-class RefundCreatedRefundCreatedDetail(BaseModel):
-    """
-    The refund has been created and will be submitted in the next batch.
-    """
-
-    origin: Literal["api"]
-    cause: Literal["refund_created"]
-    description: str
-
-
-class RefundRefundSettledRefundSettledDetail(BaseModel):
-    """
-    The refund has been deducted from a payout.
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["refund_settled"]
-    description: str
 
 
 RefundType = Annotated[
@@ -151,5 +171,4 @@ RefundType = Annotated[
     | RefundRefundSettled,
     Field(..., discriminator="action"),
 ]
-
 Refund = RootModel[RefundType]

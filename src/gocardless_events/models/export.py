@@ -5,6 +5,45 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
+class FailedExportFailedGocardlessDetail(BaseModel):
+    """
+    Export failed
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["export_failed"]
+    description: str
+
+
+FailedExportFailedDetail = FailedExportFailedGocardlessDetail
+
+
+class CompletedExportCompletedGocardlessDetail(BaseModel):
+    """
+    Export completed
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["export_completed"]
+    description: str
+
+
+CompletedExportCompletedDetail = CompletedExportCompletedGocardlessDetail
+
+
+class StartedExportStartedGocardlessDetail(BaseModel):
+    """
+    Export started
+    """
+
+    origin: Literal["gocardless"]
+    cause: Literal["export_started"]
+    description: str
+
+
+StartedExportStartedDetail = StartedExportStartedGocardlessDetail
+
+
 class ExportFailed(BaseModel):
     """
     Export failed
@@ -14,7 +53,7 @@ class ExportFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["exports"]
     action: Literal["failed"]
-    details: ExportFailedExportFailedDetail
+    details: FailedExportFailedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -29,7 +68,7 @@ class ExportCompleted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["exports"]
     action: Literal["completed"]
-    details: ExportCompletedExportCompletedDetail
+    details: CompletedExportCompletedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
@@ -44,44 +83,13 @@ class ExportStarted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["exports"]
     action: Literal["started"]
-    details: ExportStartedExportStartedDetail
+    details: StartedExportStartedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
-class ExportFailedExportFailedDetail(BaseModel):
-    """
-    Export failed
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["export_failed"]
-    description: str
-
-
-class ExportCompletedExportCompletedDetail(BaseModel):
-    """
-    Export completed
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["export_completed"]
-    description: str
-
-
-class ExportStartedExportStartedDetail(BaseModel):
-    """
-    Export started
-    """
-
-    origin: Literal["gocardless"]
-    cause: Literal["export_started"]
-    description: str
-
-
 ExportType = Annotated[
     ExportFailed | ExportCompleted | ExportStarted, Field(..., discriminator="action")
 ]
-
 Export = RootModel[ExportType]
