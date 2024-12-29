@@ -1,4 +1,5 @@
 {%- for resource_name, resource_list in schema.items() -%}
+{# just for debugging, this shows the json input
 """
 "{{ resource_name }}": [
     {%- for item in resource_list %}
@@ -18,21 +19,24 @@
     {%- endfor %}
 ],
 """
+#}
 
 from __future__ import annotations
 from typing import Annotated, Literal, Union, List
 from pydantic import BaseModel, Field, RootModel
 
 {%- set resource_singular = resource_name.rstrip('s') | to_pascal %}
-{%- set actions = resource_list | map(attribute='action') | list | unique | list %}
-{%- for action in actions %}
+{%- set actions = resource_list | map(attribute='action') | list %}
+{%- for resource_item in resource_list %}
 
-
-class {{ resource_singular }}{{ action | to_pascal }}(BaseModel):
-    action: Literal["{{ action }}"]
+class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
+    """
+    {{ resource_item.description }}
+    """
+    action: Literal["{{ resource_item.action }}"]
     description: str
     {%- set causes = [] -%}
-    {%- for item in resource_list if item.action == action %}
+    {%- for item in resource_list if item.action == resource_item.action %}
         {%- for detail in item.details %}
             {%- if detail.cause not in causes %}
                 {%- do causes.append(detail.cause) -%}
@@ -40,12 +44,12 @@ class {{ resource_singular }}{{ action | to_pascal }}(BaseModel):
         {%- endfor %}
     {%- endfor %}
     {%- if causes|length == 1 %}
-    details: {{ resource_singular }}{{ action | to_pascal }}{{ causes[0] | to_pascal }}Detail
+    details: {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ causes[0] | to_pascal }}Detail
     {%- else %}
     details: List[Annotated[
         Union[
             {%- for cause in causes %}
-            {{ resource_singular }}{{ action | to_pascal }}{{ cause | to_pascal }}Detail,
+            {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail,
             {%- endfor %}
         ],
         Field(..., discriminator="cause")
@@ -53,12 +57,15 @@ class {{ resource_singular }}{{ action | to_pascal }}(BaseModel):
     {%- endif %}
 {%- endfor %}
 
-{%- for action in actions %}
+{%- for resource_item in resource_list %}
     {%- set causes_defined = [] -%}
-    {%- for item in resource_list if item.action == action %}
+    {%- for item in resource_list if item.action == resource_item.action %}
         {%- for detail in item.details %}
             {%- if detail.cause not in causes_defined %}
-class {{ resource_singular }}{{ action | to_pascal }}{{ detail.cause | to_pascal }}Detail(BaseModel):
+class {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ detail.cause | to_pascal }}Detail(BaseModel):
+    """
+    {{ detail.description }}
+    """
     {%- for key, value in detail.items() %}
     {%- if key in ['origin', 'cause'] %}
     {{ key }}: Literal["{{ value }}"]
@@ -74,8 +81,8 @@ class {{ resource_singular }}{{ action | to_pascal }}{{ detail.cause | to_pascal
 
 {{ resource_singular }}Type = Annotated[
     Union[
-        {%- for action in actions %}
-        {{ resource_singular }}{{ action | to_pascal }},
+        {%- for resource_item in resource_list %}
+        {{ resource_singular }}{{ resource_item.action | to_pascal }},
         {%- endfor %}
     ],
     Field(..., discriminator="action")
