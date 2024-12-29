@@ -14,7 +14,6 @@ class InstalmentScheduleResumed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["instalment_schedules"]
     action: Literal["resumed"]
-    description: str
     details: InstalmentScheduleResumedInstalmentScheduleResumedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -30,7 +29,6 @@ class InstalmentScheduleCreationFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["instalment_schedules"]
     action: Literal["creation_failed"]
-    description: str
     details: InstalmentScheduleCreationFailedInstalmentScheduleCreationFailedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -46,7 +44,6 @@ class InstalmentScheduleErrored(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["instalment_schedules"]
     action: Literal["errored"]
-    description: str
     details: list[
         Annotated[
             InstalmentScheduleErroredInstalmentScheduleErroredDetail
@@ -68,7 +65,6 @@ class InstalmentScheduleCompleted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["instalment_schedules"]
     action: Literal["completed"]
-    description: str
     details: InstalmentScheduleCompletedInstalmentScheduleCompletedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -84,7 +80,6 @@ class InstalmentScheduleCreated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["instalment_schedules"]
     action: Literal["created"]
-    description: str
     details: InstalmentScheduleCreatedInstalmentScheduleCreatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -100,7 +95,6 @@ class InstalmentScheduleCancelled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["instalment_schedules"]
     action: Literal["cancelled"]
-    description: str
     details: list[
         Annotated[
             InstalmentScheduleCancelledInstalmentScheduleCancelledDetail

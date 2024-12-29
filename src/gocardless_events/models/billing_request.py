@@ -14,7 +14,6 @@ class BillingRequestChooseCurrency(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["choose_currency"]
-    description: str
     details: BillingRequestChooseCurrencyBillingRequestChooseCurrencyDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -30,7 +29,6 @@ class BillingRequestFulfilled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["fulfilled"]
-    description: str
     details: BillingRequestFulfilledBillingRequestFulfilledDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -46,7 +44,6 @@ class BillingRequestBankAuthorisationAuthorised(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_authorised"]
-    description: str
     details: BillingRequestBankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -62,7 +59,6 @@ class BillingRequestFlowVisited(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["flow_visited"]
-    description: str
     details: BillingRequestFlowVisitedBillingRequestFlowVisitedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -78,7 +74,6 @@ class BillingRequestFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["failed"]
-    description: str
     details: BillingRequestFailedBillingRequestFailedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -94,7 +89,6 @@ class BillingRequestCollectBankAccount(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["collect_bank_account"]
-    description: str
     details: BillingRequestCollectBankAccountBillingRequestCollectBankAccountDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -110,7 +104,6 @@ class BillingRequestPayerDetailsConfirmed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["payer_details_confirmed"]
-    description: str
     details: (
         BillingRequestPayerDetailsConfirmedBillingRequestPayerDetailsConfirmedDetail
     )
@@ -128,7 +121,6 @@ class BillingRequestCollectAmount(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["collect_amount"]
-    description: str
     details: BillingRequestCollectAmountBillingRequestCollectAmountDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -144,7 +136,6 @@ class BillingRequestBankAuthorisationExpired(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_expired"]
-    description: str
     details: BillingRequestBankAuthorisationExpiredBillingRequestBankAuthorisationExpiredDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -160,7 +151,6 @@ class BillingRequestFlowExited(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["flow_exited"]
-    description: str
     details: BillingRequestFlowExitedBillingRequestFlowExitedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -176,7 +166,6 @@ class BillingRequestCollectCustomerDetails(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["collect_customer_details"]
-    description: str
     details: (
         BillingRequestCollectCustomerDetailsBillingRequestCollectCustomerDetailsDetail
     )
@@ -194,7 +183,6 @@ class BillingRequestCreated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["created"]
-    description: str
     details: BillingRequestCreatedBillingRequestCreatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -210,7 +198,6 @@ class BillingRequestBankAuthorisationFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_failed"]
-    description: str
     details: (
         BillingRequestBankAuthorisationFailedBillingRequestBankAuthorisationFailedDetail
     )
@@ -228,7 +215,6 @@ class BillingRequestPayerGeoBlocked(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["payer_geo_blocked"]
-    description: str
     details: BillingRequestPayerGeoBlockedPayerGeoBlockedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -244,7 +230,6 @@ class BillingRequestFlowCreated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["flow_created"]
-    description: str
     details: BillingRequestFlowCreatedBillingRequestFlowCreatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -260,7 +245,6 @@ class BillingRequestBankAuthorisationDenied(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_denied"]
-    description: str
     details: (
         BillingRequestBankAuthorisationDeniedBillingRequestBankAuthorisationDeniedDetail
     )
@@ -278,7 +262,6 @@ class BillingRequestSelectInstitution(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["select_institution"]
-    description: str
     details: BillingRequestSelectInstitutionBillingRequestSelectInstitutionDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -294,7 +277,6 @@ class BillingRequestBankAuthorisationVisited(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_visited"]
-    description: str
     details: BillingRequestBankAuthorisationVisitedBillingRequestBankAuthorisationVisitedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -310,7 +292,6 @@ class BillingRequestCancelled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["billing_requests"]
     action: Literal["cancelled"]
-    description: str
     details: BillingRequestCancelledBillingRequestCancelledDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -322,7 +303,7 @@ class BillingRequestChooseCurrencyBillingRequestChooseCurrencyDetail(BaseModel):
     Currency details have been collected for this billing request.
     """
 
-    origin: Literal["api"]
+    origin: Literal["api", "payer"]
     cause: Literal["billing_request_choose_currency"]
     description: str
 
@@ -332,7 +313,7 @@ class BillingRequestFulfilledBillingRequestFulfilledDetail(BaseModel):
     This billing request has been fulfilled and the resources have been created.
     """
 
-    origin: Literal["gocardless"]
+    origin: Literal["gocardless", "api"]
     cause: Literal["billing_request_fulfilled"]
     description: str
 
@@ -344,7 +325,7 @@ class BillingRequestBankAuthorisationAuthorisedBillingRequestBankAuthorisationAu
     A bank authorisation for this billing request has been authorised by the payer.
     """
 
-    origin: Literal["payer"]
+    origin: Literal["payer", "gocardless"]
     cause: Literal["billing_request_bank_authorisation_authorised"]
     description: str
 
@@ -364,7 +345,7 @@ class BillingRequestFailedBillingRequestFailedDetail(BaseModel):
     This billing request has failed.
     """
 
-    origin: Literal["gocardless"]
+    origin: Literal["gocardless", "api"]
     cause: Literal["billing_request_failed"]
     description: str
 
@@ -374,7 +355,7 @@ class BillingRequestCollectBankAccountBillingRequestCollectBankAccountDetail(Bas
     Bank account details have been collected for this billing request.
     """
 
-    origin: Literal["api"]
+    origin: Literal["api", "payer"]
     cause: Literal["billing_request_collect_bank_account"]
     description: str
 
@@ -386,7 +367,7 @@ class BillingRequestPayerDetailsConfirmedBillingRequestPayerDetailsConfirmedDeta
     Payer has confirmed all their details for this billing request.
     """
 
-    origin: Literal["api"]
+    origin: Literal["api", "payer"]
     cause: Literal["billing_request_payer_details_confirmed"]
     description: str
 
@@ -430,7 +411,7 @@ class BillingRequestCollectCustomerDetailsBillingRequestCollectCustomerDetailsDe
     Customer details have been collected for this billing request.
     """
 
-    origin: Literal["api"]
+    origin: Literal["api", "payer"]
     cause: Literal["billing_request_collect_customer_details"]
     description: str
 
@@ -440,7 +421,7 @@ class BillingRequestCreatedBillingRequestCreatedDetail(BaseModel):
     This billing request has been created.
     """
 
-    origin: Literal["gocardless"]
+    origin: Literal["gocardless", "api", "payer"]
     cause: Literal["billing_request_created"]
     description: str
 
@@ -452,7 +433,7 @@ class BillingRequestBankAuthorisationFailedBillingRequestBankAuthorisationFailed
     A bank authorisation for this billing request has failed because of a bank account mismatch.
     """
 
-    origin: Literal["payer"]
+    origin: Literal["payer", "gocardless"]
     cause: Literal["billing_request_bank_authorisation_failed"]
     description: str
 
@@ -472,7 +453,7 @@ class BillingRequestFlowCreatedBillingRequestFlowCreatedDetail(BaseModel):
     A billing request flow has been created against this billing request.
     """
 
-    origin: Literal["gocardless"]
+    origin: Literal["gocardless", "api", "payer"]
     cause: Literal["billing_request_flow_created"]
     description: str
 
@@ -484,7 +465,7 @@ class BillingRequestBankAuthorisationDeniedBillingRequestBankAuthorisationDenied
     A bank authorisation for this billing request has been denied by the payer.
     """
 
-    origin: Literal["payer"]
+    origin: Literal["payer", "gocardless"]
     cause: Literal["billing_request_bank_authorisation_denied"]
     description: str
 
@@ -516,7 +497,7 @@ class BillingRequestCancelledBillingRequestCancelledDetail(BaseModel):
     This billing request has been cancelled none of the resources have been created.
     """
 
-    origin: Literal["gocardless"]
+    origin: Literal["gocardless", "api"]
     cause: Literal["billing_request_cancelled"]
     description: str
 

@@ -14,7 +14,6 @@ class PaymentSurchargeFeeDebited(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["surcharge_fee_debited"]
-    description: str
     details: PaymentSurchargeFeeDebitedSurchargeFeeDebitedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -30,7 +29,6 @@ class PaymentChargebackCancelled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["chargeback_cancelled"]
-    description: str
     details: PaymentChargebackCancelledPaymentConfirmedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -46,7 +44,6 @@ class PaymentCustomerApprovalGranted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["customer_approval_granted"]
-    description: str
     details: PaymentCustomerApprovalGrantedCustomerApprovalGrantedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -62,7 +59,6 @@ class PaymentLateFailureSettled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["late_failure_settled"]
-    description: str
     details: PaymentLateFailureSettledLateFailureSettledDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -78,7 +74,6 @@ class PaymentChargedBack(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["charged_back"]
-    description: str
     details: list[
         Annotated[
             PaymentChargedBackAuthorisationDisputedDetail
@@ -103,7 +98,6 @@ class PaymentCustomerApprovalDenied(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["customer_approval_denied"]
-    description: str
     details: PaymentCustomerApprovalDeniedCustomerApprovalDeniedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -119,7 +113,6 @@ class PaymentResubmissionRequested(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["resubmission_requested"]
-    description: str
     details: list[
         Annotated[
             PaymentResubmissionRequestedPaymentRetriedDetail
@@ -141,7 +134,6 @@ class PaymentFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["failed"]
-    description: str
     details: list[
         Annotated[
             PaymentFailedReferToPayerDetail
@@ -178,7 +170,6 @@ class PaymentSubmitted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["submitted"]
-    description: str
     details: PaymentSubmittedPaymentSubmittedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -194,7 +185,6 @@ class PaymentConfirmed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["confirmed"]
-    description: str
     details: PaymentConfirmedPaymentConfirmedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -210,7 +200,6 @@ class PaymentCreated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["created"]
-    description: str
     details: list[
         Annotated[
             PaymentCreatedPaymentCreatedDetail
@@ -232,7 +221,6 @@ class PaymentChargebackSettled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["chargeback_settled"]
-    description: str
     details: PaymentChargebackSettledChargebackSettledDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -248,7 +236,6 @@ class PaymentPaidOut(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["paid_out"]
-    description: str
     details: PaymentPaidOutPaymentPaidOutDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -264,7 +251,6 @@ class PaymentCancelled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["cancelled"]
-    description: str
     details: list[
         Annotated[
             PaymentCancelledBankAccountClosedDetail
@@ -306,7 +292,7 @@ class PaymentChargebackCancelledPaymentConfirmedDetail(BaseModel):
     The chargeback for this payment was reversed
     """
 
-    origin: Literal["bank"]
+    origin: Literal["bank", "gocardless"]
     cause: Literal["payment_confirmed"]
     description: str
 
@@ -486,7 +472,7 @@ class PaymentFailedOtherDetail(BaseModel):
     There was an internal error processing this payment.
     """
 
-    origin: Literal["bank"]
+    origin: Literal["bank", "gocardless"]
     cause: Literal["other"]
     scheme: str
     reason_code: str
@@ -650,7 +636,7 @@ class PaymentCreatedPaymentCreatedDetail(BaseModel):
     Payment created via the API.
     """
 
-    origin: Literal["api"]
+    origin: Literal["api", "gocardless"]
     cause: Literal["payment_created"]
     description: str
 
@@ -690,7 +676,7 @@ class PaymentCancelledBankAccountClosedDetail(BaseModel):
     This payment was cancelled because the customer is deceased.
     """
 
-    origin: Literal["bank"]
+    origin: Literal["bank", "api"]
     cause: Literal["bank_account_closed"]
     scheme: str
     reason_code: str
@@ -738,7 +724,7 @@ class PaymentCancelledMandateCancelledDetail(BaseModel):
     This payment has been cancelled because its mandate was cancelled.
     """
 
-    origin: Literal["bank"]
+    origin: Literal["bank", "api", "gocardless"]
     cause: Literal["mandate_cancelled"]
     scheme: str
     reason_code: str
@@ -762,7 +748,7 @@ class PaymentCancelledInstalmentScheduleCancelledDetail(BaseModel):
     payment_cancelled_at_request
     """
 
-    origin: Literal["gocardless"]
+    origin: Literal["gocardless", "api"]
     cause: Literal["instalment_schedule_cancelled"]
     scheme: str
     reason_code: str

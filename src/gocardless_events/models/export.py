@@ -14,7 +14,6 @@ class ExportFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["exports"]
     action: Literal["failed"]
-    description: str
     details: ExportFailedExportFailedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -30,7 +29,6 @@ class ExportCompleted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["exports"]
     action: Literal["completed"]
-    description: str
     details: ExportCompletedExportCompletedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -46,7 +44,6 @@ class ExportStarted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["exports"]
     action: Literal["started"]
-    description: str
     details: ExportStartedExportStartedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]

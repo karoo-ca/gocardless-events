@@ -14,7 +14,6 @@ class MandateReinstated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["reinstated"]
-    description: str
     details: MandateReinstatedMandateReinstatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -30,7 +29,6 @@ class MandateCustomerApprovalGranted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["customer_approval_granted"]
-    description: str
     details: MandateCustomerApprovalGrantedCustomerApprovalGrantedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -46,7 +44,6 @@ class MandateExpired(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["expired"]
-    description: str
     details: list[
         Annotated[
             MandateExpiredMandateExpiredDetail | MandateExpiredMandateCancelledDetail,
@@ -67,7 +64,6 @@ class MandateResubmissionRequested(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["resubmission_requested"]
-    description: str
     details: list[
         Annotated[
             MandateResubmissionRequestedResubmissionRequestedDetail
@@ -89,7 +85,6 @@ class MandateFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["failed"]
-    description: str
     details: list[
         Annotated[
             MandateFailedBankAccountClosedDetail
@@ -119,7 +114,6 @@ class MandateSubmitted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["submitted"]
-    description: str
     details: list[
         Annotated[
             MandateSubmittedMandateSubmittedDetail
@@ -141,7 +135,6 @@ class MandateTransferred(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["transferred"]
-    description: str
     details: list[
         Annotated[
             MandateTransferredBankAccountTransferredDetail
@@ -163,7 +156,6 @@ class MandateConsumed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["consumed"]
-    description: str
     details: MandateConsumedMandateConsumedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -179,7 +171,6 @@ class MandateCustomerApprovalSkipped(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["customer_approval_skipped"]
-    description: str
     details: MandateCustomerApprovalSkippedCustomerApprovalSkippedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -195,7 +186,6 @@ class MandateActive(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["active"]
-    description: str
     details: MandateActiveMandateActivatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -211,7 +201,6 @@ class MandateCreated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["created"]
-    description: str
     details: MandateCreatedMandateCreatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -227,7 +216,6 @@ class MandateBlocked(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["blocked"]
-    description: str
     details: list[
         Annotated[
             MandateBlockedMandateBlockedDetail
@@ -249,7 +237,6 @@ class MandateReplaced(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["replaced"]
-    description: str
     details: MandateReplacedSchemeIdentifierChangedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -265,7 +252,6 @@ class MandateCancelled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["cancelled"]
-    description: str
     details: list[
         Annotated[
             MandateCancelledBankAccountClosedDetail
@@ -293,7 +279,7 @@ class MandateReinstatedMandateReinstatedDetail(BaseModel):
     The time window after submission for the banks to refuse a mandate has ended without any errors being received so this mandate is now active.
     """
 
-    origin: Literal["gocardless"]
+    origin: Literal["gocardless", "bank"]
     cause: Literal["mandate_reinstated"]
     description: str
 
@@ -323,7 +309,7 @@ class MandateExpiredMandateCancelledDetail(BaseModel):
     This mandate was cancelled by the customer or their bank.
     """
 
-    origin: Literal["bank"]
+    origin: Literal["bank", "gocardless"]
     cause: Literal["mandate_cancelled"]
     description: str
 
@@ -533,7 +519,7 @@ class MandateActiveMandateActivatedDetail(BaseModel):
     The time window after submission for the banks to refuse a mandate has ended without any errors being received so this mandate is now active.
     """
 
-    origin: Literal["gocardless"]
+    origin: Literal["gocardless", "bank"]
     cause: Literal["mandate_activated"]
     description: str
 
@@ -543,7 +529,7 @@ class MandateCreatedMandateCreatedDetail(BaseModel):
     Mandate created via the API.
     """
 
-    origin: Literal["api"]
+    origin: Literal["api", "gocardless"]
     cause: Literal["mandate_created"]
     description: str
 
@@ -583,7 +569,7 @@ class MandateCancelledBankAccountClosedDetail(BaseModel):
     This bank account has been closed as the customer is deceased.
     """
 
-    origin: Literal["bank"]
+    origin: Literal["bank", "api"]
     cause: Literal["bank_account_closed"]
     scheme: str
     reason_code: str
@@ -595,7 +581,7 @@ class MandateCancelledMandateCancelledDetail(BaseModel):
     The mandate was cancelled at a bank branch.
     """
 
-    origin: Literal["bank"]
+    origin: Literal["bank", "api", "gocardless"]
     cause: Literal["mandate_cancelled"]
     scheme: str
     reason_code: str

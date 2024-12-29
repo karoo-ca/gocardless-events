@@ -14,7 +14,6 @@ class CreditorAccountAutoFrozen(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["creditors"]
     action: Literal["account_auto_frozen"]
-    description: str
     details: CreditorAccountAutoFrozenAccountAutoFrozenDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -30,7 +29,6 @@ class CreditorUpdated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["creditors"]
     action: Literal["updated"]
-    description: str
     details: CreditorUpdatedCreditorUpdatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -46,7 +44,6 @@ class CreditorAccountAutoFrozenReverted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["creditors"]
     action: Literal["account_auto_frozen_reverted"]
-    description: str
     details: CreditorAccountAutoFrozenRevertedAccountAutoFrozenRevertedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -62,7 +59,6 @@ class CreditorBouncedPayout(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["creditors"]
     action: Literal["bounced_payout"]
-    description: str
     details: CreditorBouncedPayoutBouncedPayoutDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -78,7 +74,6 @@ class CreditorNewPayoutCurrencyAdded(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["creditors"]
     action: Literal["new_payout_currency_added"]
-    description: str
     details: CreditorNewPayoutCurrencyAddedNewPayoutCurrencyAddedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]

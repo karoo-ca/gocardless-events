@@ -35,7 +35,6 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["{{ resource_name }}"]
     action: Literal["{{ resource_item.action }}"]
-    description: str
     {%- set causes = [] -%} {# Collect unique causes for the current action #}
     {%- for item in resource_list if item.action == resource_item.action %}
         {%- for detail in item.details %}
@@ -60,22 +59,34 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
 {% endmacro %}
 
 {% macro generate_detail_classes(resource_list, resource_item, resource_singular) %}
-{%- set causes_defined = [] -%}
+{# Collect all details for the current action, grouped by cause #}
+{%- set causes_details = {} -%}
 {%- for item in resource_list if item.action == resource_item.action %}
     {%- for detail in item.details %}
-        {%- if detail.cause not in causes_defined %}
-class {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ detail.cause | to_pascal }}Detail(BaseModel):
-    """
-    {{ detail.description.replace("‘", "'") }}
-    """
-    {%- for key, value in detail.items() %}
-    {%- if key in ['origin', 'cause'] %}
-    {{ key }}: Literal["{{ value }}"]
-    {%- else %}
-    {{ key }}: str
-    {%- endif %}
+        {%- set cause = detail.cause %}
+        {%- if causes_details[cause] is defined %}
+            {%- do causes_details[cause].append(detail) %}
+        {%- else %}
+            {%- set causes_details = causes_details.update({cause: [detail]}) or causes_details %}
+        {%- endif %}
     {%- endfor %}
-    {%- do causes_defined.append(detail.cause) -%}
+{%- endfor %}
+
+{# Generate the detail classes for each cause #}
+{%- for cause, details in causes_details.items() %}
+class {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail(BaseModel):
+    """
+    {{ details[0].description.replace("‘", "'") }}
+    """
+    {# Collect all unique origins #}
+    {%- set origins = details | map(attribute='origin') | list %}
+    {%- set unique_origins = origins | unique %}
+    {%- set origins_literal = unique_origins | join('", "') %}
+    origin: Literal["{{ origins_literal }}"]
+    cause: Literal["{{ cause }}"]
+    {%- for key in details[0].keys() %} {# Include other fields #}
+        {%- if key not in ['origin', 'cause'] %}
+    {{ key }}: str
         {%- endif %}
     {%- endfor %}
 {%- endfor %}

@@ -14,7 +14,6 @@ class PayerAuthorizationFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payer_authorizations"]
     action: Literal["failed"]
-    description: str
     details: list[
         Annotated[
             PayerAuthorizationFailedCustomerCreationFailedDetail
@@ -37,7 +36,6 @@ class PayerAuthorizationCompleted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payer_authorizations"]
     action: Literal["completed"]
-    description: str
     details: PayerAuthorizationCompletedPayerAuthorisationCompletedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]

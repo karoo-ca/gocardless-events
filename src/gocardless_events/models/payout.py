@@ -14,7 +14,6 @@ class PayoutTaxExchangeRatesConfirmed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payouts"]
     action: Literal["tax_exchange_rates_confirmed"]
-    description: str
     details: PayoutTaxExchangeRatesConfirmedPayoutTaxExchangeRatesConfirmedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -30,7 +29,6 @@ class PayoutFxRateConfirmed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payouts"]
     action: Literal["fx_rate_confirmed"]
-    description: str
     details: PayoutFxRateConfirmedPayoutFxRateConfirmedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -46,7 +44,6 @@ class PayoutPaid(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payouts"]
     action: Literal["paid"]
-    description: str
     details: PayoutPaidPayoutPaidDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]

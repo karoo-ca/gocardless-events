@@ -364,16 +364,17 @@ subscription_payment_created_api_json = """
 }
 """
 
+
 def test_specific_event() -> None:
     event = json.loads(billing_request_created_json)["events"]
-    BillingRequestCreated.model_validate_json(event)
+    BillingRequestCreated.model_validate_json(json.dumps(event))
 
 
 def test_resource_event() -> None:
     event = json.loads(billing_request_created_json)["events"]
-    BillingRequest.model_validate_json(event)
+    BillingRequest.model_validate_json(json.dumps(event))
 
 
 def test_parent_event() -> None:
     event = json.loads(billing_request_created_json)["events"]
-    Event.model_validate_json(event)
+    Event.model_validate_json(json.dumps(event))

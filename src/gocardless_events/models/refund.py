@@ -14,7 +14,6 @@ class RefundFundsReturned(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["refunds"]
     action: Literal["funds_returned"]
-    description: str
     details: RefundFundsReturnedRefundFundsReturnedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -30,7 +29,6 @@ class RefundFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["refunds"]
     action: Literal["failed"]
-    description: str
     details: RefundFailedRefundFailedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -46,7 +44,6 @@ class RefundPaid(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["refunds"]
     action: Literal["paid"]
-    description: str
     details: RefundPaidRefundPaidDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
@@ -62,7 +59,6 @@ class RefundCreated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["refunds"]
     action: Literal["created"]
-    description: str
     details: list[
         Annotated[
             RefundCreatedPaymentRefundedDetail | RefundCreatedRefundCreatedDetail,
@@ -83,7 +79,6 @@ class RefundRefundSettled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["refunds"]
     action: Literal["refund_settled"]
-    description: str
     details: RefundRefundSettledRefundSettledDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]

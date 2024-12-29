@@ -14,7 +14,6 @@ class SchemeIdentifierActivated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["scheme_identifiers"]
     action: Literal["activated"]
-    description: str
     details: SchemeIdentifierActivatedSchemeIdentifierActivatedDetail
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
