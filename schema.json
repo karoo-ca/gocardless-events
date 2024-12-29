@@ -1061,36 +1061,26 @@
         {
           "origin": "gocardless",
           "cause": "instalment_schedule_cancelled",
-          "scheme": null,
-          "reason_code": null,
           "description": "payment_cancelled_at_request"
         },
         {
           "origin": "api",
           "cause": "payment_cancelled",
-          "scheme": null,
-          "reason_code": null,
           "description": "This payment was cancelled at your request."
         },
         {
           "origin": "api",
           "cause": "mandate_cancelled",
-          "scheme": null,
-          "reason_code": null,
           "description": "The mandate for this payment was cancelled at your request."
         },
         {
           "origin": "api",
           "cause": "instalment_schedule_cancelled",
-          "scheme": null,
-          "reason_code": null,
           "description": "payment_cancelled_at_request"
         },
         {
           "origin": "api",
           "cause": "bank_account_closed",
-          "scheme": null,
-          "reason_code": null,
           "description": "The bank account for this payment was disabled at your request."
         },
         {
@@ -1467,8 +1457,6 @@
         {
           "origin": "gocardless",
           "cause": "mandate_expired",
-          "scheme": null,
-          "reason_code": null,
           "description": "The mandate expired before the payment could be collected."
         },
         {
@@ -1523,8 +1511,6 @@
         {
           "origin": "gocardless",
           "cause": "initial_one_off_payment_failed",
-          "scheme": null,
-          "reason_code": null,
           "description": "This mandate has been cancelled because the initial faster payment failed"
         }
       ]
@@ -2135,15 +2121,11 @@
         {
           "origin": "api",
           "cause": "mandate_cancelled",
-          "scheme": null,
-          "reason_code": null,
           "description": "The mandate was cancelled at your request."
         },
         {
           "origin": "api",
           "cause": "bank_account_closed",
-          "scheme": null,
-          "reason_code": null,
           "description": "The customer's account was disabled at your request."
         },
         {
@@ -2513,8 +2495,6 @@
         {
           "origin": "gocardless",
           "cause": "initial_one_off_payment_failed",
-          "scheme": null,
-          "reason_code": null,
           "description": "This mandate has been cancelled because the initial faster payment failed"
         }
       ]
@@ -2729,29 +2709,21 @@
         {
           "origin": "api",
           "cause": "subscription_cancelled",
-          "scheme": null,
-          "reason_code": null,
           "description": "The subscription has been cancelled at your request."
         },
         {
           "origin": "api",
           "cause": "mandate_cancelled",
-          "scheme": null,
-          "reason_code": null,
           "description": "The subscription was cancelled because its mandate was cancelled at your request."
         },
         {
           "origin": "api",
           "cause": "bank_account_closed",
-          "scheme": null,
-          "reason_code": null,
           "description": "The mandate for this subscription was cancelled at your request."
         },
         {
           "origin": "gocardless",
           "cause": "mandate_expired",
-          "scheme": null,
-          "reason_code": null,
           "description": "The subscription was cancelled because its mandate has expired."
         },
         {
@@ -2897,8 +2869,6 @@
         {
           "origin": "api",
           "cause": "plan_cancelled",
-          "scheme": null,
-          "reason_code": null,
           "description": "The subscription has been cancelled because the associated plan was cancelled."
         },
         {
@@ -3037,8 +3007,6 @@
         {
           "origin": "gocardless",
           "cause": "initial_one_off_payment_failed",
-          "scheme": null,
-          "reason_code": null,
           "description": "This subscription has been cancelled because its mandate was cancelled."
         }
       ]

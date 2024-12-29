@@ -457,8 +457,6 @@ class CancelledBankAccountClosedApiDetail(BaseModel):
 
     origin: Literal["api"]
     cause: Literal["bank_account_closed"]
-    scheme: str
-    reason_code: str
     description: str
 
 
@@ -487,8 +485,6 @@ class CancelledMandateCancelledApiDetail(BaseModel):
 
     origin: Literal["api"]
     cause: Literal["mandate_cancelled"]
-    scheme: str
-    reason_code: str
     description: str
 
 
@@ -656,8 +652,6 @@ class CancelledInitialOneOffPaymentFailedGocardlessDetail(BaseModel):
 
     origin: Literal["gocardless"]
     cause: Literal["initial_one_off_payment_failed"]
-    scheme: str
-    reason_code: str
     description: str
 
 

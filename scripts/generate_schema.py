@@ -57,7 +57,8 @@ for root, dirs, files in os.walk(docs_dir):
                             if value == "" or value == "-":
                                 value = None
                             values.append(value)
-                        detail = dict(zip(headers, values, strict=False))
+                        detail_all = dict(zip(headers, values, strict=False))
+                        detail = {k: v for k, v in detail_all.items() if v is not None}
                         details.append(detail)
                 else:
                     details = []
@@ -76,5 +77,5 @@ for root, dirs, files in os.walk(docs_dir):
                 output[resource_key].append(action_dict)
 
 # Write the output to JSON
-with open("output.json", "w", encoding="utf-8") as f:
+with open("schema.json", "w", encoding="utf-8") as f:
     json.dump(output, f, indent=2)
