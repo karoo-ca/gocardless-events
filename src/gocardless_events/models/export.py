@@ -16,7 +16,7 @@ class ExportFailed(BaseModel):
     action: Literal["failed"]
     details: ExportFailedExportFailedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -31,7 +31,7 @@ class ExportCompleted(BaseModel):
     action: Literal["completed"]
     details: ExportCompletedExportCompletedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -46,7 +46,7 @@ class ExportStarted(BaseModel):
     action: Literal["started"]
     details: ExportStartedExportStartedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 

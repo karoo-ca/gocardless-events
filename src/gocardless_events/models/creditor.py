@@ -16,7 +16,7 @@ class CreditorAccountAutoFrozen(BaseModel):
     action: Literal["account_auto_frozen"]
     details: CreditorAccountAutoFrozenAccountAutoFrozenDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -31,7 +31,7 @@ class CreditorUpdated(BaseModel):
     action: Literal["updated"]
     details: CreditorUpdatedCreditorUpdatedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -46,7 +46,7 @@ class CreditorAccountAutoFrozenReverted(BaseModel):
     action: Literal["account_auto_frozen_reverted"]
     details: CreditorAccountAutoFrozenRevertedAccountAutoFrozenRevertedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -61,7 +61,7 @@ class CreditorBouncedPayout(BaseModel):
     action: Literal["bounced_payout"]
     details: CreditorBouncedPayoutBouncedPayoutDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -76,7 +76,7 @@ class CreditorNewPayoutCurrencyAdded(BaseModel):
     action: Literal["new_payout_currency_added"]
     details: CreditorNewPayoutCurrencyAddedNewPayoutCurrencyAddedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 

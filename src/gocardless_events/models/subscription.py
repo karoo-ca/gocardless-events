@@ -16,7 +16,7 @@ class SubscriptionCustomerApprovalGranted(BaseModel):
     action: Literal["customer_approval_granted"]
     details: SubscriptionCustomerApprovalGrantedCustomerApprovalGrantedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -31,7 +31,7 @@ class SubscriptionFinished(BaseModel):
     action: Literal["finished"]
     details: SubscriptionFinishedSubscriptionFinishedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -46,7 +46,7 @@ class SubscriptionResumed(BaseModel):
     action: Literal["resumed"]
     details: SubscriptionResumedSubscriptionResumedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -61,7 +61,7 @@ class SubscriptionAmended(BaseModel):
     action: Literal["amended"]
     details: SubscriptionAmendedSubscriptionAmendedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -76,7 +76,7 @@ class SubscriptionCustomerApprovalDenied(BaseModel):
     action: Literal["customer_approval_denied"]
     details: SubscriptionCustomerApprovalDeniedCustomerApprovalDeniedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -91,7 +91,7 @@ class SubscriptionPaused(BaseModel):
     action: Literal["paused"]
     details: SubscriptionPausedSubscriptionPausedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -106,7 +106,7 @@ class SubscriptionScheduledPauseCancelled(BaseModel):
     action: Literal["scheduled_pause_cancelled"]
     details: SubscriptionScheduledPauseCancelledScheduledPauseCancelledDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -121,7 +121,7 @@ class SubscriptionScheduledPause(BaseModel):
     action: Literal["scheduled_pause"]
     details: SubscriptionScheduledPauseScheduledPauseDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -136,7 +136,7 @@ class SubscriptionCreated(BaseModel):
     action: Literal["created"]
     details: SubscriptionCreatedSubscriptionCreatedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -151,7 +151,7 @@ class SubscriptionPaymentCreated(BaseModel):
     action: Literal["payment_created"]
     details: SubscriptionPaymentCreatedPaymentCreatedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -166,7 +166,7 @@ class SubscriptionScheduledResume(BaseModel):
     action: Literal["scheduled_resume"]
     details: SubscriptionScheduledResumeScheduledResumeDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -201,7 +201,7 @@ class SubscriptionCancelled(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 

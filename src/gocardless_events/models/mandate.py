@@ -16,7 +16,7 @@ class MandateReinstated(BaseModel):
     action: Literal["reinstated"]
     details: MandateReinstatedMandateReinstatedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -31,7 +31,7 @@ class MandateCustomerApprovalGranted(BaseModel):
     action: Literal["customer_approval_granted"]
     details: MandateCustomerApprovalGrantedCustomerApprovalGrantedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -51,7 +51,7 @@ class MandateExpired(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -72,7 +72,7 @@ class MandateResubmissionRequested(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -101,7 +101,7 @@ class MandateFailed(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -122,7 +122,7 @@ class MandateSubmitted(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -143,7 +143,7 @@ class MandateTransferred(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -158,7 +158,7 @@ class MandateConsumed(BaseModel):
     action: Literal["consumed"]
     details: MandateConsumedMandateConsumedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -173,7 +173,7 @@ class MandateCustomerApprovalSkipped(BaseModel):
     action: Literal["customer_approval_skipped"]
     details: MandateCustomerApprovalSkippedCustomerApprovalSkippedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -188,7 +188,7 @@ class MandateActive(BaseModel):
     action: Literal["active"]
     details: MandateActiveMandateActivatedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -203,7 +203,7 @@ class MandateCreated(BaseModel):
     action: Literal["created"]
     details: MandateCreatedMandateCreatedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -224,7 +224,7 @@ class MandateBlocked(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -239,7 +239,7 @@ class MandateReplaced(BaseModel):
     action: Literal["replaced"]
     details: MandateReplacedSchemeIdentifierChangedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -270,7 +270,7 @@ class MandateCancelled(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 

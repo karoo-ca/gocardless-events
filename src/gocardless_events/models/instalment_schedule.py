@@ -16,7 +16,7 @@ class InstalmentScheduleResumed(BaseModel):
     action: Literal["resumed"]
     details: InstalmentScheduleResumedInstalmentScheduleResumedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -31,7 +31,7 @@ class InstalmentScheduleCreationFailed(BaseModel):
     action: Literal["creation_failed"]
     details: InstalmentScheduleCreationFailedInstalmentScheduleCreationFailedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -52,7 +52,7 @@ class InstalmentScheduleErrored(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -67,7 +67,7 @@ class InstalmentScheduleCompleted(BaseModel):
     action: Literal["completed"]
     details: InstalmentScheduleCompletedInstalmentScheduleCompletedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -82,7 +82,7 @@ class InstalmentScheduleCreated(BaseModel):
     action: Literal["created"]
     details: InstalmentScheduleCreatedInstalmentScheduleCreatedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -106,7 +106,7 @@ class InstalmentScheduleCancelled(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 

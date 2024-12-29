@@ -16,7 +16,7 @@ class RefundFundsReturned(BaseModel):
     action: Literal["funds_returned"]
     details: RefundFundsReturnedRefundFundsReturnedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -31,7 +31,7 @@ class RefundFailed(BaseModel):
     action: Literal["failed"]
     details: RefundFailedRefundFailedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -46,7 +46,7 @@ class RefundPaid(BaseModel):
     action: Literal["paid"]
     details: RefundPaidRefundPaidDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -66,7 +66,7 @@ class RefundCreated(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -81,7 +81,7 @@ class RefundRefundSettled(BaseModel):
     action: Literal["refund_settled"]
     details: RefundRefundSettledRefundSettledDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 

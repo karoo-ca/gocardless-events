@@ -16,7 +16,7 @@ class BillingRequestChooseCurrency(BaseModel):
     action: Literal["choose_currency"]
     details: BillingRequestChooseCurrencyBillingRequestChooseCurrencyDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -31,7 +31,7 @@ class BillingRequestFulfilled(BaseModel):
     action: Literal["fulfilled"]
     details: BillingRequestFulfilledBillingRequestFulfilledDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -46,7 +46,7 @@ class BillingRequestBankAuthorisationAuthorised(BaseModel):
     action: Literal["bank_authorisation_authorised"]
     details: BillingRequestBankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -61,7 +61,7 @@ class BillingRequestFlowVisited(BaseModel):
     action: Literal["flow_visited"]
     details: BillingRequestFlowVisitedBillingRequestFlowVisitedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -76,7 +76,7 @@ class BillingRequestFailed(BaseModel):
     action: Literal["failed"]
     details: BillingRequestFailedBillingRequestFailedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -91,7 +91,7 @@ class BillingRequestCollectBankAccount(BaseModel):
     action: Literal["collect_bank_account"]
     details: BillingRequestCollectBankAccountBillingRequestCollectBankAccountDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -108,7 +108,7 @@ class BillingRequestPayerDetailsConfirmed(BaseModel):
         BillingRequestPayerDetailsConfirmedBillingRequestPayerDetailsConfirmedDetail
     )
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -123,7 +123,7 @@ class BillingRequestCollectAmount(BaseModel):
     action: Literal["collect_amount"]
     details: BillingRequestCollectAmountBillingRequestCollectAmountDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -138,7 +138,7 @@ class BillingRequestBankAuthorisationExpired(BaseModel):
     action: Literal["bank_authorisation_expired"]
     details: BillingRequestBankAuthorisationExpiredBillingRequestBankAuthorisationExpiredDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -153,7 +153,7 @@ class BillingRequestFlowExited(BaseModel):
     action: Literal["flow_exited"]
     details: BillingRequestFlowExitedBillingRequestFlowExitedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -170,7 +170,7 @@ class BillingRequestCollectCustomerDetails(BaseModel):
         BillingRequestCollectCustomerDetailsBillingRequestCollectCustomerDetailsDetail
     )
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -185,7 +185,7 @@ class BillingRequestCreated(BaseModel):
     action: Literal["created"]
     details: BillingRequestCreatedBillingRequestCreatedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -202,7 +202,7 @@ class BillingRequestBankAuthorisationFailed(BaseModel):
         BillingRequestBankAuthorisationFailedBillingRequestBankAuthorisationFailedDetail
     )
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -217,7 +217,7 @@ class BillingRequestPayerGeoBlocked(BaseModel):
     action: Literal["payer_geo_blocked"]
     details: BillingRequestPayerGeoBlockedPayerGeoBlockedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -232,7 +232,7 @@ class BillingRequestFlowCreated(BaseModel):
     action: Literal["flow_created"]
     details: BillingRequestFlowCreatedBillingRequestFlowCreatedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -249,7 +249,7 @@ class BillingRequestBankAuthorisationDenied(BaseModel):
         BillingRequestBankAuthorisationDeniedBillingRequestBankAuthorisationDeniedDetail
     )
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -264,7 +264,7 @@ class BillingRequestSelectInstitution(BaseModel):
     action: Literal["select_institution"]
     details: BillingRequestSelectInstitutionBillingRequestSelectInstitutionDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -279,7 +279,7 @@ class BillingRequestBankAuthorisationVisited(BaseModel):
     action: Literal["bank_authorisation_visited"]
     details: BillingRequestBankAuthorisationVisitedBillingRequestBankAuthorisationVisitedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -294,7 +294,7 @@ class BillingRequestCancelled(BaseModel):
     action: Literal["cancelled"]
     details: BillingRequestCancelledBillingRequestCancelledDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 

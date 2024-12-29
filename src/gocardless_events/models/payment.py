@@ -16,7 +16,7 @@ class PaymentSurchargeFeeDebited(BaseModel):
     action: Literal["surcharge_fee_debited"]
     details: PaymentSurchargeFeeDebitedSurchargeFeeDebitedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -31,7 +31,7 @@ class PaymentChargebackCancelled(BaseModel):
     action: Literal["chargeback_cancelled"]
     details: PaymentChargebackCancelledPaymentConfirmedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -46,7 +46,7 @@ class PaymentCustomerApprovalGranted(BaseModel):
     action: Literal["customer_approval_granted"]
     details: PaymentCustomerApprovalGrantedCustomerApprovalGrantedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -61,7 +61,7 @@ class PaymentLateFailureSettled(BaseModel):
     action: Literal["late_failure_settled"]
     details: PaymentLateFailureSettledLateFailureSettledDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -85,7 +85,7 @@ class PaymentChargedBack(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -100,7 +100,7 @@ class PaymentCustomerApprovalDenied(BaseModel):
     action: Literal["customer_approval_denied"]
     details: PaymentCustomerApprovalDeniedCustomerApprovalDeniedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -121,7 +121,7 @@ class PaymentResubmissionRequested(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -157,7 +157,7 @@ class PaymentFailed(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -172,7 +172,7 @@ class PaymentSubmitted(BaseModel):
     action: Literal["submitted"]
     details: PaymentSubmittedPaymentSubmittedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -187,7 +187,7 @@ class PaymentConfirmed(BaseModel):
     action: Literal["confirmed"]
     details: PaymentConfirmedPaymentConfirmedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -208,7 +208,7 @@ class PaymentCreated(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -223,7 +223,7 @@ class PaymentChargebackSettled(BaseModel):
     action: Literal["chargeback_settled"]
     details: PaymentChargebackSettledChargebackSettledDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -238,7 +238,7 @@ class PaymentPaidOut(BaseModel):
     action: Literal["paid_out"]
     details: PaymentPaidOutPaymentPaidOutDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -273,7 +273,7 @@ class PaymentCancelled(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 

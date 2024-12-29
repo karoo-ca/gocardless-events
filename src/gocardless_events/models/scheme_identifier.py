@@ -16,7 +16,7 @@ class SchemeIdentifierActivated(BaseModel):
     action: Literal["activated"]
     details: SchemeIdentifierActivatedSchemeIdentifierActivatedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 

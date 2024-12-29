@@ -23,7 +23,7 @@ class PayerAuthorizationFailed(BaseModel):
         ]
     ]
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -38,7 +38,7 @@ class PayerAuthorizationCompleted(BaseModel):
     action: Literal["completed"]
     details: PayerAuthorizationCompletedPayerAuthorisationCompletedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 

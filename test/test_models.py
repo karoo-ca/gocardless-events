@@ -1,5 +1,7 @@
 import json
 
+import pytest
+
 from gocardless_events.models import Event
 from gocardless_events.models.billing_request import (
     BillingRequest,
@@ -58,7 +60,7 @@ export_started_gocardless_json = """
     "resource_type": "exports",
     "action": "started",
     "links": {
-        "export": "EX0000116MFWYM",
+        "export": "EX0000116MFWYM"
     },
     "details": {
         "origin": "gocardless",
@@ -328,7 +330,7 @@ scheme_identifier_activated_gocardless_json = """
     "resource_type": "scheme_identifiers",
     "action": "activated",
     "links": {
-      "scheme_identifier": "SU222",
+      "scheme_identifier": "SU222"
     },
     "details": {
       "origin": "gocardless",
@@ -365,16 +367,58 @@ subscription_payment_created_api_json = """
 """
 
 
+def _extract_event(payload: str) -> str:
+    event = json.loads(payload)["events"]
+    return json.dumps(event)
+
+
 def test_specific_event() -> None:
-    event = json.loads(billing_request_created_json)["events"]
-    BillingRequestCreated.model_validate_json(json.dumps(event))
+    event = _extract_event(billing_request_created_json)
+    BillingRequestCreated.model_validate_json(event)
 
 
 def test_resource_event() -> None:
-    event = json.loads(billing_request_created_json)["events"]
-    BillingRequest.model_validate_json(json.dumps(event))
+    event = _extract_event(billing_request_created_json)
+    BillingRequest.model_validate_json(event)
 
 
-def test_parent_event() -> None:
-    event = json.loads(billing_request_created_json)["events"]
-    Event.model_validate_json(json.dumps(event))
+@pytest.mark.parametrize(
+    "payload",
+    [
+        billing_request_created_json,
+        creditor_updated_gocardless_json,
+        export_started_gocardless_json,
+        instalment_schedule_payment_created_api_json,
+        mandate_cancelled_bank_account_closed_json,
+        mandate_cancelled_api_json,
+        mandate_tranferred_bank_account_transferred_json,
+        payment_failed_bank_insufficient_funds_json,
+        payment_cancelled_bank_mandate_cancelled_json,
+        payment_cancelled_api_json,
+        payment_confirmed_gocardless_json,
+        payout_paid_gocardless_json,
+        refund_created_api_json,
+        scheme_identifier_activated_gocardless_json,
+        subscription_payment_created_api_json,
+    ],
+    ids=[
+        "billing_request_created",
+        "creditor_updated",
+        "export_started",
+        "instalment_schedule_payment_created",
+        "mandate_cancelled_bank_account_closed",
+        "mandate_cancelled_api",
+        "mandate_transferred_bank_account",
+        "payment_failed_insufficient_funds",
+        "payment_cancelled_mandate_cancelled",
+        "payment_cancelled_api",
+        "payment_confirmed",
+        "payout_paid",
+        "refund_created",
+        "scheme_identifier_activated",
+        "subscription_payment_created",
+    ],
+)
+def test_parent_event(payload: str) -> None:
+    event = _extract_event(payload)
+    Event.model_validate_json(event)

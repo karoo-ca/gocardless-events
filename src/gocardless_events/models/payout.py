@@ -16,7 +16,7 @@ class PayoutTaxExchangeRatesConfirmed(BaseModel):
     action: Literal["tax_exchange_rates_confirmed"]
     details: PayoutTaxExchangeRatesConfirmedPayoutTaxExchangeRatesConfirmedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -31,7 +31,7 @@ class PayoutFxRateConfirmed(BaseModel):
     action: Literal["fx_rate_confirmed"]
     details: PayoutFxRateConfirmedPayoutFxRateConfirmedDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
@@ -46,7 +46,7 @@ class PayoutPaid(BaseModel):
     action: Literal["paid"]
     details: PayoutPaidPayoutPaidDetail
     metadata: dict[str, Any]
-    resource_metadata: dict[str, Any]
+    resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
 
