@@ -56,7 +56,7 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
     {%- endif %}
 {%- endfor %}
 {%- for origin, origin_details in origins_details.items() %}
-class {{ resource_item.action | to_pascal }}{{ cause | to_pascal }}{{ origin | to_pascal }}Detail(BaseModel):
+class {{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail{{ origin | to_pascal }}(BaseModel):
     """
     {{ origin_details[0].description.replace("‘", "'") }}
     """
@@ -70,11 +70,11 @@ class {{ resource_item.action | to_pascal }}{{ cause | to_pascal }}{{ origin | t
 {%- endfor %}
 {# Now, define the Detail type for this cause #}
 {%- if origins_details | length == 1 %}
-{{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail = {{ resource_item.action | to_pascal }}{{ cause | to_pascal }}{{ origins_details.keys() | list | first | to_pascal }}Detail
+{{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail = {{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail{{ origins_details.keys() | list | first | to_pascal }}
 {%- else %}
 {{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail = Annotated[
     {%- for origin in origins_details.keys() %}
-    {{ resource_item.action | to_pascal }}{{ cause | to_pascal }}{{ origin | to_pascal }}Detail{% if not loop.last %} |{% endif %}
+    {{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail{{ origin | to_pascal }}{% if not loop.last %} |{% endif %}
     {%- endfor %},
     Field(..., discriminator="origin"),
 ]

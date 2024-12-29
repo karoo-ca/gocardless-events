@@ -5,7 +5,7 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
-class TaxExchangeRatesConfirmedPayoutTaxExchangeRatesConfirmedGocardlessDetail(
+class TaxExchangeRatesConfirmedPayoutTaxExchangeRatesConfirmedDetailGocardless(
     BaseModel
 ):
     """
@@ -18,11 +18,11 @@ class TaxExchangeRatesConfirmedPayoutTaxExchangeRatesConfirmedGocardlessDetail(
 
 
 TaxExchangeRatesConfirmedPayoutTaxExchangeRatesConfirmedDetail = (
-    TaxExchangeRatesConfirmedPayoutTaxExchangeRatesConfirmedGocardlessDetail
+    TaxExchangeRatesConfirmedPayoutTaxExchangeRatesConfirmedDetailGocardless
 )
 
 
-class FxRateConfirmedPayoutFxRateConfirmedGocardlessDetail(BaseModel):
+class FxRateConfirmedPayoutFxRateConfirmedDetailGocardless(BaseModel):
     """
     The exchange rate for the payout has been confirmed and will not change. Only sent for FX payouts.
     """
@@ -33,11 +33,11 @@ class FxRateConfirmedPayoutFxRateConfirmedGocardlessDetail(BaseModel):
 
 
 FxRateConfirmedPayoutFxRateConfirmedDetail = (
-    FxRateConfirmedPayoutFxRateConfirmedGocardlessDetail
+    FxRateConfirmedPayoutFxRateConfirmedDetailGocardless
 )
 
 
-class PaidPayoutPaidGocardlessDetail(BaseModel):
+class PaidPayoutPaidDetailGocardless(BaseModel):
     """
     GoCardless has transferred the payout to the creditor's bank account. FX payouts will emit this event but will continue to have a pending status until we emit the payout_fx_rate_confirmed event.
     """
@@ -47,7 +47,7 @@ class PaidPayoutPaidGocardlessDetail(BaseModel):
     description: str
 
 
-PaidPayoutPaidDetail = PaidPayoutPaidGocardlessDetail
+PaidPayoutPaidDetail = PaidPayoutPaidDetailGocardless
 
 
 class PayoutTaxExchangeRatesConfirmed(BaseModel):

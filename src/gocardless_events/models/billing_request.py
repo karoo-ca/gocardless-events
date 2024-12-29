@@ -5,7 +5,7 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
-class ChooseCurrencyBillingRequestChooseCurrencyApiDetail(BaseModel):
+class ChooseCurrencyBillingRequestChooseCurrencyDetailApi(BaseModel):
     """
     Currency details have been collected for this billing request.
     """
@@ -15,7 +15,7 @@ class ChooseCurrencyBillingRequestChooseCurrencyApiDetail(BaseModel):
     description: str
 
 
-class ChooseCurrencyBillingRequestChooseCurrencyPayerDetail(BaseModel):
+class ChooseCurrencyBillingRequestChooseCurrencyDetailPayer(BaseModel):
     """
     Currency details have been collected for this billing request.
     """
@@ -26,13 +26,13 @@ class ChooseCurrencyBillingRequestChooseCurrencyPayerDetail(BaseModel):
 
 
 ChooseCurrencyBillingRequestChooseCurrencyDetail = Annotated[
-    ChooseCurrencyBillingRequestChooseCurrencyApiDetail
-    | ChooseCurrencyBillingRequestChooseCurrencyPayerDetail,
+    ChooseCurrencyBillingRequestChooseCurrencyDetailApi
+    | ChooseCurrencyBillingRequestChooseCurrencyDetailPayer,
     Field(..., discriminator="origin"),
 ]
 
 
-class FulfilledBillingRequestFulfilledGocardlessDetail(BaseModel):
+class FulfilledBillingRequestFulfilledDetailGocardless(BaseModel):
     """
     This billing request has been fulfilled and the resources have been created.
     """
@@ -42,7 +42,7 @@ class FulfilledBillingRequestFulfilledGocardlessDetail(BaseModel):
     description: str
 
 
-class FulfilledBillingRequestFulfilledApiDetail(BaseModel):
+class FulfilledBillingRequestFulfilledDetailApi(BaseModel):
     """
     This billing request has been fulfilled and the resources have been created.
     """
@@ -53,13 +53,13 @@ class FulfilledBillingRequestFulfilledApiDetail(BaseModel):
 
 
 FulfilledBillingRequestFulfilledDetail = Annotated[
-    FulfilledBillingRequestFulfilledGocardlessDetail
-    | FulfilledBillingRequestFulfilledApiDetail,
+    FulfilledBillingRequestFulfilledDetailGocardless
+    | FulfilledBillingRequestFulfilledDetailApi,
     Field(..., discriminator="origin"),
 ]
 
 
-class BankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedPayerDetail(
+class BankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedDetailPayer(
     BaseModel
 ):
     """
@@ -71,7 +71,7 @@ class BankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedPayerD
     description: str
 
 
-class BankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedGocardlessDetail(
+class BankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedDetailGocardless(
     BaseModel
 ):
     """
@@ -84,13 +84,13 @@ class BankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedGocard
 
 
 BankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedDetail = Annotated[
-    BankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedPayerDetail
-    | BankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedGocardlessDetail,
+    BankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedDetailPayer
+    | BankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedDetailGocardless,
     Field(..., discriminator="origin"),
 ]
 
 
-class FlowVisitedBillingRequestFlowVisitedPayerDetail(BaseModel):
+class FlowVisitedBillingRequestFlowVisitedDetailPayer(BaseModel):
     """
     The billing request flow has been visited.
     """
@@ -101,11 +101,11 @@ class FlowVisitedBillingRequestFlowVisitedPayerDetail(BaseModel):
 
 
 FlowVisitedBillingRequestFlowVisitedDetail = (
-    FlowVisitedBillingRequestFlowVisitedPayerDetail
+    FlowVisitedBillingRequestFlowVisitedDetailPayer
 )
 
 
-class FailedBillingRequestFailedGocardlessDetail(BaseModel):
+class FailedBillingRequestFailedDetailGocardless(BaseModel):
     """
     This billing request has failed.
     """
@@ -115,7 +115,7 @@ class FailedBillingRequestFailedGocardlessDetail(BaseModel):
     description: str
 
 
-class FailedBillingRequestFailedApiDetail(BaseModel):
+class FailedBillingRequestFailedDetailApi(BaseModel):
     """
     This billing request has failed.
     """
@@ -126,12 +126,12 @@ class FailedBillingRequestFailedApiDetail(BaseModel):
 
 
 FailedBillingRequestFailedDetail = Annotated[
-    FailedBillingRequestFailedGocardlessDetail | FailedBillingRequestFailedApiDetail,
+    FailedBillingRequestFailedDetailGocardless | FailedBillingRequestFailedDetailApi,
     Field(..., discriminator="origin"),
 ]
 
 
-class CollectBankAccountBillingRequestCollectBankAccountApiDetail(BaseModel):
+class CollectBankAccountBillingRequestCollectBankAccountDetailApi(BaseModel):
     """
     Bank account details have been collected for this billing request.
     """
@@ -141,7 +141,7 @@ class CollectBankAccountBillingRequestCollectBankAccountApiDetail(BaseModel):
     description: str
 
 
-class CollectBankAccountBillingRequestCollectBankAccountPayerDetail(BaseModel):
+class CollectBankAccountBillingRequestCollectBankAccountDetailPayer(BaseModel):
     """
     Bank account details have been collected for this billing request.
     """
@@ -152,13 +152,13 @@ class CollectBankAccountBillingRequestCollectBankAccountPayerDetail(BaseModel):
 
 
 CollectBankAccountBillingRequestCollectBankAccountDetail = Annotated[
-    CollectBankAccountBillingRequestCollectBankAccountApiDetail
-    | CollectBankAccountBillingRequestCollectBankAccountPayerDetail,
+    CollectBankAccountBillingRequestCollectBankAccountDetailApi
+    | CollectBankAccountBillingRequestCollectBankAccountDetailPayer,
     Field(..., discriminator="origin"),
 ]
 
 
-class PayerDetailsConfirmedBillingRequestPayerDetailsConfirmedApiDetail(BaseModel):
+class PayerDetailsConfirmedBillingRequestPayerDetailsConfirmedDetailApi(BaseModel):
     """
     Payer has confirmed all their details for this billing request.
     """
@@ -168,7 +168,7 @@ class PayerDetailsConfirmedBillingRequestPayerDetailsConfirmedApiDetail(BaseMode
     description: str
 
 
-class PayerDetailsConfirmedBillingRequestPayerDetailsConfirmedPayerDetail(BaseModel):
+class PayerDetailsConfirmedBillingRequestPayerDetailsConfirmedDetailPayer(BaseModel):
     """
     Payer has confirmed all their details for this billing request.
     """
@@ -179,13 +179,13 @@ class PayerDetailsConfirmedBillingRequestPayerDetailsConfirmedPayerDetail(BaseMo
 
 
 PayerDetailsConfirmedBillingRequestPayerDetailsConfirmedDetail = Annotated[
-    PayerDetailsConfirmedBillingRequestPayerDetailsConfirmedApiDetail
-    | PayerDetailsConfirmedBillingRequestPayerDetailsConfirmedPayerDetail,
+    PayerDetailsConfirmedBillingRequestPayerDetailsConfirmedDetailApi
+    | PayerDetailsConfirmedBillingRequestPayerDetailsConfirmedDetailPayer,
     Field(..., discriminator="origin"),
 ]
 
 
-class CollectAmountBillingRequestCollectAmountPayerDetail(BaseModel):
+class CollectAmountBillingRequestCollectAmountDetailPayer(BaseModel):
     """
     Amount has been collected for this billing request.
     """
@@ -196,11 +196,11 @@ class CollectAmountBillingRequestCollectAmountPayerDetail(BaseModel):
 
 
 CollectAmountBillingRequestCollectAmountDetail = (
-    CollectAmountBillingRequestCollectAmountPayerDetail
+    CollectAmountBillingRequestCollectAmountDetailPayer
 )
 
 
-class BankAuthorisationExpiredBillingRequestBankAuthorisationExpiredPayerDetail(
+class BankAuthorisationExpiredBillingRequestBankAuthorisationExpiredDetailPayer(
     BaseModel
 ):
     """
@@ -213,11 +213,11 @@ class BankAuthorisationExpiredBillingRequestBankAuthorisationExpiredPayerDetail(
 
 
 BankAuthorisationExpiredBillingRequestBankAuthorisationExpiredDetail = (
-    BankAuthorisationExpiredBillingRequestBankAuthorisationExpiredPayerDetail
+    BankAuthorisationExpiredBillingRequestBankAuthorisationExpiredDetailPayer
 )
 
 
-class FlowExitedBillingRequestFlowExitedPayerDetail(BaseModel):
+class FlowExitedBillingRequestFlowExitedDetailPayer(BaseModel):
     """
     The billing request flow has been exited by the payer.
     """
@@ -227,10 +227,10 @@ class FlowExitedBillingRequestFlowExitedPayerDetail(BaseModel):
     description: str
 
 
-FlowExitedBillingRequestFlowExitedDetail = FlowExitedBillingRequestFlowExitedPayerDetail
+FlowExitedBillingRequestFlowExitedDetail = FlowExitedBillingRequestFlowExitedDetailPayer
 
 
-class CollectCustomerDetailsBillingRequestCollectCustomerDetailsApiDetail(BaseModel):
+class CollectCustomerDetailsBillingRequestCollectCustomerDetailsDetailApi(BaseModel):
     """
     Customer details have been collected for this billing request.
     """
@@ -240,7 +240,7 @@ class CollectCustomerDetailsBillingRequestCollectCustomerDetailsApiDetail(BaseMo
     description: str
 
 
-class CollectCustomerDetailsBillingRequestCollectCustomerDetailsPayerDetail(BaseModel):
+class CollectCustomerDetailsBillingRequestCollectCustomerDetailsDetailPayer(BaseModel):
     """
     Customer details have been collected for this billing request.
     """
@@ -251,13 +251,13 @@ class CollectCustomerDetailsBillingRequestCollectCustomerDetailsPayerDetail(Base
 
 
 CollectCustomerDetailsBillingRequestCollectCustomerDetailsDetail = Annotated[
-    CollectCustomerDetailsBillingRequestCollectCustomerDetailsApiDetail
-    | CollectCustomerDetailsBillingRequestCollectCustomerDetailsPayerDetail,
+    CollectCustomerDetailsBillingRequestCollectCustomerDetailsDetailApi
+    | CollectCustomerDetailsBillingRequestCollectCustomerDetailsDetailPayer,
     Field(..., discriminator="origin"),
 ]
 
 
-class CreatedBillingRequestCreatedGocardlessDetail(BaseModel):
+class CreatedBillingRequestCreatedDetailGocardless(BaseModel):
     """
     This billing request has been created.
     """
@@ -267,7 +267,7 @@ class CreatedBillingRequestCreatedGocardlessDetail(BaseModel):
     description: str
 
 
-class CreatedBillingRequestCreatedApiDetail(BaseModel):
+class CreatedBillingRequestCreatedDetailApi(BaseModel):
     """
     This billing request has been created.
     """
@@ -277,7 +277,7 @@ class CreatedBillingRequestCreatedApiDetail(BaseModel):
     description: str
 
 
-class CreatedBillingRequestCreatedPayerDetail(BaseModel):
+class CreatedBillingRequestCreatedDetailPayer(BaseModel):
     """
     This billing request has been created.
     """
@@ -288,14 +288,14 @@ class CreatedBillingRequestCreatedPayerDetail(BaseModel):
 
 
 CreatedBillingRequestCreatedDetail = Annotated[
-    CreatedBillingRequestCreatedGocardlessDetail
-    | CreatedBillingRequestCreatedApiDetail
-    | CreatedBillingRequestCreatedPayerDetail,
+    CreatedBillingRequestCreatedDetailGocardless
+    | CreatedBillingRequestCreatedDetailApi
+    | CreatedBillingRequestCreatedDetailPayer,
     Field(..., discriminator="origin"),
 ]
 
 
-class BankAuthorisationFailedBillingRequestBankAuthorisationFailedPayerDetail(
+class BankAuthorisationFailedBillingRequestBankAuthorisationFailedDetailPayer(
     BaseModel
 ):
     """
@@ -307,7 +307,7 @@ class BankAuthorisationFailedBillingRequestBankAuthorisationFailedPayerDetail(
     description: str
 
 
-class BankAuthorisationFailedBillingRequestBankAuthorisationFailedGocardlessDetail(
+class BankAuthorisationFailedBillingRequestBankAuthorisationFailedDetailGocardless(
     BaseModel
 ):
     """
@@ -320,13 +320,13 @@ class BankAuthorisationFailedBillingRequestBankAuthorisationFailedGocardlessDeta
 
 
 BankAuthorisationFailedBillingRequestBankAuthorisationFailedDetail = Annotated[
-    BankAuthorisationFailedBillingRequestBankAuthorisationFailedPayerDetail
-    | BankAuthorisationFailedBillingRequestBankAuthorisationFailedGocardlessDetail,
+    BankAuthorisationFailedBillingRequestBankAuthorisationFailedDetailPayer
+    | BankAuthorisationFailedBillingRequestBankAuthorisationFailedDetailGocardless,
     Field(..., discriminator="origin"),
 ]
 
 
-class PayerGeoBlockedPayerGeoBlockedPayerDetail(BaseModel):
+class PayerGeoBlockedPayerGeoBlockedDetailPayer(BaseModel):
     """
     Payer blocked for 24 hours for attempting to pay from an unsupported location.
     """
@@ -336,10 +336,10 @@ class PayerGeoBlockedPayerGeoBlockedPayerDetail(BaseModel):
     description: str
 
 
-PayerGeoBlockedPayerGeoBlockedDetail = PayerGeoBlockedPayerGeoBlockedPayerDetail
+PayerGeoBlockedPayerGeoBlockedDetail = PayerGeoBlockedPayerGeoBlockedDetailPayer
 
 
-class FlowCreatedBillingRequestFlowCreatedGocardlessDetail(BaseModel):
+class FlowCreatedBillingRequestFlowCreatedDetailGocardless(BaseModel):
     """
     A billing request flow has been created against this billing request.
     """
@@ -349,7 +349,7 @@ class FlowCreatedBillingRequestFlowCreatedGocardlessDetail(BaseModel):
     description: str
 
 
-class FlowCreatedBillingRequestFlowCreatedApiDetail(BaseModel):
+class FlowCreatedBillingRequestFlowCreatedDetailApi(BaseModel):
     """
     A billing request flow has been created against this billing request.
     """
@@ -359,7 +359,7 @@ class FlowCreatedBillingRequestFlowCreatedApiDetail(BaseModel):
     description: str
 
 
-class FlowCreatedBillingRequestFlowCreatedPayerDetail(BaseModel):
+class FlowCreatedBillingRequestFlowCreatedDetailPayer(BaseModel):
     """
     A billing request flow has been created against this billing request.
     """
@@ -370,14 +370,14 @@ class FlowCreatedBillingRequestFlowCreatedPayerDetail(BaseModel):
 
 
 FlowCreatedBillingRequestFlowCreatedDetail = Annotated[
-    FlowCreatedBillingRequestFlowCreatedGocardlessDetail
-    | FlowCreatedBillingRequestFlowCreatedApiDetail
-    | FlowCreatedBillingRequestFlowCreatedPayerDetail,
+    FlowCreatedBillingRequestFlowCreatedDetailGocardless
+    | FlowCreatedBillingRequestFlowCreatedDetailApi
+    | FlowCreatedBillingRequestFlowCreatedDetailPayer,
     Field(..., discriminator="origin"),
 ]
 
 
-class BankAuthorisationDeniedBillingRequestBankAuthorisationDeniedPayerDetail(
+class BankAuthorisationDeniedBillingRequestBankAuthorisationDeniedDetailPayer(
     BaseModel
 ):
     """
@@ -389,7 +389,7 @@ class BankAuthorisationDeniedBillingRequestBankAuthorisationDeniedPayerDetail(
     description: str
 
 
-class BankAuthorisationDeniedBillingRequestBankAuthorisationDeniedGocardlessDetail(
+class BankAuthorisationDeniedBillingRequestBankAuthorisationDeniedDetailGocardless(
     BaseModel
 ):
     """
@@ -402,13 +402,13 @@ class BankAuthorisationDeniedBillingRequestBankAuthorisationDeniedGocardlessDeta
 
 
 BankAuthorisationDeniedBillingRequestBankAuthorisationDeniedDetail = Annotated[
-    BankAuthorisationDeniedBillingRequestBankAuthorisationDeniedPayerDetail
-    | BankAuthorisationDeniedBillingRequestBankAuthorisationDeniedGocardlessDetail,
+    BankAuthorisationDeniedBillingRequestBankAuthorisationDeniedDetailPayer
+    | BankAuthorisationDeniedBillingRequestBankAuthorisationDeniedDetailGocardless,
     Field(..., discriminator="origin"),
 ]
 
 
-class SelectInstitutionBillingRequestSelectInstitutionPayerDetail(BaseModel):
+class SelectInstitutionBillingRequestSelectInstitutionDetailPayer(BaseModel):
     """
     Institution details have been collected for this billing request.
     """
@@ -419,11 +419,11 @@ class SelectInstitutionBillingRequestSelectInstitutionPayerDetail(BaseModel):
 
 
 SelectInstitutionBillingRequestSelectInstitutionDetail = (
-    SelectInstitutionBillingRequestSelectInstitutionPayerDetail
+    SelectInstitutionBillingRequestSelectInstitutionDetailPayer
 )
 
 
-class BankAuthorisationVisitedBillingRequestBankAuthorisationVisitedPayerDetail(
+class BankAuthorisationVisitedBillingRequestBankAuthorisationVisitedDetailPayer(
     BaseModel
 ):
     """
@@ -436,11 +436,11 @@ class BankAuthorisationVisitedBillingRequestBankAuthorisationVisitedPayerDetail(
 
 
 BankAuthorisationVisitedBillingRequestBankAuthorisationVisitedDetail = (
-    BankAuthorisationVisitedBillingRequestBankAuthorisationVisitedPayerDetail
+    BankAuthorisationVisitedBillingRequestBankAuthorisationVisitedDetailPayer
 )
 
 
-class CancelledBillingRequestCancelledGocardlessDetail(BaseModel):
+class CancelledBillingRequestCancelledDetailGocardless(BaseModel):
     """
     This billing request has been cancelled none of the resources have been created.
     """
@@ -450,7 +450,7 @@ class CancelledBillingRequestCancelledGocardlessDetail(BaseModel):
     description: str
 
 
-class CancelledBillingRequestCancelledApiDetail(BaseModel):
+class CancelledBillingRequestCancelledDetailApi(BaseModel):
     """
     This billing request has been cancelled none of the resources have been created.
     """
@@ -461,8 +461,8 @@ class CancelledBillingRequestCancelledApiDetail(BaseModel):
 
 
 CancelledBillingRequestCancelledDetail = Annotated[
-    CancelledBillingRequestCancelledGocardlessDetail
-    | CancelledBillingRequestCancelledApiDetail,
+    CancelledBillingRequestCancelledDetailGocardless
+    | CancelledBillingRequestCancelledDetailApi,
     Field(..., discriminator="origin"),
 ]
 

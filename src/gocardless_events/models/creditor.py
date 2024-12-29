@@ -5,7 +5,7 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
-class AccountAutoFrozenAccountAutoFrozenGocardlessDetail(BaseModel):
+class AccountAutoFrozenAccountAutoFrozenDetailGocardless(BaseModel):
     """
     This creditor account has been automatically frozen and had restrictions applied.
     """
@@ -16,11 +16,11 @@ class AccountAutoFrozenAccountAutoFrozenGocardlessDetail(BaseModel):
 
 
 AccountAutoFrozenAccountAutoFrozenDetail = (
-    AccountAutoFrozenAccountAutoFrozenGocardlessDetail
+    AccountAutoFrozenAccountAutoFrozenDetailGocardless
 )
 
 
-class UpdatedCreditorUpdatedGocardlessDetail(BaseModel):
+class UpdatedCreditorUpdatedDetailGocardless(BaseModel):
     """
     This creditor has been updated.
     """
@@ -30,10 +30,10 @@ class UpdatedCreditorUpdatedGocardlessDetail(BaseModel):
     description: str
 
 
-UpdatedCreditorUpdatedDetail = UpdatedCreditorUpdatedGocardlessDetail
+UpdatedCreditorUpdatedDetail = UpdatedCreditorUpdatedDetailGocardless
 
 
-class AccountAutoFrozenRevertedAccountAutoFrozenRevertedGocardlessDetail(BaseModel):
+class AccountAutoFrozenRevertedAccountAutoFrozenRevertedDetailGocardless(BaseModel):
     """
     The restrictions on this creditor account have been removed.
     """
@@ -44,11 +44,11 @@ class AccountAutoFrozenRevertedAccountAutoFrozenRevertedGocardlessDetail(BaseMod
 
 
 AccountAutoFrozenRevertedAccountAutoFrozenRevertedDetail = (
-    AccountAutoFrozenRevertedAccountAutoFrozenRevertedGocardlessDetail
+    AccountAutoFrozenRevertedAccountAutoFrozenRevertedDetailGocardless
 )
 
 
-class BouncedPayoutBouncedPayoutGocardlessDetail(BaseModel):
+class BouncedPayoutBouncedPayoutDetailGocardless(BaseModel):
     """
     A payout for this creditor has failed. Please retry the payout or contact your bank for more information.
     """
@@ -58,10 +58,10 @@ class BouncedPayoutBouncedPayoutGocardlessDetail(BaseModel):
     description: str
 
 
-BouncedPayoutBouncedPayoutDetail = BouncedPayoutBouncedPayoutGocardlessDetail
+BouncedPayoutBouncedPayoutDetail = BouncedPayoutBouncedPayoutDetailGocardless
 
 
-class NewPayoutCurrencyAddedNewPayoutCurrencyAddedGocardlessDetail(BaseModel):
+class NewPayoutCurrencyAddedNewPayoutCurrencyAddedDetailGocardless(BaseModel):
     """
     This creditor has added a new payout currency.
     """
@@ -72,7 +72,7 @@ class NewPayoutCurrencyAddedNewPayoutCurrencyAddedGocardlessDetail(BaseModel):
 
 
 NewPayoutCurrencyAddedNewPayoutCurrencyAddedDetail = (
-    NewPayoutCurrencyAddedNewPayoutCurrencyAddedGocardlessDetail
+    NewPayoutCurrencyAddedNewPayoutCurrencyAddedDetailGocardless
 )
 
 

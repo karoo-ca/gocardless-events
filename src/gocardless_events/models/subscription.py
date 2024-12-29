@@ -5,7 +5,7 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
-class CustomerApprovalGrantedCustomerApprovalGrantedCustomerDetail(BaseModel):
+class CustomerApprovalGrantedCustomerApprovalGrantedDetailCustomer(BaseModel):
     """
     The customer granted approval for this subscription
     """
@@ -16,11 +16,11 @@ class CustomerApprovalGrantedCustomerApprovalGrantedCustomerDetail(BaseModel):
 
 
 CustomerApprovalGrantedCustomerApprovalGrantedDetail = (
-    CustomerApprovalGrantedCustomerApprovalGrantedCustomerDetail
+    CustomerApprovalGrantedCustomerApprovalGrantedDetailCustomer
 )
 
 
-class FinishedSubscriptionFinishedGocardlessDetail(BaseModel):
+class FinishedSubscriptionFinishedDetailGocardless(BaseModel):
     """
     The subscription has finished.
     """
@@ -30,10 +30,10 @@ class FinishedSubscriptionFinishedGocardlessDetail(BaseModel):
     description: str
 
 
-FinishedSubscriptionFinishedDetail = FinishedSubscriptionFinishedGocardlessDetail
+FinishedSubscriptionFinishedDetail = FinishedSubscriptionFinishedDetailGocardless
 
 
-class ResumedSubscriptionResumedApiDetail(BaseModel):
+class ResumedSubscriptionResumedDetailApi(BaseModel):
     """
     The subscription was resumed.
     """
@@ -43,7 +43,7 @@ class ResumedSubscriptionResumedApiDetail(BaseModel):
     description: str
 
 
-class ResumedSubscriptionResumedGocardlessDetail(BaseModel):
+class ResumedSubscriptionResumedDetailGocardless(BaseModel):
     """
     The subscription was resumed.
     """
@@ -54,12 +54,12 @@ class ResumedSubscriptionResumedGocardlessDetail(BaseModel):
 
 
 ResumedSubscriptionResumedDetail = Annotated[
-    ResumedSubscriptionResumedApiDetail | ResumedSubscriptionResumedGocardlessDetail,
+    ResumedSubscriptionResumedDetailApi | ResumedSubscriptionResumedDetailGocardless,
     Field(..., discriminator="origin"),
 ]
 
 
-class AmendedSubscriptionAmendedApiDetail(BaseModel):
+class AmendedSubscriptionAmendedDetailApi(BaseModel):
     """
     Subscription amount has been amended.
     """
@@ -69,10 +69,10 @@ class AmendedSubscriptionAmendedApiDetail(BaseModel):
     description: str
 
 
-AmendedSubscriptionAmendedDetail = AmendedSubscriptionAmendedApiDetail
+AmendedSubscriptionAmendedDetail = AmendedSubscriptionAmendedDetailApi
 
 
-class CustomerApprovalDeniedCustomerApprovalDeniedCustomerDetail(BaseModel):
+class CustomerApprovalDeniedCustomerApprovalDeniedDetailCustomer(BaseModel):
     """
     The customer denied approval for this subscription
     """
@@ -83,11 +83,11 @@ class CustomerApprovalDeniedCustomerApprovalDeniedCustomerDetail(BaseModel):
 
 
 CustomerApprovalDeniedCustomerApprovalDeniedDetail = (
-    CustomerApprovalDeniedCustomerApprovalDeniedCustomerDetail
+    CustomerApprovalDeniedCustomerApprovalDeniedDetailCustomer
 )
 
 
-class PausedSubscriptionPausedApiDetail(BaseModel):
+class PausedSubscriptionPausedDetailApi(BaseModel):
     """
     The subscription has been paused.
     """
@@ -97,7 +97,7 @@ class PausedSubscriptionPausedApiDetail(BaseModel):
     description: str
 
 
-class PausedSubscriptionPausedGocardlessDetail(BaseModel):
+class PausedSubscriptionPausedDetailGocardless(BaseModel):
     """
     The subscription has been paused.
     """
@@ -108,12 +108,12 @@ class PausedSubscriptionPausedGocardlessDetail(BaseModel):
 
 
 PausedSubscriptionPausedDetail = Annotated[
-    PausedSubscriptionPausedApiDetail | PausedSubscriptionPausedGocardlessDetail,
+    PausedSubscriptionPausedDetailApi | PausedSubscriptionPausedDetailGocardless,
     Field(..., discriminator="origin"),
 ]
 
 
-class ScheduledPauseCancelledScheduledPauseCancelledApiDetail(BaseModel):
+class ScheduledPauseCancelledScheduledPauseCancelledDetailApi(BaseModel):
     """
     An upcoming pause for this subscription has been cancelled.
     """
@@ -124,11 +124,11 @@ class ScheduledPauseCancelledScheduledPauseCancelledApiDetail(BaseModel):
 
 
 ScheduledPauseCancelledScheduledPauseCancelledDetail = (
-    ScheduledPauseCancelledScheduledPauseCancelledApiDetail
+    ScheduledPauseCancelledScheduledPauseCancelledDetailApi
 )
 
 
-class ScheduledPauseScheduledPauseApiDetail(BaseModel):
+class ScheduledPauseScheduledPauseDetailApi(BaseModel):
     """
     The subscription has been scheduled to be paused at a future date.
     """
@@ -138,10 +138,10 @@ class ScheduledPauseScheduledPauseApiDetail(BaseModel):
     description: str
 
 
-ScheduledPauseScheduledPauseDetail = ScheduledPauseScheduledPauseApiDetail
+ScheduledPauseScheduledPauseDetail = ScheduledPauseScheduledPauseDetailApi
 
 
-class CreatedSubscriptionCreatedApiDetail(BaseModel):
+class CreatedSubscriptionCreatedDetailApi(BaseModel):
     """
     Subscription created via the API.
     """
@@ -151,10 +151,10 @@ class CreatedSubscriptionCreatedApiDetail(BaseModel):
     description: str
 
 
-CreatedSubscriptionCreatedDetail = CreatedSubscriptionCreatedApiDetail
+CreatedSubscriptionCreatedDetail = CreatedSubscriptionCreatedDetailApi
 
 
-class PaymentCreatedPaymentCreatedGocardlessDetail(BaseModel):
+class PaymentCreatedPaymentCreatedDetailGocardless(BaseModel):
     """
     Payment created by a subscription.
     """
@@ -164,10 +164,10 @@ class PaymentCreatedPaymentCreatedGocardlessDetail(BaseModel):
     description: str
 
 
-PaymentCreatedPaymentCreatedDetail = PaymentCreatedPaymentCreatedGocardlessDetail
+PaymentCreatedPaymentCreatedDetail = PaymentCreatedPaymentCreatedDetailGocardless
 
 
-class ScheduledResumeScheduledResumeApiDetail(BaseModel):
+class ScheduledResumeScheduledResumeDetailApi(BaseModel):
     """
     This paused subscription has been scheduled to be resumed at a future date.
     """
@@ -177,10 +177,10 @@ class ScheduledResumeScheduledResumeApiDetail(BaseModel):
     description: str
 
 
-ScheduledResumeScheduledResumeDetail = ScheduledResumeScheduledResumeApiDetail
+ScheduledResumeScheduledResumeDetail = ScheduledResumeScheduledResumeDetailApi
 
 
-class CancelledBankAccountClosedBankDetail(BaseModel):
+class CancelledBankAccountClosedDetailBank(BaseModel):
     """
     This subscription was cancelled because the customer is deceased.
     """
@@ -192,7 +192,7 @@ class CancelledBankAccountClosedBankDetail(BaseModel):
     description: str
 
 
-class CancelledBankAccountClosedApiDetail(BaseModel):
+class CancelledBankAccountClosedDetailApi(BaseModel):
     """
     The mandate for this subscription was cancelled at your request.
     """
@@ -203,12 +203,12 @@ class CancelledBankAccountClosedApiDetail(BaseModel):
 
 
 CancelledBankAccountClosedDetail = Annotated[
-    CancelledBankAccountClosedBankDetail | CancelledBankAccountClosedApiDetail,
+    CancelledBankAccountClosedDetailBank | CancelledBankAccountClosedDetailApi,
     Field(..., discriminator="origin"),
 ]
 
 
-class CancelledReturnOnOdfiRequestBankDetail(BaseModel):
+class CancelledReturnOnOdfiRequestDetailBank(BaseModel):
     """
     This subscription has been cancelled because its mandate was cancelled.
     """
@@ -220,10 +220,10 @@ class CancelledReturnOnOdfiRequestBankDetail(BaseModel):
     description: str
 
 
-CancelledReturnOnOdfiRequestDetail = CancelledReturnOnOdfiRequestBankDetail
+CancelledReturnOnOdfiRequestDetail = CancelledReturnOnOdfiRequestDetailBank
 
 
-class CancelledReferToPayerBankDetail(BaseModel):
+class CancelledReferToPayerDetailBank(BaseModel):
     """
     This subscription has been cancelled because the bank details for its mandate are incorrect.
     """
@@ -235,10 +235,10 @@ class CancelledReferToPayerBankDetail(BaseModel):
     description: str
 
 
-CancelledReferToPayerDetail = CancelledReferToPayerBankDetail
+CancelledReferToPayerDetail = CancelledReferToPayerDetailBank
 
 
-class CancelledMandateCancelledBankDetail(BaseModel):
+class CancelledMandateCancelledDetailBank(BaseModel):
     """
     This subscription was canceled because the customer cancelled the mandate at their bank.
     """
@@ -250,7 +250,7 @@ class CancelledMandateCancelledBankDetail(BaseModel):
     description: str
 
 
-class CancelledMandateCancelledApiDetail(BaseModel):
+class CancelledMandateCancelledDetailApi(BaseModel):
     """
     The subscription was cancelled because its mandate was cancelled at your request.
     """
@@ -260,7 +260,7 @@ class CancelledMandateCancelledApiDetail(BaseModel):
     description: str
 
 
-class CancelledMandateCancelledGocardlessDetail(BaseModel):
+class CancelledMandateCancelledDetailGocardless(BaseModel):
     """
     The mandate for this subscription was cancelled at your request.
     """
@@ -273,14 +273,14 @@ class CancelledMandateCancelledGocardlessDetail(BaseModel):
 
 
 CancelledMandateCancelledDetail = Annotated[
-    CancelledMandateCancelledBankDetail
-    | CancelledMandateCancelledApiDetail
-    | CancelledMandateCancelledGocardlessDetail,
+    CancelledMandateCancelledDetailBank
+    | CancelledMandateCancelledDetailApi
+    | CancelledMandateCancelledDetailGocardless,
     Field(..., discriminator="origin"),
 ]
 
 
-class CancelledInvalidBankDetailsBankDetail(BaseModel):
+class CancelledInvalidBankDetailsDetailBank(BaseModel):
     """
     This subscription has been cancelled because the bank details for its mandate are incorrect.
     """
@@ -292,10 +292,10 @@ class CancelledInvalidBankDetailsBankDetail(BaseModel):
     description: str
 
 
-CancelledInvalidBankDetailsDetail = CancelledInvalidBankDetailsBankDetail
+CancelledInvalidBankDetailsDetail = CancelledInvalidBankDetailsDetailBank
 
 
-class CancelledDirectDebitNotEnabledBankDetail(BaseModel):
+class CancelledDirectDebitNotEnabledDetailBank(BaseModel):
     """
     This subscription has been cancelled because the bank account it was going to be taken from does not support direct debit.
     """
@@ -307,10 +307,10 @@ class CancelledDirectDebitNotEnabledBankDetail(BaseModel):
     description: str
 
 
-CancelledDirectDebitNotEnabledDetail = CancelledDirectDebitNotEnabledBankDetail
+CancelledDirectDebitNotEnabledDetail = CancelledDirectDebitNotEnabledDetailBank
 
 
-class CancelledAuthorisationDisputedBankDetail(BaseModel):
+class CancelledAuthorisationDisputedDetailBank(BaseModel):
     """
     This subscription has been cancelled because the customer disputes authorising its mandate.
     """
@@ -322,10 +322,10 @@ class CancelledAuthorisationDisputedBankDetail(BaseModel):
     description: str
 
 
-CancelledAuthorisationDisputedDetail = CancelledAuthorisationDisputedBankDetail
+CancelledAuthorisationDisputedDetail = CancelledAuthorisationDisputedDetailBank
 
 
-class CancelledSubscriptionCancelledApiDetail(BaseModel):
+class CancelledSubscriptionCancelledDetailApi(BaseModel):
     """
     The subscription has been cancelled at your request.
     """
@@ -335,10 +335,10 @@ class CancelledSubscriptionCancelledApiDetail(BaseModel):
     description: str
 
 
-CancelledSubscriptionCancelledDetail = CancelledSubscriptionCancelledApiDetail
+CancelledSubscriptionCancelledDetail = CancelledSubscriptionCancelledDetailApi
 
 
-class CancelledMandateExpiredGocardlessDetail(BaseModel):
+class CancelledMandateExpiredDetailGocardless(BaseModel):
     """
     The subscription was cancelled because its mandate has expired.
     """
@@ -348,10 +348,10 @@ class CancelledMandateExpiredGocardlessDetail(BaseModel):
     description: str
 
 
-CancelledMandateExpiredDetail = CancelledMandateExpiredGocardlessDetail
+CancelledMandateExpiredDetail = CancelledMandateExpiredDetailGocardless
 
 
-class CancelledBankAccountTransferredBankDetail(BaseModel):
+class CancelledBankAccountTransferredDetailBank(BaseModel):
     """
     The mandate for this subscription was cancelled as the customer asked their bank to transfer the mandate to a new account but the bank has failed to send GoCardless the new bank details.
     """
@@ -363,10 +363,10 @@ class CancelledBankAccountTransferredBankDetail(BaseModel):
     description: str
 
 
-CancelledBankAccountTransferredDetail = CancelledBankAccountTransferredBankDetail
+CancelledBankAccountTransferredDetail = CancelledBankAccountTransferredDetailBank
 
 
-class CancelledAccountBlockedForAnyFinancialTransactionBankDetail(BaseModel):
+class CancelledAccountBlockedForAnyFinancialTransactionDetailBank(BaseModel):
     """
     This subscription has been cancelled because the bank account for its mandate was blocked.
     """
@@ -379,11 +379,11 @@ class CancelledAccountBlockedForAnyFinancialTransactionBankDetail(BaseModel):
 
 
 CancelledAccountBlockedForAnyFinancialTransactionDetail = (
-    CancelledAccountBlockedForAnyFinancialTransactionBankDetail
+    CancelledAccountBlockedForAnyFinancialTransactionDetailBank
 )
 
 
-class CancelledPlanCancelledApiDetail(BaseModel):
+class CancelledPlanCancelledDetailApi(BaseModel):
     """
     The subscription has been cancelled because the associated plan was cancelled.
     """
@@ -393,10 +393,10 @@ class CancelledPlanCancelledApiDetail(BaseModel):
     description: str
 
 
-CancelledPlanCancelledDetail = CancelledPlanCancelledApiDetail
+CancelledPlanCancelledDetail = CancelledPlanCancelledDetailApi
 
 
-class CancelledPaymentStoppedBankDetail(BaseModel):
+class CancelledPaymentStoppedDetailBank(BaseModel):
     """
     The subscription was cancelled because the payment was stopped by the payer or their bank.
     """
@@ -408,10 +408,10 @@ class CancelledPaymentStoppedBankDetail(BaseModel):
     description: str
 
 
-CancelledPaymentStoppedDetail = CancelledPaymentStoppedBankDetail
+CancelledPaymentStoppedDetail = CancelledPaymentStoppedDetailBank
 
 
-class CancelledOtherBankDetail(BaseModel):
+class CancelledOtherDetailBank(BaseModel):
     """
     An error was received from the banks while setting up the mandate for this subscription.
     """
@@ -423,10 +423,10 @@ class CancelledOtherBankDetail(BaseModel):
     description: str
 
 
-CancelledOtherDetail = CancelledOtherBankDetail
+CancelledOtherDetail = CancelledOtherDetailBank
 
 
-class CancelledMandateSuspendedByPayerBankDetail(BaseModel):
+class CancelledMandateSuspendedByPayerDetailBank(BaseModel):
     """
     The subscription has been cancelled because its mandate was suspended by payer.
     """
@@ -438,10 +438,10 @@ class CancelledMandateSuspendedByPayerBankDetail(BaseModel):
     description: str
 
 
-CancelledMandateSuspendedByPayerDetail = CancelledMandateSuspendedByPayerBankDetail
+CancelledMandateSuspendedByPayerDetail = CancelledMandateSuspendedByPayerDetailBank
 
 
-class CancelledInitialOneOffPaymentFailedGocardlessDetail(BaseModel):
+class CancelledInitialOneOffPaymentFailedDetailGocardless(BaseModel):
     """
     This subscription has been cancelled because its mandate was cancelled.
     """
@@ -452,7 +452,7 @@ class CancelledInitialOneOffPaymentFailedGocardlessDetail(BaseModel):
 
 
 CancelledInitialOneOffPaymentFailedDetail = (
-    CancelledInitialOneOffPaymentFailedGocardlessDetail
+    CancelledInitialOneOffPaymentFailedDetailGocardless
 )
 
 

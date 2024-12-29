@@ -5,7 +5,7 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
-class FundsReturnedRefundFundsReturnedGocardlessDetail(BaseModel):
+class FundsReturnedRefundFundsReturnedDetailGocardless(BaseModel):
     """
     The funds for the refund have been returned to you.
     """
@@ -16,11 +16,11 @@ class FundsReturnedRefundFundsReturnedGocardlessDetail(BaseModel):
 
 
 FundsReturnedRefundFundsReturnedDetail = (
-    FundsReturnedRefundFundsReturnedGocardlessDetail
+    FundsReturnedRefundFundsReturnedDetailGocardless
 )
 
 
-class FailedRefundFailedGocardlessDetail(BaseModel):
+class FailedRefundFailedDetailGocardless(BaseModel):
     """
     The refund did not reach your customer the funds will be returned to you.
     """
@@ -30,10 +30,10 @@ class FailedRefundFailedGocardlessDetail(BaseModel):
     description: str
 
 
-FailedRefundFailedDetail = FailedRefundFailedGocardlessDetail
+FailedRefundFailedDetail = FailedRefundFailedDetailGocardless
 
 
-class PaidRefundPaidGocardlessDetail(BaseModel):
+class PaidRefundPaidDetailGocardless(BaseModel):
     """
     The refund has been paid to your customer.
     """
@@ -43,10 +43,10 @@ class PaidRefundPaidGocardlessDetail(BaseModel):
     description: str
 
 
-PaidRefundPaidDetail = PaidRefundPaidGocardlessDetail
+PaidRefundPaidDetail = PaidRefundPaidDetailGocardless
 
 
-class CreatedPaymentRefundedApiDetail(BaseModel):
+class CreatedPaymentRefundedDetailApi(BaseModel):
     """
     The refund has been created and will be submitted in the next batch.
     """
@@ -56,10 +56,10 @@ class CreatedPaymentRefundedApiDetail(BaseModel):
     description: str
 
 
-CreatedPaymentRefundedDetail = CreatedPaymentRefundedApiDetail
+CreatedPaymentRefundedDetail = CreatedPaymentRefundedDetailApi
 
 
-class CreatedRefundCreatedApiDetail(BaseModel):
+class CreatedRefundCreatedDetailApi(BaseModel):
     """
     The refund has been created and will be submitted in the next batch.
     """
@@ -69,10 +69,10 @@ class CreatedRefundCreatedApiDetail(BaseModel):
     description: str
 
 
-CreatedRefundCreatedDetail = CreatedRefundCreatedApiDetail
+CreatedRefundCreatedDetail = CreatedRefundCreatedDetailApi
 
 
-class RefundSettledRefundSettledGocardlessDetail(BaseModel):
+class RefundSettledRefundSettledDetailGocardless(BaseModel):
     """
     The refund has been deducted from a payout.
     """
@@ -82,7 +82,7 @@ class RefundSettledRefundSettledGocardlessDetail(BaseModel):
     description: str
 
 
-RefundSettledRefundSettledDetail = RefundSettledRefundSettledGocardlessDetail
+RefundSettledRefundSettledDetail = RefundSettledRefundSettledDetailGocardless
 
 
 class RefundFundsReturned(BaseModel):

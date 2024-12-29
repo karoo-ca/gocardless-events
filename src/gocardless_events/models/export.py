@@ -5,7 +5,7 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
-class FailedExportFailedGocardlessDetail(BaseModel):
+class FailedExportFailedDetailGocardless(BaseModel):
     """
     Export failed
     """
@@ -15,10 +15,10 @@ class FailedExportFailedGocardlessDetail(BaseModel):
     description: str
 
 
-FailedExportFailedDetail = FailedExportFailedGocardlessDetail
+FailedExportFailedDetail = FailedExportFailedDetailGocardless
 
 
-class CompletedExportCompletedGocardlessDetail(BaseModel):
+class CompletedExportCompletedDetailGocardless(BaseModel):
     """
     Export completed
     """
@@ -28,10 +28,10 @@ class CompletedExportCompletedGocardlessDetail(BaseModel):
     description: str
 
 
-CompletedExportCompletedDetail = CompletedExportCompletedGocardlessDetail
+CompletedExportCompletedDetail = CompletedExportCompletedDetailGocardless
 
 
-class StartedExportStartedGocardlessDetail(BaseModel):
+class StartedExportStartedDetailGocardless(BaseModel):
     """
     Export started
     """
@@ -41,7 +41,7 @@ class StartedExportStartedGocardlessDetail(BaseModel):
     description: str
 
 
-StartedExportStartedDetail = StartedExportStartedGocardlessDetail
+StartedExportStartedDetail = StartedExportStartedDetailGocardless
 
 
 class ExportFailed(BaseModel):

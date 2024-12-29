@@ -5,7 +5,7 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
-class FailedCustomerCreationFailedGocardlessDetail(BaseModel):
+class FailedCustomerCreationFailedDetailGocardless(BaseModel):
     """
     PayerAuthorisation has failed. Customer CustomerBankAccount and Mandate creation have failed.
     """
@@ -15,10 +15,10 @@ class FailedCustomerCreationFailedGocardlessDetail(BaseModel):
     description: str
 
 
-FailedCustomerCreationFailedDetail = FailedCustomerCreationFailedGocardlessDetail
+FailedCustomerCreationFailedDetail = FailedCustomerCreationFailedDetailGocardless
 
 
-class FailedCustomerBankAccountCreationFailedGocardlessDetail(BaseModel):
+class FailedCustomerBankAccountCreationFailedDetailGocardless(BaseModel):
     """
     PayerAuthorisation has failed. Customer CustomerBankAccount and Mandate creation have failed.
     """
@@ -29,11 +29,11 @@ class FailedCustomerBankAccountCreationFailedGocardlessDetail(BaseModel):
 
 
 FailedCustomerBankAccountCreationFailedDetail = (
-    FailedCustomerBankAccountCreationFailedGocardlessDetail
+    FailedCustomerBankAccountCreationFailedDetailGocardless
 )
 
 
-class FailedMandateCreationFailedGocardlessDetail(BaseModel):
+class FailedMandateCreationFailedDetailGocardless(BaseModel):
     """
     PayerAuthorisation has failed. Customer CustomerBankAccount and Mandate creation have failed.
     """
@@ -43,10 +43,10 @@ class FailedMandateCreationFailedGocardlessDetail(BaseModel):
     description: str
 
 
-FailedMandateCreationFailedDetail = FailedMandateCreationFailedGocardlessDetail
+FailedMandateCreationFailedDetail = FailedMandateCreationFailedDetailGocardless
 
 
-class CompletedPayerAuthorisationCompletedGocardlessDetail(BaseModel):
+class CompletedPayerAuthorisationCompletedDetailGocardless(BaseModel):
     """
     PayerAuthorisation is completed. Customer CustomerBankAccount and Mandate have been created.
     """
@@ -57,7 +57,7 @@ class CompletedPayerAuthorisationCompletedGocardlessDetail(BaseModel):
 
 
 CompletedPayerAuthorisationCompletedDetail = (
-    CompletedPayerAuthorisationCompletedGocardlessDetail
+    CompletedPayerAuthorisationCompletedDetailGocardless
 )
 
 

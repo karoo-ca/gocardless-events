@@ -5,7 +5,7 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
-class ResumedInstalmentScheduleResumedGocardlessDetail(BaseModel):
+class ResumedInstalmentScheduleResumedDetailGocardless(BaseModel):
     """
     Instalment schedule has resumed
     """
@@ -16,11 +16,11 @@ class ResumedInstalmentScheduleResumedGocardlessDetail(BaseModel):
 
 
 ResumedInstalmentScheduleResumedDetail = (
-    ResumedInstalmentScheduleResumedGocardlessDetail
+    ResumedInstalmentScheduleResumedDetailGocardless
 )
 
 
-class CreationFailedInstalmentScheduleCreationFailedApiDetail(BaseModel):
+class CreationFailedInstalmentScheduleCreationFailedDetailApi(BaseModel):
     """
     Instalment schedule failed to be created
     """
@@ -31,11 +31,11 @@ class CreationFailedInstalmentScheduleCreationFailedApiDetail(BaseModel):
 
 
 CreationFailedInstalmentScheduleCreationFailedDetail = (
-    CreationFailedInstalmentScheduleCreationFailedApiDetail
+    CreationFailedInstalmentScheduleCreationFailedDetailApi
 )
 
 
-class ErroredInstalmentScheduleErroredGocardlessDetail(BaseModel):
+class ErroredInstalmentScheduleErroredDetailGocardless(BaseModel):
     """
     Instalment schedule has errored
     """
@@ -46,11 +46,11 @@ class ErroredInstalmentScheduleErroredGocardlessDetail(BaseModel):
 
 
 ErroredInstalmentScheduleErroredDetail = (
-    ErroredInstalmentScheduleErroredGocardlessDetail
+    ErroredInstalmentScheduleErroredDetailGocardless
 )
 
 
-class ErroredInstalmentScheduleErroredLateGocardlessDetail(BaseModel):
+class ErroredInstalmentScheduleErroredLateDetailGocardless(BaseModel):
     """
     One or more payments in the instalment schedule has had a late failure
     """
@@ -61,11 +61,11 @@ class ErroredInstalmentScheduleErroredLateGocardlessDetail(BaseModel):
 
 
 ErroredInstalmentScheduleErroredLateDetail = (
-    ErroredInstalmentScheduleErroredLateGocardlessDetail
+    ErroredInstalmentScheduleErroredLateDetailGocardless
 )
 
 
-class CompletedInstalmentScheduleCompletedGocardlessDetail(BaseModel):
+class CompletedInstalmentScheduleCompletedDetailGocardless(BaseModel):
     """
     Instalment schedule has completed
     """
@@ -76,11 +76,11 @@ class CompletedInstalmentScheduleCompletedGocardlessDetail(BaseModel):
 
 
 CompletedInstalmentScheduleCompletedDetail = (
-    CompletedInstalmentScheduleCompletedGocardlessDetail
+    CompletedInstalmentScheduleCompletedDetailGocardless
 )
 
 
-class CreatedInstalmentScheduleCreatedApiDetail(BaseModel):
+class CreatedInstalmentScheduleCreatedDetailApi(BaseModel):
     """
     Instalment schedule has been created via the API
     """
@@ -90,10 +90,10 @@ class CreatedInstalmentScheduleCreatedApiDetail(BaseModel):
     description: str
 
 
-CreatedInstalmentScheduleCreatedDetail = CreatedInstalmentScheduleCreatedApiDetail
+CreatedInstalmentScheduleCreatedDetail = CreatedInstalmentScheduleCreatedDetailApi
 
 
-class CancelledInstalmentScheduleCancelledApiDetail(BaseModel):
+class CancelledInstalmentScheduleCancelledDetailApi(BaseModel):
     """
     Instalment schedule has been cancelled
     """
@@ -104,11 +104,11 @@ class CancelledInstalmentScheduleCancelledApiDetail(BaseModel):
 
 
 CancelledInstalmentScheduleCancelledDetail = (
-    CancelledInstalmentScheduleCancelledApiDetail
+    CancelledInstalmentScheduleCancelledDetailApi
 )
 
 
-class CancelledMandateCancelledGocardlessDetail(BaseModel):
+class CancelledMandateCancelledDetailGocardless(BaseModel):
     """
     Instalment schedule has been cancelled
     """
@@ -118,10 +118,10 @@ class CancelledMandateCancelledGocardlessDetail(BaseModel):
     description: str
 
 
-CancelledMandateCancelledDetail = CancelledMandateCancelledGocardlessDetail
+CancelledMandateCancelledDetail = CancelledMandateCancelledDetailGocardless
 
 
-class CancelledMandateFailedGocardlessDetail(BaseModel):
+class CancelledMandateFailedDetailGocardless(BaseModel):
     """
     Instalment schedule has been cancelled
     """
@@ -131,10 +131,10 @@ class CancelledMandateFailedGocardlessDetail(BaseModel):
     description: str
 
 
-CancelledMandateFailedDetail = CancelledMandateFailedGocardlessDetail
+CancelledMandateFailedDetail = CancelledMandateFailedDetailGocardless
 
 
-class CancelledMandateSuspendedByPayerGocardlessDetail(BaseModel):
+class CancelledMandateSuspendedByPayerDetailGocardless(BaseModel):
     """
     Instalment schedule has been cancelled
     """
@@ -145,11 +145,11 @@ class CancelledMandateSuspendedByPayerGocardlessDetail(BaseModel):
 
 
 CancelledMandateSuspendedByPayerDetail = (
-    CancelledMandateSuspendedByPayerGocardlessDetail
+    CancelledMandateSuspendedByPayerDetailGocardless
 )
 
 
-class CancelledMandateExpiredGocardlessDetail(BaseModel):
+class CancelledMandateExpiredDetailGocardless(BaseModel):
     """
     Instalment schedule has been cancelled
     """
@@ -159,7 +159,7 @@ class CancelledMandateExpiredGocardlessDetail(BaseModel):
     description: str
 
 
-CancelledMandateExpiredDetail = CancelledMandateExpiredGocardlessDetail
+CancelledMandateExpiredDetail = CancelledMandateExpiredDetailGocardless
 
 
 class InstalmentScheduleResumed(BaseModel):

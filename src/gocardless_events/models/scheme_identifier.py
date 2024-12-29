@@ -5,7 +5,7 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
-class ActivatedSchemeIdentifierActivatedGocardlessDetail(BaseModel):
+class ActivatedSchemeIdentifierActivatedDetailGocardless(BaseModel):
     """
     This scheme identifier has been activated.
     """
@@ -16,7 +16,7 @@ class ActivatedSchemeIdentifierActivatedGocardlessDetail(BaseModel):
 
 
 ActivatedSchemeIdentifierActivatedDetail = (
-    ActivatedSchemeIdentifierActivatedGocardlessDetail
+    ActivatedSchemeIdentifierActivatedDetailGocardless
 )
 
 

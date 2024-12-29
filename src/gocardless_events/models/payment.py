@@ -5,7 +5,7 @@ from typing import Annotated, Any, Literal
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
-class SurchargeFeeDebitedSurchargeFeeDebitedGocardlessDetail(BaseModel):
+class SurchargeFeeDebitedSurchargeFeeDebitedDetailGocardless(BaseModel):
     """
     A surcharge fee has been charged for a payment.
     """
@@ -16,11 +16,11 @@ class SurchargeFeeDebitedSurchargeFeeDebitedGocardlessDetail(BaseModel):
 
 
 SurchargeFeeDebitedSurchargeFeeDebitedDetail = (
-    SurchargeFeeDebitedSurchargeFeeDebitedGocardlessDetail
+    SurchargeFeeDebitedSurchargeFeeDebitedDetailGocardless
 )
 
 
-class ChargebackCancelledPaymentConfirmedBankDetail(BaseModel):
+class ChargebackCancelledPaymentConfirmedDetailBank(BaseModel):
     """
     The chargeback for this payment was reversed
     """
@@ -30,7 +30,7 @@ class ChargebackCancelledPaymentConfirmedBankDetail(BaseModel):
     description: str
 
 
-class ChargebackCancelledPaymentConfirmedGocardlessDetail(BaseModel):
+class ChargebackCancelledPaymentConfirmedDetailGocardless(BaseModel):
     """
     The chargeback for this payment was reversed
     """
@@ -41,13 +41,13 @@ class ChargebackCancelledPaymentConfirmedGocardlessDetail(BaseModel):
 
 
 ChargebackCancelledPaymentConfirmedDetail = Annotated[
-    ChargebackCancelledPaymentConfirmedBankDetail
-    | ChargebackCancelledPaymentConfirmedGocardlessDetail,
+    ChargebackCancelledPaymentConfirmedDetailBank
+    | ChargebackCancelledPaymentConfirmedDetailGocardless,
     Field(..., discriminator="origin"),
 ]
 
 
-class CustomerApprovalGrantedCustomerApprovalGrantedCustomerDetail(BaseModel):
+class CustomerApprovalGrantedCustomerApprovalGrantedDetailCustomer(BaseModel):
     """
     The customer granted approval for this payment
     """
@@ -58,11 +58,11 @@ class CustomerApprovalGrantedCustomerApprovalGrantedCustomerDetail(BaseModel):
 
 
 CustomerApprovalGrantedCustomerApprovalGrantedDetail = (
-    CustomerApprovalGrantedCustomerApprovalGrantedCustomerDetail
+    CustomerApprovalGrantedCustomerApprovalGrantedDetailCustomer
 )
 
 
-class LateFailureSettledLateFailureSettledGocardlessDetail(BaseModel):
+class LateFailureSettledLateFailureSettledDetailGocardless(BaseModel):
     """
     This late failed payment has been settled against a payout.
     """
@@ -73,11 +73,11 @@ class LateFailureSettledLateFailureSettledGocardlessDetail(BaseModel):
 
 
 LateFailureSettledLateFailureSettledDetail = (
-    LateFailureSettledLateFailureSettledGocardlessDetail
+    LateFailureSettledLateFailureSettledDetailGocardless
 )
 
 
-class ChargedBackAuthorisationDisputedBankDetail(BaseModel):
+class ChargedBackAuthorisationDisputedDetailBank(BaseModel):
     """
     This payment was charged back by the customer's bank because the customer disputed authorising the transaction.
     """
@@ -89,10 +89,10 @@ class ChargedBackAuthorisationDisputedBankDetail(BaseModel):
     description: str
 
 
-ChargedBackAuthorisationDisputedDetail = ChargedBackAuthorisationDisputedBankDetail
+ChargedBackAuthorisationDisputedDetail = ChargedBackAuthorisationDisputedDetailBank
 
 
-class ChargedBackRefundRequestedBankDetail(BaseModel):
+class ChargedBackRefundRequestedDetailBank(BaseModel):
     """
     This payment was charged back by the customer's bank at the customer's request within the 8 week cool-off period.
     """
@@ -104,10 +104,10 @@ class ChargedBackRefundRequestedBankDetail(BaseModel):
     description: str
 
 
-ChargedBackRefundRequestedDetail = ChargedBackRefundRequestedBankDetail
+ChargedBackRefundRequestedDetail = ChargedBackRefundRequestedDetailBank
 
 
-class ChargedBackMandateCancelledBankDetail(BaseModel):
+class ChargedBackMandateCancelledDetailBank(BaseModel):
     """
     This payment was charged back because the mandate was withdrawn.
     """
@@ -119,10 +119,10 @@ class ChargedBackMandateCancelledBankDetail(BaseModel):
     description: str
 
 
-ChargedBackMandateCancelledDetail = ChargedBackMandateCancelledBankDetail
+ChargedBackMandateCancelledDetail = ChargedBackMandateCancelledDetailBank
 
 
-class ChargedBackReturnOnOdfiRequestBankDetail(BaseModel):
+class ChargedBackReturnOnOdfiRequestDetailBank(BaseModel):
     """
     This payment was charged back by the customer's bank because the customer disputed authorising the transaction.
     """
@@ -134,10 +134,10 @@ class ChargedBackReturnOnOdfiRequestBankDetail(BaseModel):
     description: str
 
 
-ChargedBackReturnOnOdfiRequestDetail = ChargedBackReturnOnOdfiRequestBankDetail
+ChargedBackReturnOnOdfiRequestDetail = ChargedBackReturnOnOdfiRequestDetailBank
 
 
-class ChargedBackOtherBankDetail(BaseModel):
+class ChargedBackOtherDetailBank(BaseModel):
     """
     The payment was charged back.
     """
@@ -149,10 +149,10 @@ class ChargedBackOtherBankDetail(BaseModel):
     description: str
 
 
-ChargedBackOtherDetail = ChargedBackOtherBankDetail
+ChargedBackOtherDetail = ChargedBackOtherDetailBank
 
 
-class CustomerApprovalDeniedCustomerApprovalDeniedCustomerDetail(BaseModel):
+class CustomerApprovalDeniedCustomerApprovalDeniedDetailCustomer(BaseModel):
     """
     The customer denied approval for this payment
     """
@@ -163,11 +163,11 @@ class CustomerApprovalDeniedCustomerApprovalDeniedCustomerDetail(BaseModel):
 
 
 CustomerApprovalDeniedCustomerApprovalDeniedDetail = (
-    CustomerApprovalDeniedCustomerApprovalDeniedCustomerDetail
+    CustomerApprovalDeniedCustomerApprovalDeniedDetailCustomer
 )
 
 
-class ResubmissionRequestedPaymentRetriedApiDetail(BaseModel):
+class ResubmissionRequestedPaymentRetriedDetailApi(BaseModel):
     """
     An attempt to retry this payment was requested.
     """
@@ -177,10 +177,10 @@ class ResubmissionRequestedPaymentRetriedApiDetail(BaseModel):
     description: str
 
 
-ResubmissionRequestedPaymentRetriedDetail = ResubmissionRequestedPaymentRetriedApiDetail
+ResubmissionRequestedPaymentRetriedDetail = ResubmissionRequestedPaymentRetriedDetailApi
 
 
-class ResubmissionRequestedPaymentAutoretriedGocardlessDetail(BaseModel):
+class ResubmissionRequestedPaymentAutoretriedDetailGocardless(BaseModel):
     """
     The payment was scheduled for resubmission automatically by GoCardless.
     """
@@ -191,11 +191,11 @@ class ResubmissionRequestedPaymentAutoretriedGocardlessDetail(BaseModel):
 
 
 ResubmissionRequestedPaymentAutoretriedDetail = (
-    ResubmissionRequestedPaymentAutoretriedGocardlessDetail
+    ResubmissionRequestedPaymentAutoretriedDetailGocardless
 )
 
 
-class FailedReferToPayerBankDetail(BaseModel):
+class FailedReferToPayerDetailBank(BaseModel):
     """
     The customer's account had insufficient funds to make this payment.
     """
@@ -207,10 +207,10 @@ class FailedReferToPayerBankDetail(BaseModel):
     description: str
 
 
-FailedReferToPayerDetail = FailedReferToPayerBankDetail
+FailedReferToPayerDetail = FailedReferToPayerDetailBank
 
 
-class FailedBankAccountClosedBankDetail(BaseModel):
+class FailedBankAccountClosedDetailBank(BaseModel):
     """
     This payment failed because the customer is deceased.
     """
@@ -222,10 +222,10 @@ class FailedBankAccountClosedBankDetail(BaseModel):
     description: str
 
 
-FailedBankAccountClosedDetail = FailedBankAccountClosedBankDetail
+FailedBankAccountClosedDetail = FailedBankAccountClosedDetailBank
 
 
-class FailedInvalidBankDetailsBankDetail(BaseModel):
+class FailedInvalidBankDetailsDetailBank(BaseModel):
     """
     The account number was invalid. The mandate will also be cancelled or failed.
     """
@@ -237,10 +237,10 @@ class FailedInvalidBankDetailsBankDetail(BaseModel):
     description: str
 
 
-FailedInvalidBankDetailsDetail = FailedInvalidBankDetailsBankDetail
+FailedInvalidBankDetailsDetail = FailedInvalidBankDetailsDetailBank
 
 
-class FailedAuthorisationDisputedBankDetail(BaseModel):
+class FailedAuthorisationDisputedDetailBank(BaseModel):
     """
     The customer claims that they asked you to cancel their mandate before you took the payment.
     """
@@ -252,10 +252,10 @@ class FailedAuthorisationDisputedBankDetail(BaseModel):
     description: str
 
 
-FailedAuthorisationDisputedDetail = FailedAuthorisationDisputedBankDetail
+FailedAuthorisationDisputedDetail = FailedAuthorisationDisputedDetailBank
 
 
-class FailedReturnOnOdfiRequestBankDetail(BaseModel):
+class FailedReturnOnOdfiRequestDetailBank(BaseModel):
     """
     This payment was charged back by the customer's bank because the customer disputed authorising the transaction.
     """
@@ -267,10 +267,10 @@ class FailedReturnOnOdfiRequestBankDetail(BaseModel):
     description: str
 
 
-FailedReturnOnOdfiRequestDetail = FailedReturnOnOdfiRequestBankDetail
+FailedReturnOnOdfiRequestDetail = FailedReturnOnOdfiRequestDetailBank
 
 
-class FailedOtherBankDetail(BaseModel):
+class FailedOtherDetailBank(BaseModel):
     """
     There was an internal error processing this payment.
     """
@@ -282,7 +282,7 @@ class FailedOtherBankDetail(BaseModel):
     description: str
 
 
-class FailedOtherGocardlessDetail(BaseModel):
+class FailedOtherDetailGocardless(BaseModel):
     """
     There was an internal error processing this payment.
     """
@@ -295,12 +295,12 @@ class FailedOtherGocardlessDetail(BaseModel):
 
 
 FailedOtherDetail = Annotated[
-    FailedOtherBankDetail | FailedOtherGocardlessDetail,
+    FailedOtherDetailBank | FailedOtherDetailGocardless,
     Field(..., discriminator="origin"),
 ]
 
 
-class FailedTestFailureBankDetail(BaseModel):
+class FailedTestFailureDetailBank(BaseModel):
     """
     GoCardless has marked this payment as failed in sandbox to enable testing of payment failure webhooks.
     """
@@ -312,10 +312,10 @@ class FailedTestFailureBankDetail(BaseModel):
     description: str
 
 
-FailedTestFailureDetail = FailedTestFailureBankDetail
+FailedTestFailureDetail = FailedTestFailureDetailBank
 
 
-class FailedMandateCancelledBankDetail(BaseModel):
+class FailedMandateCancelledDetailBank(BaseModel):
     """
     The customer cancelled the mandate at their bank before the payment could be collected.
     """
@@ -327,10 +327,10 @@ class FailedMandateCancelledBankDetail(BaseModel):
     description: str
 
 
-FailedMandateCancelledDetail = FailedMandateCancelledBankDetail
+FailedMandateCancelledDetail = FailedMandateCancelledDetailBank
 
 
-class FailedBankAccountTransferredBankDetail(BaseModel):
+class FailedBankAccountTransferredDetailBank(BaseModel):
     """
     Your customer's mandate was transferred to a new bank account but this payment was submitted to the old account. You may wish to retry the payment once you have received a transferred webhook for the corresponding mandate.
     """
@@ -342,10 +342,10 @@ class FailedBankAccountTransferredBankDetail(BaseModel):
     description: str
 
 
-FailedBankAccountTransferredDetail = FailedBankAccountTransferredBankDetail
+FailedBankAccountTransferredDetail = FailedBankAccountTransferredDetailBank
 
 
-class FailedDirectDebitNotEnabledBankDetail(BaseModel):
+class FailedDirectDebitNotEnabledDetailBank(BaseModel):
     """
     The bank account for this payment does not support SEPA Direct Debit. The mandate will also be cancelled.
     """
@@ -357,10 +357,10 @@ class FailedDirectDebitNotEnabledBankDetail(BaseModel):
     description: str
 
 
-FailedDirectDebitNotEnabledDetail = FailedDirectDebitNotEnabledBankDetail
+FailedDirectDebitNotEnabledDetail = FailedDirectDebitNotEnabledDetailBank
 
 
-class FailedAccountBlockedForAnyFinancialTransactionBankDetail(BaseModel):
+class FailedAccountBlockedForAnyFinancialTransactionDetailBank(BaseModel):
     """
     This payment failed because the payer's account was blocked.
     """
@@ -373,11 +373,11 @@ class FailedAccountBlockedForAnyFinancialTransactionBankDetail(BaseModel):
 
 
 FailedAccountBlockedForAnyFinancialTransactionDetail = (
-    FailedAccountBlockedForAnyFinancialTransactionBankDetail
+    FailedAccountBlockedForAnyFinancialTransactionDetailBank
 )
 
 
-class FailedInsufficientFundsBankDetail(BaseModel):
+class FailedInsufficientFundsDetailBank(BaseModel):
     """
     The customer's account had insufficient funds to make this payment.
     """
@@ -389,10 +389,10 @@ class FailedInsufficientFundsBankDetail(BaseModel):
     description: str
 
 
-FailedInsufficientFundsDetail = FailedInsufficientFundsBankDetail
+FailedInsufficientFundsDetail = FailedInsufficientFundsDetailBank
 
 
-class FailedPaymentStoppedBankDetail(BaseModel):
+class FailedPaymentStoppedDetailBank(BaseModel):
     """
     The payment was stopped by the payer or their bank.
     """
@@ -404,10 +404,10 @@ class FailedPaymentStoppedBankDetail(BaseModel):
     description: str
 
 
-FailedPaymentStoppedDetail = FailedPaymentStoppedBankDetail
+FailedPaymentStoppedDetail = FailedPaymentStoppedDetailBank
 
 
-class FailedBankDeclinedPaymentBankDetail(BaseModel):
+class FailedBankDeclinedPaymentDetailBank(BaseModel):
     """
     Payment declined by the bank.
     """
@@ -419,10 +419,10 @@ class FailedBankDeclinedPaymentBankDetail(BaseModel):
     description: str
 
 
-FailedBankDeclinedPaymentDetail = FailedBankDeclinedPaymentBankDetail
+FailedBankDeclinedPaymentDetail = FailedBankDeclinedPaymentDetailBank
 
 
-class FailedDailyPaymentLimitReachedBankDetail(BaseModel):
+class FailedDailyPaymentLimitReachedDetailBank(BaseModel):
     """
     Payment exceeds the daily payment limit for this payer imposed by the bank.
     """
@@ -434,10 +434,10 @@ class FailedDailyPaymentLimitReachedBankDetail(BaseModel):
     description: str
 
 
-FailedDailyPaymentLimitReachedDetail = FailedDailyPaymentLimitReachedBankDetail
+FailedDailyPaymentLimitReachedDetail = FailedDailyPaymentLimitReachedDetailBank
 
 
-class FailedInsufficientPaymentPermissionsBankDetail(BaseModel):
+class FailedInsufficientPaymentPermissionsDetailBank(BaseModel):
     """
     Payment denied due to missing approvals from the bank.
     """
@@ -450,11 +450,11 @@ class FailedInsufficientPaymentPermissionsBankDetail(BaseModel):
 
 
 FailedInsufficientPaymentPermissionsDetail = (
-    FailedInsufficientPaymentPermissionsBankDetail
+    FailedInsufficientPaymentPermissionsDetailBank
 )
 
 
-class FailedPaymentViolatedMandateParametersBankDetail(BaseModel):
+class FailedPaymentViolatedMandateParametersDetailBank(BaseModel):
     """
     The payment failed due to a violation of the associated mandate consent parameters.
     """
@@ -467,11 +467,11 @@ class FailedPaymentViolatedMandateParametersBankDetail(BaseModel):
 
 
 FailedPaymentViolatedMandateParametersDetail = (
-    FailedPaymentViolatedMandateParametersBankDetail
+    FailedPaymentViolatedMandateParametersDetailBank
 )
 
 
-class SubmittedPaymentSubmittedGocardlessDetail(BaseModel):
+class SubmittedPaymentSubmittedDetailGocardless(BaseModel):
     """
     Payment submitted to the banks. As a result it can no longer be cancelled.
     """
@@ -481,10 +481,10 @@ class SubmittedPaymentSubmittedGocardlessDetail(BaseModel):
     description: str
 
 
-SubmittedPaymentSubmittedDetail = SubmittedPaymentSubmittedGocardlessDetail
+SubmittedPaymentSubmittedDetail = SubmittedPaymentSubmittedDetailGocardless
 
 
-class ConfirmedPaymentConfirmedGocardlessDetail(BaseModel):
+class ConfirmedPaymentConfirmedDetailGocardless(BaseModel):
     """
     Enough time has passed since the payment was submitted for the banks to return an error so this payment is now confirmed.
     """
@@ -494,10 +494,10 @@ class ConfirmedPaymentConfirmedGocardlessDetail(BaseModel):
     description: str
 
 
-ConfirmedPaymentConfirmedDetail = ConfirmedPaymentConfirmedGocardlessDetail
+ConfirmedPaymentConfirmedDetail = ConfirmedPaymentConfirmedDetailGocardless
 
 
-class CreatedPaymentCreatedApiDetail(BaseModel):
+class CreatedPaymentCreatedDetailApi(BaseModel):
     """
     Payment created via the API.
     """
@@ -507,7 +507,7 @@ class CreatedPaymentCreatedApiDetail(BaseModel):
     description: str
 
 
-class CreatedPaymentCreatedGocardlessDetail(BaseModel):
+class CreatedPaymentCreatedDetailGocardless(BaseModel):
     """
     Payment created by a subscription.
     """
@@ -518,12 +518,12 @@ class CreatedPaymentCreatedGocardlessDetail(BaseModel):
 
 
 CreatedPaymentCreatedDetail = Annotated[
-    CreatedPaymentCreatedApiDetail | CreatedPaymentCreatedGocardlessDetail,
+    CreatedPaymentCreatedDetailApi | CreatedPaymentCreatedDetailGocardless,
     Field(..., discriminator="origin"),
 ]
 
 
-class CreatedInstalmentScheduleCreatedApiDetail(BaseModel):
+class CreatedInstalmentScheduleCreatedDetailApi(BaseModel):
     """
     Payment created by an instalment schedule.
     """
@@ -533,10 +533,10 @@ class CreatedInstalmentScheduleCreatedApiDetail(BaseModel):
     description: str
 
 
-CreatedInstalmentScheduleCreatedDetail = CreatedInstalmentScheduleCreatedApiDetail
+CreatedInstalmentScheduleCreatedDetail = CreatedInstalmentScheduleCreatedDetailApi
 
 
-class ChargebackSettledChargebackSettledGocardlessDetail(BaseModel):
+class ChargebackSettledChargebackSettledDetailGocardless(BaseModel):
     """
     This charged back payment has been settled against a payout.
     """
@@ -547,11 +547,11 @@ class ChargebackSettledChargebackSettledGocardlessDetail(BaseModel):
 
 
 ChargebackSettledChargebackSettledDetail = (
-    ChargebackSettledChargebackSettledGocardlessDetail
+    ChargebackSettledChargebackSettledDetailGocardless
 )
 
 
-class PaidOutPaymentPaidOutGocardlessDetail(BaseModel):
+class PaidOutPaymentPaidOutDetailGocardless(BaseModel):
     """
     The payment has been paid out by GoCardless.
     """
@@ -561,10 +561,10 @@ class PaidOutPaymentPaidOutGocardlessDetail(BaseModel):
     description: str
 
 
-PaidOutPaymentPaidOutDetail = PaidOutPaymentPaidOutGocardlessDetail
+PaidOutPaymentPaidOutDetail = PaidOutPaymentPaidOutDetailGocardless
 
 
-class CancelledBankAccountClosedBankDetail(BaseModel):
+class CancelledBankAccountClosedDetailBank(BaseModel):
     """
     This payment was cancelled because the customer is deceased.
     """
@@ -576,7 +576,7 @@ class CancelledBankAccountClosedBankDetail(BaseModel):
     description: str
 
 
-class CancelledBankAccountClosedApiDetail(BaseModel):
+class CancelledBankAccountClosedDetailApi(BaseModel):
     """
     The bank account for this payment was disabled at your request.
     """
@@ -587,12 +587,12 @@ class CancelledBankAccountClosedApiDetail(BaseModel):
 
 
 CancelledBankAccountClosedDetail = Annotated[
-    CancelledBankAccountClosedBankDetail | CancelledBankAccountClosedApiDetail,
+    CancelledBankAccountClosedDetailBank | CancelledBankAccountClosedDetailApi,
     Field(..., discriminator="origin"),
 ]
 
 
-class CancelledReferToPayerBankDetail(BaseModel):
+class CancelledReferToPayerDetailBank(BaseModel):
     """
     This payment has been cancelled because the bank details for its mandate are incorrect.
     """
@@ -604,10 +604,10 @@ class CancelledReferToPayerBankDetail(BaseModel):
     description: str
 
 
-CancelledReferToPayerDetail = CancelledReferToPayerBankDetail
+CancelledReferToPayerDetail = CancelledReferToPayerDetailBank
 
 
-class CancelledInvalidBankDetailsBankDetail(BaseModel):
+class CancelledInvalidBankDetailsDetailBank(BaseModel):
     """
     This payment has been cancelled because the bank details for its mandate are incorrect.
     """
@@ -619,10 +619,10 @@ class CancelledInvalidBankDetailsBankDetail(BaseModel):
     description: str
 
 
-CancelledInvalidBankDetailsDetail = CancelledInvalidBankDetailsBankDetail
+CancelledInvalidBankDetailsDetail = CancelledInvalidBankDetailsDetailBank
 
 
-class CancelledAuthorisationDisputedBankDetail(BaseModel):
+class CancelledAuthorisationDisputedDetailBank(BaseModel):
     """
     This payment has been cancelled because the payer disputes authorising its mandate.
     """
@@ -634,10 +634,10 @@ class CancelledAuthorisationDisputedBankDetail(BaseModel):
     description: str
 
 
-CancelledAuthorisationDisputedDetail = CancelledAuthorisationDisputedBankDetail
+CancelledAuthorisationDisputedDetail = CancelledAuthorisationDisputedDetailBank
 
 
-class CancelledMandateCancelledBankDetail(BaseModel):
+class CancelledMandateCancelledDetailBank(BaseModel):
     """
     This payment has been cancelled because its mandate was cancelled.
     """
@@ -649,7 +649,7 @@ class CancelledMandateCancelledBankDetail(BaseModel):
     description: str
 
 
-class CancelledMandateCancelledApiDetail(BaseModel):
+class CancelledMandateCancelledDetailApi(BaseModel):
     """
     The mandate for this payment was cancelled at your request.
     """
@@ -659,7 +659,7 @@ class CancelledMandateCancelledApiDetail(BaseModel):
     description: str
 
 
-class CancelledMandateCancelledGocardlessDetail(BaseModel):
+class CancelledMandateCancelledDetailGocardless(BaseModel):
     """
     The mandate for this payment was cancelled at your request.
     """
@@ -672,14 +672,14 @@ class CancelledMandateCancelledGocardlessDetail(BaseModel):
 
 
 CancelledMandateCancelledDetail = Annotated[
-    CancelledMandateCancelledBankDetail
-    | CancelledMandateCancelledApiDetail
-    | CancelledMandateCancelledGocardlessDetail,
+    CancelledMandateCancelledDetailBank
+    | CancelledMandateCancelledDetailApi
+    | CancelledMandateCancelledDetailGocardless,
     Field(..., discriminator="origin"),
 ]
 
 
-class CancelledOtherBankDetail(BaseModel):
+class CancelledOtherDetailBank(BaseModel):
     """
     There was an internal error processing this payment.
     """
@@ -691,10 +691,10 @@ class CancelledOtherBankDetail(BaseModel):
     description: str
 
 
-CancelledOtherDetail = CancelledOtherBankDetail
+CancelledOtherDetail = CancelledOtherDetailBank
 
 
-class CancelledInstalmentScheduleCancelledGocardlessDetail(BaseModel):
+class CancelledInstalmentScheduleCancelledDetailGocardless(BaseModel):
     """
     payment_cancelled_at_request
     """
@@ -704,7 +704,7 @@ class CancelledInstalmentScheduleCancelledGocardlessDetail(BaseModel):
     description: str
 
 
-class CancelledInstalmentScheduleCancelledApiDetail(BaseModel):
+class CancelledInstalmentScheduleCancelledDetailApi(BaseModel):
     """
     payment_cancelled_at_request
     """
@@ -715,13 +715,13 @@ class CancelledInstalmentScheduleCancelledApiDetail(BaseModel):
 
 
 CancelledInstalmentScheduleCancelledDetail = Annotated[
-    CancelledInstalmentScheduleCancelledGocardlessDetail
-    | CancelledInstalmentScheduleCancelledApiDetail,
+    CancelledInstalmentScheduleCancelledDetailGocardless
+    | CancelledInstalmentScheduleCancelledDetailApi,
     Field(..., discriminator="origin"),
 ]
 
 
-class CancelledPaymentCancelledApiDetail(BaseModel):
+class CancelledPaymentCancelledDetailApi(BaseModel):
     """
     This payment was cancelled at your request.
     """
@@ -731,10 +731,10 @@ class CancelledPaymentCancelledApiDetail(BaseModel):
     description: str
 
 
-CancelledPaymentCancelledDetail = CancelledPaymentCancelledApiDetail
+CancelledPaymentCancelledDetail = CancelledPaymentCancelledDetailApi
 
 
-class CancelledBankAccountTransferredBankDetail(BaseModel):
+class CancelledBankAccountTransferredDetailBank(BaseModel):
     """
     The mandate for this payment was cancelled as the customer asked their bank to transfer the mandate to a new account but the bank has failed to send GoCardless the new bank details.
     """
@@ -746,10 +746,10 @@ class CancelledBankAccountTransferredBankDetail(BaseModel):
     description: str
 
 
-CancelledBankAccountTransferredDetail = CancelledBankAccountTransferredBankDetail
+CancelledBankAccountTransferredDetail = CancelledBankAccountTransferredDetailBank
 
 
-class CancelledDirectDebitNotEnabledBankDetail(BaseModel):
+class CancelledDirectDebitNotEnabledDetailBank(BaseModel):
     """
     This payment has been cancelled because the bank account it was going to be taken from does not support Direct Debit.
     """
@@ -761,10 +761,10 @@ class CancelledDirectDebitNotEnabledBankDetail(BaseModel):
     description: str
 
 
-CancelledDirectDebitNotEnabledDetail = CancelledDirectDebitNotEnabledBankDetail
+CancelledDirectDebitNotEnabledDetail = CancelledDirectDebitNotEnabledDetailBank
 
 
-class CancelledAccountBlockedForAnyFinancialTransactionBankDetail(BaseModel):
+class CancelledAccountBlockedForAnyFinancialTransactionDetailBank(BaseModel):
     """
     This payment failed because the payer's account was blocked.
     """
@@ -777,11 +777,11 @@ class CancelledAccountBlockedForAnyFinancialTransactionBankDetail(BaseModel):
 
 
 CancelledAccountBlockedForAnyFinancialTransactionDetail = (
-    CancelledAccountBlockedForAnyFinancialTransactionBankDetail
+    CancelledAccountBlockedForAnyFinancialTransactionDetailBank
 )
 
 
-class CancelledPaymentStoppedBankDetail(BaseModel):
+class CancelledPaymentStoppedDetailBank(BaseModel):
     """
     The payment was stopped by the payer or their bank.
     """
@@ -793,10 +793,10 @@ class CancelledPaymentStoppedBankDetail(BaseModel):
     description: str
 
 
-CancelledPaymentStoppedDetail = CancelledPaymentStoppedBankDetail
+CancelledPaymentStoppedDetail = CancelledPaymentStoppedDetailBank
 
 
-class CancelledMandateExpiredGocardlessDetail(BaseModel):
+class CancelledMandateExpiredDetailGocardless(BaseModel):
     """
     The mandate expired before the payment could be collected.
     """
@@ -806,10 +806,10 @@ class CancelledMandateExpiredGocardlessDetail(BaseModel):
     description: str
 
 
-CancelledMandateExpiredDetail = CancelledMandateExpiredGocardlessDetail
+CancelledMandateExpiredDetail = CancelledMandateExpiredDetailGocardless
 
 
-class CancelledMandateSuspendedByPayerBankDetail(BaseModel):
+class CancelledMandateSuspendedByPayerDetailBank(BaseModel):
     """
     The mandate for this payment was suspended by the payer.
     """
@@ -821,10 +821,10 @@ class CancelledMandateSuspendedByPayerBankDetail(BaseModel):
     description: str
 
 
-CancelledMandateSuspendedByPayerDetail = CancelledMandateSuspendedByPayerBankDetail
+CancelledMandateSuspendedByPayerDetail = CancelledMandateSuspendedByPayerDetailBank
 
 
-class CancelledReturnOnOdfiRequestBankDetail(BaseModel):
+class CancelledReturnOnOdfiRequestDetailBank(BaseModel):
     """
     The payment was cancelled because of an ODFI return request.
     """
@@ -836,10 +836,10 @@ class CancelledReturnOnOdfiRequestBankDetail(BaseModel):
     description: str
 
 
-CancelledReturnOnOdfiRequestDetail = CancelledReturnOnOdfiRequestBankDetail
+CancelledReturnOnOdfiRequestDetail = CancelledReturnOnOdfiRequestDetailBank
 
 
-class CancelledInitialOneOffPaymentFailedGocardlessDetail(BaseModel):
+class CancelledInitialOneOffPaymentFailedDetailGocardless(BaseModel):
     """
     This mandate has been cancelled because the initial faster payment failed
     """
@@ -850,7 +850,7 @@ class CancelledInitialOneOffPaymentFailedGocardlessDetail(BaseModel):
 
 
 CancelledInitialOneOffPaymentFailedDetail = (
-    CancelledInitialOneOffPaymentFailedGocardlessDetail
+    CancelledInitialOneOffPaymentFailedDetailGocardless
 )
 
 
