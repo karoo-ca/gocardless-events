@@ -5,7 +5,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
 
-def to_pascal(s):
+def to_pascal(s: str) -> str:
     return "".join(word.capitalize() for word in s.split("_"))
 
 

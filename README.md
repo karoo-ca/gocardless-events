@@ -16,6 +16,7 @@ This is a Python implementation of the Event Actions in the [GoCardless docs](ht
 ```sh
 uv run ruff format .
 uv run ruff check --fix .
+uv run mypy .
 uv run pytest
 ```
 

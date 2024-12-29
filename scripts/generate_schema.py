@@ -3,10 +3,11 @@
 import json
 import os
 import re
+from typing import Any
 
 from bs4 import BeautifulSoup
 
-output = {}
+output: dict[str, Any] = {}
 
 docs_dir = "docs"  # Directory containing the HTML files
 
@@ -16,7 +17,7 @@ def clean_whitespace(text: str) -> str:
 
 
 # Walk through the 'docs' directory
-for root, dirs, files in os.walk(docs_dir):
+for root, _, files in os.walk(docs_dir):
     for file in files:
         if file.endswith(".html"):
             file_path = os.path.join(root, file)
@@ -31,7 +32,7 @@ for root, dirs, files in os.walk(docs_dir):
                 soup = BeautifulSoup(f, "html.parser")
 
                 # Extract the <h3><code>{{ action }}</code></h3>
-                h3_code = soup.find("h3").find("code").get_text(strip=True)
+                h3_code = soup.find("h3").find("code").get_text(strip=True)  # type: ignore[union-attr]
 
                 # Extract the <p>{{ description }}</p>
                 description_tag = soup.find("p")
@@ -46,13 +47,14 @@ for root, dirs, files in os.walk(docs_dir):
                 if table:
                     headers = [
                         th.get_text(strip=True).replace(" ", "_").lower()
-                        for th in table.find("thead").find_all("th")
+                        for th in table.find("thead").find_all("th")  # type: ignore[union-attr]
                     ]
                     # Extract table rows
                     details = []
-                    for row in table.find("tbody").find_all("tr"):
-                        values = []
+                    for row in table.find("tbody").find_all("tr"):  # type: ignore[union-attr]
+                        values: list[str | None] = []
                         for td in row.find_all("td"):
+                            value: str | None
                             value = clean_whitespace(td.get_text(strip=True))
                             if value == "" or value == "-":
                                 value = None
