@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal, Union, List
+from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
@@ -47,12 +47,10 @@ class InstalmentScheduleErrored(BaseModel):
     resource_type: Literal["instalment_schedules"]
     action: Literal["errored"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                InstalmentScheduleErroredInstalmentScheduleErroredDetail,
-                InstalmentScheduleErroredInstalmentScheduleErroredLateDetail,
-            ],
+            InstalmentScheduleErroredInstalmentScheduleErroredDetail
+            | InstalmentScheduleErroredInstalmentScheduleErroredLateDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -103,15 +101,13 @@ class InstalmentScheduleCancelled(BaseModel):
     resource_type: Literal["instalment_schedules"]
     action: Literal["cancelled"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                InstalmentScheduleCancelledInstalmentScheduleCancelledDetail,
-                InstalmentScheduleCancelledMandateCancelledDetail,
-                InstalmentScheduleCancelledMandateFailedDetail,
-                InstalmentScheduleCancelledMandateSuspendedByPayerDetail,
-                InstalmentScheduleCancelledMandateExpiredDetail,
-            ],
+            InstalmentScheduleCancelledInstalmentScheduleCancelledDetail
+            | InstalmentScheduleCancelledMandateCancelledDetail
+            | InstalmentScheduleCancelledMandateFailedDetail
+            | InstalmentScheduleCancelledMandateSuspendedByPayerDetail
+            | InstalmentScheduleCancelledMandateExpiredDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -231,14 +227,12 @@ class InstalmentScheduleCancelledMandateExpiredDetail(BaseModel):
 
 
 InstalmentScheduleType = Annotated[
-    Union[
-        InstalmentScheduleResumed,
-        InstalmentScheduleCreationFailed,
-        InstalmentScheduleErrored,
-        InstalmentScheduleCompleted,
-        InstalmentScheduleCreated,
-        InstalmentScheduleCancelled,
-    ],
+    InstalmentScheduleResumed
+    | InstalmentScheduleCreationFailed
+    | InstalmentScheduleErrored
+    | InstalmentScheduleCompleted
+    | InstalmentScheduleCreated
+    | InstalmentScheduleCancelled,
     Field(..., discriminator="action"),
 ]
 

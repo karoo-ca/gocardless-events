@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal, Union
+from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
@@ -84,11 +84,7 @@ class PayoutPaidPayoutPaidDetail(BaseModel):
 
 
 PayoutType = Annotated[
-    Union[
-        PayoutTaxExchangeRatesConfirmed,
-        PayoutFxRateConfirmed,
-        PayoutPaid,
-    ],
+    PayoutTaxExchangeRatesConfirmed | PayoutFxRateConfirmed | PayoutPaid,
     Field(..., discriminator="action"),
 ]
 

@@ -5,7 +5,7 @@
     {%- for item in resource_list %}
     {
         "action": "{{ item.action }}",
-        "description": "{{ item.description }}",
+        "description": "{{ item.description.replace("‘", "'") }}",
         "details": [
             {%- for detail in item.details %}
             {
@@ -23,7 +23,7 @@
 
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal, Union, List
+from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
@@ -33,7 +33,7 @@ from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
     """
-    {{ resource_item.description }}
+    {{ resource_item.description.replace("‘", "'") }}
     """
     id: str
     created_at: AwareDatetime
@@ -51,12 +51,10 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
     {%- if causes|length == 1 %}
     details: {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ causes[0] | to_pascal }}Detail
     {%- else %}
-    details: List[Annotated[
-        Union[
-            {%- for cause in causes %}
-            {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail,
-            {%- endfor %}
-        ],
+    details: list[Annotated[
+        {%- for cause in causes %}
+        {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail{% if not loop.last %} |{% endif %}
+        {%- endfor %},
         Field(..., discriminator="cause")
     ]]
     {%- endif %}
@@ -72,7 +70,7 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
             {%- if detail.cause not in causes_defined %}
 class {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ detail.cause | to_pascal }}Detail(BaseModel):
     """
-    {{ detail.description }}
+    {{ detail.description.replace("‘", "'") }}
     """
     {%- for key, value in detail.items() %}
     {%- if key in ['origin', 'cause'] %}
@@ -88,11 +86,9 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ detail.cau
 {%- endfor %}
 
 {{ resource_singular }}Type = Annotated[
-    Union[
-        {%- for resource_item in resource_list %}
-        {{ resource_singular }}{{ resource_item.action | to_pascal }},
-        {%- endfor %}
-    ],
+    {%- for resource_item in resource_list %}
+    {{ resource_singular }}{{ resource_item.action | to_pascal }}{% if not loop.last %} |{% endif %}
+    {%- endfor %},
     Field(..., discriminator="action")
 ]
 

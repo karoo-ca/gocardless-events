@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal, Union
+from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
@@ -84,12 +84,7 @@ class ExportStartedExportStartedDetail(BaseModel):
 
 
 ExportType = Annotated[
-    Union[
-        ExportFailed,
-        ExportCompleted,
-        ExportStarted,
-    ],
-    Field(..., discriminator="action"),
+    ExportFailed | ExportCompleted | ExportStarted, Field(..., discriminator="action")
 ]
 
 Export = RootModel[ExportType]

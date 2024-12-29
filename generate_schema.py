@@ -1,8 +1,9 @@
 """thanks o1"""
 
-import os
 import json
+import os
 import re
+
 from bs4 import BeautifulSoup
 
 output = {}
@@ -26,7 +27,7 @@ for root, dirs, files in os.walk(docs_dir):
             action = os.path.splitext(parts[1])[0]  # Remove .html extension
 
             # Open and parse the HTML file
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(file_path, encoding="utf-8") as f:
                 soup = BeautifulSoup(f, "html.parser")
 
                 # Extract the <h3><code>{{ action }}</code></h3>
@@ -56,7 +57,7 @@ for root, dirs, files in os.walk(docs_dir):
                             if value == "" or value == "-":
                                 value = None
                             values.append(value)
-                        detail = dict(zip(headers, values))
+                        detail = dict(zip(headers, values, strict=False))
                         details.append(detail)
                 else:
                     details = []

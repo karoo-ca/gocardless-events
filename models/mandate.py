@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal, Union, List
+from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
@@ -47,12 +47,9 @@ class MandateExpired(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["expired"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                MandateExpiredMandateExpiredDetail,
-                MandateExpiredMandateCancelledDetail,
-            ],
+            MandateExpiredMandateExpiredDetail | MandateExpiredMandateCancelledDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -71,12 +68,10 @@ class MandateResubmissionRequested(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["resubmission_requested"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                MandateResubmissionRequestedResubmissionRequestedDetail,
-                MandateResubmissionRequestedBankAccountTransferredDetail,
-            ],
+            MandateResubmissionRequestedResubmissionRequestedDetail
+            | MandateResubmissionRequestedBankAccountTransferredDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -95,20 +90,18 @@ class MandateFailed(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["failed"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                MandateFailedBankAccountClosedDetail,
-                MandateFailedReferToPayerDetail,
-                MandateFailedMandateCancelledDetail,
-                MandateFailedAuthorisationDisputedDetail,
-                MandateFailedInvalidBankDetailsDetail,
-                MandateFailedDirectDebitNotEnabledDetail,
-                MandateFailedOtherDetail,
-                MandateFailedReturnOnOdfiRequestDetail,
-                MandateFailedBankAccountTransferredDetail,
-                MandateFailedPaymentStoppedDetail,
-            ],
+            MandateFailedBankAccountClosedDetail
+            | MandateFailedReferToPayerDetail
+            | MandateFailedMandateCancelledDetail
+            | MandateFailedAuthorisationDisputedDetail
+            | MandateFailedInvalidBankDetailsDetail
+            | MandateFailedDirectDebitNotEnabledDetail
+            | MandateFailedOtherDetail
+            | MandateFailedReturnOnOdfiRequestDetail
+            | MandateFailedBankAccountTransferredDetail
+            | MandateFailedPaymentStoppedDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -127,12 +120,10 @@ class MandateSubmitted(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["submitted"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                MandateSubmittedMandateSubmittedDetail,
-                MandateSubmittedBankAccountTransferredDetail,
-            ],
+            MandateSubmittedMandateSubmittedDetail
+            | MandateSubmittedBankAccountTransferredDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -151,12 +142,10 @@ class MandateTransferred(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["transferred"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                MandateTransferredBankAccountTransferredDetail,
-                MandateTransferredMandateTransferredDetail,
-            ],
+            MandateTransferredBankAccountTransferredDetail
+            | MandateTransferredMandateTransferredDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -239,12 +228,10 @@ class MandateBlocked(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["blocked"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                MandateBlockedMandateBlockedDetail,
-                MandateBlockedMandateBlockedByGocardlessDetail,
-            ],
+            MandateBlockedMandateBlockedDetail
+            | MandateBlockedMandateBlockedByGocardlessDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -279,22 +266,20 @@ class MandateCancelled(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["cancelled"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                MandateCancelledBankAccountClosedDetail,
-                MandateCancelledMandateCancelledDetail,
-                MandateCancelledAuthorisationDisputedDetail,
-                MandateCancelledInvalidBankDetailsDetail,
-                MandateCancelledDirectDebitNotEnabledDetail,
-                MandateCancelledReferToPayerDetail,
-                MandateCancelledReturnOnOdfiRequestDetail,
-                MandateCancelledBankAccountTransferredDetail,
-                MandateCancelledAccountBlockedForAnyFinancialTransactionDetail,
-                MandateCancelledPaymentStoppedDetail,
-                MandateCancelledOtherDetail,
-                MandateCancelledInitialOneOffPaymentFailedDetail,
-            ],
+            MandateCancelledBankAccountClosedDetail
+            | MandateCancelledMandateCancelledDetail
+            | MandateCancelledAuthorisationDisputedDetail
+            | MandateCancelledInvalidBankDetailsDetail
+            | MandateCancelledDirectDebitNotEnabledDetail
+            | MandateCancelledReferToPayerDetail
+            | MandateCancelledReturnOnOdfiRequestDetail
+            | MandateCancelledBankAccountTransferredDetail
+            | MandateCancelledAccountBlockedForAnyFinancialTransactionDetail
+            | MandateCancelledPaymentStoppedDetail
+            | MandateCancelledOtherDetail
+            | MandateCancelledInitialOneOffPaymentFailedDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -738,22 +723,20 @@ class MandateCancelledInitialOneOffPaymentFailedDetail(BaseModel):
 
 
 MandateType = Annotated[
-    Union[
-        MandateReinstated,
-        MandateCustomerApprovalGranted,
-        MandateExpired,
-        MandateResubmissionRequested,
-        MandateFailed,
-        MandateSubmitted,
-        MandateTransferred,
-        MandateConsumed,
-        MandateCustomerApprovalSkipped,
-        MandateActive,
-        MandateCreated,
-        MandateBlocked,
-        MandateReplaced,
-        MandateCancelled,
-    ],
+    MandateReinstated
+    | MandateCustomerApprovalGranted
+    | MandateExpired
+    | MandateResubmissionRequested
+    | MandateFailed
+    | MandateSubmitted
+    | MandateTransferred
+    | MandateConsumed
+    | MandateCustomerApprovalSkipped
+    | MandateActive
+    | MandateCreated
+    | MandateBlocked
+    | MandateReplaced
+    | MandateCancelled,
     Field(..., discriminator="action"),
 ]
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal, Union, List
+from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
@@ -23,7 +23,7 @@ class RefundFundsReturned(BaseModel):
 
 class RefundFailed(BaseModel):
     """
-    The refund did not reach your customer the funds will be returned to you. Thedetails[cause]will berefund_failedand thedetails[origin]will begocardless.It is important to note that the ‘failed' and ‘refund_settled' events are not associated. A refund can fail even after it's been settled. If a refund fails GoCardless has attempted to refund the customer and has already deducted the applicable funds from one of your payouts. The refund has then subsequently failed to reach the customer. If this occurs the funds will be returned to you.
+    The refund did not reach your customer the funds will be returned to you. Thedetails[cause]will berefund_failedand thedetails[origin]will begocardless.It is important to note that the 'failed' and 'refund_settled' events are not associated. A refund can fail even after it's been settled. If a refund fails GoCardless has attempted to refund the customer and has already deducted the applicable funds from one of your payouts. The refund has then subsequently failed to reach the customer. If this occurs the funds will be returned to you.
     """
 
     id: str
@@ -63,12 +63,9 @@ class RefundCreated(BaseModel):
     resource_type: Literal["refunds"]
     action: Literal["created"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                RefundCreatedPaymentRefundedDetail,
-                RefundCreatedRefundCreatedDetail,
-            ],
+            RefundCreatedPaymentRefundedDetail | RefundCreatedRefundCreatedDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -154,13 +151,11 @@ class RefundRefundSettledRefundSettledDetail(BaseModel):
 
 
 RefundType = Annotated[
-    Union[
-        RefundFundsReturned,
-        RefundFailed,
-        RefundPaid,
-        RefundCreated,
-        RefundRefundSettled,
-    ],
+    RefundFundsReturned
+    | RefundFailed
+    | RefundPaid
+    | RefundCreated
+    | RefundRefundSettled,
     Field(..., discriminator="action"),
 ]
 

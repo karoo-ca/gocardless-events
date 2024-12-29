@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal, Union, List
+from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
@@ -15,13 +15,11 @@ class PayerAuthorizationFailed(BaseModel):
     resource_type: Literal["payer_authorizations"]
     action: Literal["failed"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                PayerAuthorizationFailedCustomerCreationFailedDetail,
-                PayerAuthorizationFailedCustomerBankAccountCreationFailedDetail,
-                PayerAuthorizationFailedMandateCreationFailedDetail,
-            ],
+            PayerAuthorizationFailedCustomerCreationFailedDetail
+            | PayerAuthorizationFailedCustomerBankAccountCreationFailedDetail
+            | PayerAuthorizationFailedMandateCreationFailedDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -87,10 +85,7 @@ class PayerAuthorizationCompletedPayerAuthorisationCompletedDetail(BaseModel):
 
 
 PayerAuthorizationType = Annotated[
-    Union[
-        PayerAuthorizationFailed,
-        PayerAuthorizationCompleted,
-    ],
+    PayerAuthorizationFailed | PayerAuthorizationCompleted,
     Field(..., discriminator="action"),
 ]
 

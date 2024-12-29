@@ -12,5 +12,42 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "mypy>=1.14.0",
+    "pytest>=8.3.4",
     "ruff>=0.8.4",
 ]
+
+[tool.ruff.lint]
+select = [
+    "E",     # pycodestyle errors
+    "W",     # pycodestyle warnings
+    "F",     # pyflakes
+    "I",     # isort
+    "UP",    # pyupgrade
+    "B",     # bugbear
+    "TD",    # todos
+    "PERF",  # performance
+    "RUF",   # ruff
+    "ASYNC", # flake8-async
+    "S",     # bandit
+    "BLE",   # blind except
+    "FBT",   # boolean trap
+    "A",     # shadowing builtins
+    "DTZ",   # datetime timezone
+    "EM",    # error message
+    "FA",    # future annotations
+    "G",     # logging format
+]
+ignore = [
+    "E501",  # line too long (handled by ruff format)
+    "W505",  # line too long (handled by ruff format)
+    "TD002", # todo author
+    "TD003", # todo link
+    "S101",  # use of assert
+]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.mypy]
+strict = true

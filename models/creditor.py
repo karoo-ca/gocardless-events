@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal, Union
+from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
@@ -136,13 +136,11 @@ class CreditorNewPayoutCurrencyAddedNewPayoutCurrencyAddedDetail(BaseModel):
 
 
 CreditorType = Annotated[
-    Union[
-        CreditorAccountAutoFrozen,
-        CreditorUpdated,
-        CreditorAccountAutoFrozenReverted,
-        CreditorBouncedPayout,
-        CreditorNewPayoutCurrencyAdded,
-    ],
+    CreditorAccountAutoFrozen
+    | CreditorUpdated
+    | CreditorAccountAutoFrozenReverted
+    | CreditorBouncedPayout
+    | CreditorNewPayoutCurrencyAdded,
     Field(..., discriminator="action"),
 ]
 

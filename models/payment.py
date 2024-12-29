@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal, Union, List
+from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
@@ -79,15 +79,13 @@ class PaymentChargedBack(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["charged_back"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                PaymentChargedBackAuthorisationDisputedDetail,
-                PaymentChargedBackRefundRequestedDetail,
-                PaymentChargedBackMandateCancelledDetail,
-                PaymentChargedBackReturnOnOdfiRequestDetail,
-                PaymentChargedBackOtherDetail,
-            ],
+            PaymentChargedBackAuthorisationDisputedDetail
+            | PaymentChargedBackRefundRequestedDetail
+            | PaymentChargedBackMandateCancelledDetail
+            | PaymentChargedBackReturnOnOdfiRequestDetail
+            | PaymentChargedBackOtherDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -122,12 +120,10 @@ class PaymentResubmissionRequested(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["resubmission_requested"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                PaymentResubmissionRequestedPaymentRetriedDetail,
-                PaymentResubmissionRequestedPaymentAutoretriedDetail,
-            ],
+            PaymentResubmissionRequestedPaymentRetriedDetail
+            | PaymentResubmissionRequestedPaymentAutoretriedDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -146,27 +142,25 @@ class PaymentFailed(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["failed"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                PaymentFailedReferToPayerDetail,
-                PaymentFailedBankAccountClosedDetail,
-                PaymentFailedInvalidBankDetailsDetail,
-                PaymentFailedAuthorisationDisputedDetail,
-                PaymentFailedReturnOnOdfiRequestDetail,
-                PaymentFailedOtherDetail,
-                PaymentFailedTestFailureDetail,
-                PaymentFailedMandateCancelledDetail,
-                PaymentFailedBankAccountTransferredDetail,
-                PaymentFailedDirectDebitNotEnabledDetail,
-                PaymentFailedAccountBlockedForAnyFinancialTransactionDetail,
-                PaymentFailedInsufficientFundsDetail,
-                PaymentFailedPaymentStoppedDetail,
-                PaymentFailedBankDeclinedPaymentDetail,
-                PaymentFailedDailyPaymentLimitReachedDetail,
-                PaymentFailedInsufficientPaymentPermissionsDetail,
-                PaymentFailedPaymentViolatedMandateParametersDetail,
-            ],
+            PaymentFailedReferToPayerDetail
+            | PaymentFailedBankAccountClosedDetail
+            | PaymentFailedInvalidBankDetailsDetail
+            | PaymentFailedAuthorisationDisputedDetail
+            | PaymentFailedReturnOnOdfiRequestDetail
+            | PaymentFailedOtherDetail
+            | PaymentFailedTestFailureDetail
+            | PaymentFailedMandateCancelledDetail
+            | PaymentFailedBankAccountTransferredDetail
+            | PaymentFailedDirectDebitNotEnabledDetail
+            | PaymentFailedAccountBlockedForAnyFinancialTransactionDetail
+            | PaymentFailedInsufficientFundsDetail
+            | PaymentFailedPaymentStoppedDetail
+            | PaymentFailedBankDeclinedPaymentDetail
+            | PaymentFailedDailyPaymentLimitReachedDetail
+            | PaymentFailedInsufficientPaymentPermissionsDetail
+            | PaymentFailedPaymentViolatedMandateParametersDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -217,12 +211,10 @@ class PaymentCreated(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["created"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                PaymentCreatedPaymentCreatedDetail,
-                PaymentCreatedInstalmentScheduleCreatedDetail,
-            ],
+            PaymentCreatedPaymentCreatedDetail
+            | PaymentCreatedInstalmentScheduleCreatedDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -273,26 +265,24 @@ class PaymentCancelled(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["cancelled"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                PaymentCancelledBankAccountClosedDetail,
-                PaymentCancelledReferToPayerDetail,
-                PaymentCancelledInvalidBankDetailsDetail,
-                PaymentCancelledAuthorisationDisputedDetail,
-                PaymentCancelledMandateCancelledDetail,
-                PaymentCancelledOtherDetail,
-                PaymentCancelledInstalmentScheduleCancelledDetail,
-                PaymentCancelledPaymentCancelledDetail,
-                PaymentCancelledBankAccountTransferredDetail,
-                PaymentCancelledDirectDebitNotEnabledDetail,
-                PaymentCancelledAccountBlockedForAnyFinancialTransactionDetail,
-                PaymentCancelledPaymentStoppedDetail,
-                PaymentCancelledMandateExpiredDetail,
-                PaymentCancelledMandateSuspendedByPayerDetail,
-                PaymentCancelledReturnOnOdfiRequestDetail,
-                PaymentCancelledInitialOneOffPaymentFailedDetail,
-            ],
+            PaymentCancelledBankAccountClosedDetail
+            | PaymentCancelledReferToPayerDetail
+            | PaymentCancelledInvalidBankDetailsDetail
+            | PaymentCancelledAuthorisationDisputedDetail
+            | PaymentCancelledMandateCancelledDetail
+            | PaymentCancelledOtherDetail
+            | PaymentCancelledInstalmentScheduleCancelledDetail
+            | PaymentCancelledPaymentCancelledDetail
+            | PaymentCancelledBankAccountTransferredDetail
+            | PaymentCancelledDirectDebitNotEnabledDetail
+            | PaymentCancelledAccountBlockedForAnyFinancialTransactionDetail
+            | PaymentCancelledPaymentStoppedDetail
+            | PaymentCancelledMandateExpiredDetail
+            | PaymentCancelledMandateSuspendedByPayerDetail
+            | PaymentCancelledReturnOnOdfiRequestDetail
+            | PaymentCancelledInitialOneOffPaymentFailedDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -888,22 +878,20 @@ class PaymentCancelledInitialOneOffPaymentFailedDetail(BaseModel):
 
 
 PaymentType = Annotated[
-    Union[
-        PaymentSurchargeFeeDebited,
-        PaymentChargebackCancelled,
-        PaymentCustomerApprovalGranted,
-        PaymentLateFailureSettled,
-        PaymentChargedBack,
-        PaymentCustomerApprovalDenied,
-        PaymentResubmissionRequested,
-        PaymentFailed,
-        PaymentSubmitted,
-        PaymentConfirmed,
-        PaymentCreated,
-        PaymentChargebackSettled,
-        PaymentPaidOut,
-        PaymentCancelled,
-    ],
+    PaymentSurchargeFeeDebited
+    | PaymentChargebackCancelled
+    | PaymentCustomerApprovalGranted
+    | PaymentLateFailureSettled
+    | PaymentChargedBack
+    | PaymentCustomerApprovalDenied
+    | PaymentResubmissionRequested
+    | PaymentFailed
+    | PaymentSubmitted
+    | PaymentConfirmed
+    | PaymentCreated
+    | PaymentChargebackSettled
+    | PaymentPaidOut
+    | PaymentCancelled,
     Field(..., discriminator="action"),
 ]
 

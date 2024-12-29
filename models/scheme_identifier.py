@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal, Union
+from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
@@ -32,7 +32,7 @@ class SchemeIdentifierActivatedSchemeIdentifierActivatedDetail(BaseModel):
 
 
 SchemeIdentifierType = Annotated[
-    Union[SchemeIdentifierActivated,], Field(..., discriminator="action")
+    SchemeIdentifierActivated, Field(..., discriminator="action")
 ]
 
 SchemeIdentifier = RootModel[SchemeIdentifierType]

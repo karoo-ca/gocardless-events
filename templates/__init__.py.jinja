@@ -10,7 +10,7 @@ from models.{{ resource_name.rstrip('s') }} import {{ resource_singular }}
 EventType = Annotated[
     {%- for resource_name, resource_list in schemas.items() -%}
     {%- set resource_singular = resource_name.rstrip('s') | to_pascal %}
-    {{ resource_singular }}{% if not loop.last %}|{% endif %}
+    {{ resource_singular }}{% if not loop.last %} |{% endif %}
     {%- endfor %},
     Field(..., discriminator="resource_type")
 ]

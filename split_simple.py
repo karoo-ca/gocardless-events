@@ -19,7 +19,7 @@ def process_html_file(input_file: Path) -> None:
     outdir = Path(title)
     outdir.mkdir(parents=True, exist_ok=True)
     print(f"Found {len(indices)} h3 tags at lines: {indices}")
-    for i, j in zip(indices, indices[1:] + [None]):
+    for i, j in zip(indices, indices[1:] + [None], strict=False):
         name = lines[i].replace("<h3><code>", "").replace("</code></h3>", "")
         contents = lines[i:j]
         outfile = outdir / f"{name}.html"

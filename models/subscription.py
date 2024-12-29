@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal, Union, List
+from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
@@ -191,26 +191,24 @@ class SubscriptionCancelled(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["cancelled"]
     description: str
-    details: List[
+    details: list[
         Annotated[
-            Union[
-                SubscriptionCancelledBankAccountClosedDetail,
-                SubscriptionCancelledReturnOnOdfiRequestDetail,
-                SubscriptionCancelledReferToPayerDetail,
-                SubscriptionCancelledMandateCancelledDetail,
-                SubscriptionCancelledInvalidBankDetailsDetail,
-                SubscriptionCancelledDirectDebitNotEnabledDetail,
-                SubscriptionCancelledAuthorisationDisputedDetail,
-                SubscriptionCancelledSubscriptionCancelledDetail,
-                SubscriptionCancelledMandateExpiredDetail,
-                SubscriptionCancelledBankAccountTransferredDetail,
-                SubscriptionCancelledAccountBlockedForAnyFinancialTransactionDetail,
-                SubscriptionCancelledPlanCancelledDetail,
-                SubscriptionCancelledPaymentStoppedDetail,
-                SubscriptionCancelledOtherDetail,
-                SubscriptionCancelledMandateSuspendedByPayerDetail,
-                SubscriptionCancelledInitialOneOffPaymentFailedDetail,
-            ],
+            SubscriptionCancelledBankAccountClosedDetail
+            | SubscriptionCancelledReturnOnOdfiRequestDetail
+            | SubscriptionCancelledReferToPayerDetail
+            | SubscriptionCancelledMandateCancelledDetail
+            | SubscriptionCancelledInvalidBankDetailsDetail
+            | SubscriptionCancelledDirectDebitNotEnabledDetail
+            | SubscriptionCancelledAuthorisationDisputedDetail
+            | SubscriptionCancelledSubscriptionCancelledDetail
+            | SubscriptionCancelledMandateExpiredDetail
+            | SubscriptionCancelledBankAccountTransferredDetail
+            | SubscriptionCancelledAccountBlockedForAnyFinancialTransactionDetail
+            | SubscriptionCancelledPlanCancelledDetail
+            | SubscriptionCancelledPaymentStoppedDetail
+            | SubscriptionCancelledOtherDetail
+            | SubscriptionCancelledMandateSuspendedByPayerDetail
+            | SubscriptionCancelledInitialOneOffPaymentFailedDetail,
             Field(..., discriminator="cause"),
         ]
     ]
@@ -522,20 +520,18 @@ class SubscriptionCancelledInitialOneOffPaymentFailedDetail(BaseModel):
 
 
 SubscriptionType = Annotated[
-    Union[
-        SubscriptionCustomerApprovalGranted,
-        SubscriptionFinished,
-        SubscriptionResumed,
-        SubscriptionAmended,
-        SubscriptionCustomerApprovalDenied,
-        SubscriptionPaused,
-        SubscriptionScheduledPauseCancelled,
-        SubscriptionScheduledPause,
-        SubscriptionCreated,
-        SubscriptionPaymentCreated,
-        SubscriptionScheduledResume,
-        SubscriptionCancelled,
-    ],
+    SubscriptionCustomerApprovalGranted
+    | SubscriptionFinished
+    | SubscriptionResumed
+    | SubscriptionAmended
+    | SubscriptionCustomerApprovalDenied
+    | SubscriptionPaused
+    | SubscriptionScheduledPauseCancelled
+    | SubscriptionScheduledPause
+    | SubscriptionCreated
+    | SubscriptionPaymentCreated
+    | SubscriptionScheduledResume
+    | SubscriptionCancelled,
     Field(..., discriminator="action"),
 ]
 

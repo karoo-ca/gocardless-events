@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, Any, Literal, Union
+from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
@@ -522,27 +522,25 @@ class BillingRequestCancelledBillingRequestCancelledDetail(BaseModel):
 
 
 BillingRequestType = Annotated[
-    Union[
-        BillingRequestChooseCurrency,
-        BillingRequestFulfilled,
-        BillingRequestBankAuthorisationAuthorised,
-        BillingRequestFlowVisited,
-        BillingRequestFailed,
-        BillingRequestCollectBankAccount,
-        BillingRequestPayerDetailsConfirmed,
-        BillingRequestCollectAmount,
-        BillingRequestBankAuthorisationExpired,
-        BillingRequestFlowExited,
-        BillingRequestCollectCustomerDetails,
-        BillingRequestCreated,
-        BillingRequestBankAuthorisationFailed,
-        BillingRequestPayerGeoBlocked,
-        BillingRequestFlowCreated,
-        BillingRequestBankAuthorisationDenied,
-        BillingRequestSelectInstitution,
-        BillingRequestBankAuthorisationVisited,
-        BillingRequestCancelled,
-    ],
+    BillingRequestChooseCurrency
+    | BillingRequestFulfilled
+    | BillingRequestBankAuthorisationAuthorised
+    | BillingRequestFlowVisited
+    | BillingRequestFailed
+    | BillingRequestCollectBankAccount
+    | BillingRequestPayerDetailsConfirmed
+    | BillingRequestCollectAmount
+    | BillingRequestBankAuthorisationExpired
+    | BillingRequestFlowExited
+    | BillingRequestCollectCustomerDetails
+    | BillingRequestCreated
+    | BillingRequestBankAuthorisationFailed
+    | BillingRequestPayerGeoBlocked
+    | BillingRequestFlowCreated
+    | BillingRequestBankAuthorisationDenied
+    | BillingRequestSelectInstitution
+    | BillingRequestBankAuthorisationVisited
+    | BillingRequestCancelled,
     Field(..., discriminator="action"),
 ]
 
