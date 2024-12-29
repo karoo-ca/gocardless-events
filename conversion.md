@@ -1,3 +1,7 @@
+> [!NOTE]
+>
+> I used this to prompt claude for the first iteration
+
 directory structure:
 
 ```
