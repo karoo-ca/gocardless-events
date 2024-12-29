@@ -9,7 +9,9 @@ def to_pascal(s):
     return "".join(word.capitalize() for word in s.split("_"))
 
 
-root_dir = Path("src/gocardless_events")
+base_dir = Path(__file__).parent.parent.absolute()
+
+root_dir = base_dir / "src/gocardless_events"
 root_dir.mkdir(parents=True, exist_ok=True)
 
 root_init = root_dir / "__init__.py"
@@ -20,7 +22,7 @@ outdir = root_dir / "models"
 outdir.mkdir(parents=True, exist_ok=True)
 
 env = Environment(  # noqa: S701
-    loader=FileSystemLoader(searchpath="./templates/"),
+    loader=FileSystemLoader(searchpath=base_dir / "templates"),
     extensions=["jinja2.ext.do"],
 )
 env.filters["to_pascal"] = to_pascal
