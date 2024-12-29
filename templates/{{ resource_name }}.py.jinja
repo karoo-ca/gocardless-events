@@ -20,17 +20,13 @@
 ],
 """
 #}
-
 from __future__ import annotations
 
 from typing import Annotated, Any, Literal
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
-{%- set resource_singular = resource_name.rstrip('s') | to_pascal %}
-{%- set actions = resource_list | map(attribute='action') | list %}
-{%- for resource_item in resource_list %}
-
+{% macro generate_resource_item_class(resource_item, resource_singular, resource_name, resource_list) %}
 class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
     """
     {{ resource_item.description.replace("‘", "'") }}
@@ -40,7 +36,7 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
     resource_type: Literal["{{ resource_name }}"]
     action: Literal["{{ resource_item.action }}"]
     description: str
-    {%- set causes = [] -%}
+    {%- set causes = [] -%} {# Collect unique causes for the current action #}
     {%- for item in resource_list if item.action == resource_item.action %}
         {%- for detail in item.details %}
             {%- if detail.cause not in causes %}
@@ -48,7 +44,7 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
             {%- endif %}
         {%- endfor %}
     {%- endfor %}
-    {%- if causes|length == 1 %}
+    {%- if causes|length == 1 %} {# Define the details field based on the number of causes #}
     details: {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ causes[0] | to_pascal }}Detail
     {%- else %}
     details: list[Annotated[
@@ -61,13 +57,13 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any]
     links: dict[str, Any]
-{%- endfor %}
+{% endmacro %}
 
-{%- for resource_item in resource_list %}
-    {%- set causes_defined = [] -%}
-    {%- for item in resource_list if item.action == resource_item.action %}
-        {%- for detail in item.details %}
-            {%- if detail.cause not in causes_defined %}
+{% macro generate_detail_classes(resource_list, resource_item, resource_singular) %}
+{%- set causes_defined = [] -%}
+{%- for item in resource_list if item.action == resource_item.action %}
+    {%- for detail in item.details %}
+        {%- if detail.cause not in causes_defined %}
 class {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ detail.cause | to_pascal }}Detail(BaseModel):
     """
     {{ detail.description.replace("‘", "'") }}
@@ -80,11 +76,12 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ detail.cau
     {%- endif %}
     {%- endfor %}
     {%- do causes_defined.append(detail.cause) -%}
-            {%- endif %}
-        {%- endfor %}
+        {%- endif %}
     {%- endfor %}
 {%- endfor %}
+{% endmacro %}
 
+{% macro generate_types(resource_list, resource_singular) %}
 {{ resource_singular }}Type = Annotated[
     {%- for resource_item in resource_list %}
     {{ resource_singular }}{{ resource_item.action | to_pascal }}{% if not loop.last %} |{% endif %}
@@ -93,4 +90,22 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ detail.cau
 ]
 
 {{ resource_singular }} = RootModel[{{ resource_singular }}Type]
+{% endmacro %}
+
+{%- set resource_singular = resource_name.rstrip('s') | to_pascal %}
+{%- set actions = resource_list | map(attribute='action') | list %}
+
+{# Generate the resource item classes #}
+{%- for resource_item in resource_list %}
+{{ generate_resource_item_class(resource_item, resource_singular, resource_name, resource_list) }}
+{%- endfor %}
+
+{# Generate the detail classes #}
+{%- for resource_item in resource_list %}
+{{ generate_detail_classes(resource_list, resource_item, resource_singular) }}
+{%- endfor %}
+
+{# Generate the type annotations #}
+{{ generate_types(resource_list, resource_singular) }}
+
 {%- endfor %}
