@@ -386,6 +386,26 @@ def test_resource_event() -> None:
     BillingRequest.model_validate_json(event)
 
 
+def test_backwards_compatibility() -> None:
+    """
+    > The following changes are considered backwards compatible:
+    >
+    > - [ ] Adding new API endpoints
+    > - [x] Adding new properties to the responses from existing API endpoints
+    > - [built-in to python/pydantic] Reordering properties returned from existing API endpoints
+    > - [ ] Adding optional request parameters to existing API endpoints
+    > - [built-in to python/pydantic] Altering the format or length of IDs (These strings will never exceed 255 characters, but you should be able to handle anything up to that length)
+    > - [ ] Altering the message attributes returned by validation failures / other errors
+    > - [ ] The number of and duration between retries for failed webhooks
+    > - [ ] The behaviour of Scenario Simulators
+    > - [will cause validation error --> still respond with 2xx] Sending webhooks for new event types
+    """
+    event_obj = json.loads(billing_request_created_json)["events"]
+    event_obj["extra"] = "test"
+    event = json.dumps(event_obj)
+    BillingRequestCreated.model_validate_json(event)
+
+
 @pytest.mark.parametrize(
     "payload",
     [
