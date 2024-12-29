@@ -388,7 +388,7 @@ def test_resource_event() -> None:
         billing_request_created_json,
         creditor_updated_gocardless_json,
         export_started_gocardless_json,
-        instalment_schedule_payment_created_api_json,
+        instalment_schedule_payment_created_api_json,  # failing, no action=payment_created
         mandate_cancelled_bank_account_closed_json,
         mandate_cancelled_api_json,
         mandate_tranferred_bank_account_transferred_json,

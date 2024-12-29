@@ -74,15 +74,13 @@ class PaymentChargedBack(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["charged_back"]
-    details: list[
-        Annotated[
-            PaymentChargedBackAuthorisationDisputedDetail
-            | PaymentChargedBackRefundRequestedDetail
-            | PaymentChargedBackMandateCancelledDetail
-            | PaymentChargedBackReturnOnOdfiRequestDetail
-            | PaymentChargedBackOtherDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        PaymentChargedBackAuthorisationDisputedDetail
+        | PaymentChargedBackRefundRequestedDetail
+        | PaymentChargedBackMandateCancelledDetail
+        | PaymentChargedBackReturnOnOdfiRequestDetail
+        | PaymentChargedBackOtherDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
@@ -113,12 +111,10 @@ class PaymentResubmissionRequested(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["resubmission_requested"]
-    details: list[
-        Annotated[
-            PaymentResubmissionRequestedPaymentRetriedDetail
-            | PaymentResubmissionRequestedPaymentAutoretriedDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        PaymentResubmissionRequestedPaymentRetriedDetail
+        | PaymentResubmissionRequestedPaymentAutoretriedDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
@@ -134,27 +130,25 @@ class PaymentFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["failed"]
-    details: list[
-        Annotated[
-            PaymentFailedReferToPayerDetail
-            | PaymentFailedBankAccountClosedDetail
-            | PaymentFailedInvalidBankDetailsDetail
-            | PaymentFailedAuthorisationDisputedDetail
-            | PaymentFailedReturnOnOdfiRequestDetail
-            | PaymentFailedOtherDetail
-            | PaymentFailedTestFailureDetail
-            | PaymentFailedMandateCancelledDetail
-            | PaymentFailedBankAccountTransferredDetail
-            | PaymentFailedDirectDebitNotEnabledDetail
-            | PaymentFailedAccountBlockedForAnyFinancialTransactionDetail
-            | PaymentFailedInsufficientFundsDetail
-            | PaymentFailedPaymentStoppedDetail
-            | PaymentFailedBankDeclinedPaymentDetail
-            | PaymentFailedDailyPaymentLimitReachedDetail
-            | PaymentFailedInsufficientPaymentPermissionsDetail
-            | PaymentFailedPaymentViolatedMandateParametersDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        PaymentFailedReferToPayerDetail
+        | PaymentFailedBankAccountClosedDetail
+        | PaymentFailedInvalidBankDetailsDetail
+        | PaymentFailedAuthorisationDisputedDetail
+        | PaymentFailedReturnOnOdfiRequestDetail
+        | PaymentFailedOtherDetail
+        | PaymentFailedTestFailureDetail
+        | PaymentFailedMandateCancelledDetail
+        | PaymentFailedBankAccountTransferredDetail
+        | PaymentFailedDirectDebitNotEnabledDetail
+        | PaymentFailedAccountBlockedForAnyFinancialTransactionDetail
+        | PaymentFailedInsufficientFundsDetail
+        | PaymentFailedPaymentStoppedDetail
+        | PaymentFailedBankDeclinedPaymentDetail
+        | PaymentFailedDailyPaymentLimitReachedDetail
+        | PaymentFailedInsufficientPaymentPermissionsDetail
+        | PaymentFailedPaymentViolatedMandateParametersDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
@@ -200,12 +194,10 @@ class PaymentCreated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["created"]
-    details: list[
-        Annotated[
-            PaymentCreatedPaymentCreatedDetail
-            | PaymentCreatedInstalmentScheduleCreatedDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        PaymentCreatedPaymentCreatedDetail
+        | PaymentCreatedInstalmentScheduleCreatedDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
@@ -251,26 +243,24 @@ class PaymentCancelled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payments"]
     action: Literal["cancelled"]
-    details: list[
-        Annotated[
-            PaymentCancelledBankAccountClosedDetail
-            | PaymentCancelledReferToPayerDetail
-            | PaymentCancelledInvalidBankDetailsDetail
-            | PaymentCancelledAuthorisationDisputedDetail
-            | PaymentCancelledMandateCancelledDetail
-            | PaymentCancelledOtherDetail
-            | PaymentCancelledInstalmentScheduleCancelledDetail
-            | PaymentCancelledPaymentCancelledDetail
-            | PaymentCancelledBankAccountTransferredDetail
-            | PaymentCancelledDirectDebitNotEnabledDetail
-            | PaymentCancelledAccountBlockedForAnyFinancialTransactionDetail
-            | PaymentCancelledPaymentStoppedDetail
-            | PaymentCancelledMandateExpiredDetail
-            | PaymentCancelledMandateSuspendedByPayerDetail
-            | PaymentCancelledReturnOnOdfiRequestDetail
-            | PaymentCancelledInitialOneOffPaymentFailedDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        PaymentCancelledBankAccountClosedDetail
+        | PaymentCancelledReferToPayerDetail
+        | PaymentCancelledInvalidBankDetailsDetail
+        | PaymentCancelledAuthorisationDisputedDetail
+        | PaymentCancelledMandateCancelledDetail
+        | PaymentCancelledOtherDetail
+        | PaymentCancelledInstalmentScheduleCancelledDetail
+        | PaymentCancelledPaymentCancelledDetail
+        | PaymentCancelledBankAccountTransferredDetail
+        | PaymentCancelledDirectDebitNotEnabledDetail
+        | PaymentCancelledAccountBlockedForAnyFinancialTransactionDetail
+        | PaymentCancelledPaymentStoppedDetail
+        | PaymentCancelledMandateExpiredDetail
+        | PaymentCancelledMandateSuspendedByPayerDetail
+        | PaymentCancelledReturnOnOdfiRequestDetail
+        | PaymentCancelledInitialOneOffPaymentFailedDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None

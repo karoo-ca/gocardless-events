@@ -14,13 +14,11 @@ class PayerAuthorizationFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["payer_authorizations"]
     action: Literal["failed"]
-    details: list[
-        Annotated[
-            PayerAuthorizationFailedCustomerCreationFailedDetail
-            | PayerAuthorizationFailedCustomerBankAccountCreationFailedDetail
-            | PayerAuthorizationFailedMandateCreationFailedDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        PayerAuthorizationFailedCustomerCreationFailedDetail
+        | PayerAuthorizationFailedCustomerBankAccountCreationFailedDetail
+        | PayerAuthorizationFailedMandateCreationFailedDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None

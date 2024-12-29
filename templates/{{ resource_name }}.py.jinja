@@ -46,12 +46,12 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
     {%- if causes|length == 1 %} {# Define the details field based on the number of causes #}
     details: {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ causes[0] | to_pascal }}Detail
     {%- else %}
-    details: list[Annotated[
+    details: Annotated[
         {%- for cause in causes %}
         {{ resource_singular }}{{ resource_item.action | to_pascal }}{{ cause | to_pascal }}Detail{% if not loop.last %} |{% endif %}
         {%- endfor %},
         Field(..., discriminator="cause")
-    ]]
+    ]
     {%- endif %}
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None

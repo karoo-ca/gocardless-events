@@ -179,26 +179,24 @@ class SubscriptionCancelled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["subscriptions"]
     action: Literal["cancelled"]
-    details: list[
-        Annotated[
-            SubscriptionCancelledBankAccountClosedDetail
-            | SubscriptionCancelledReturnOnOdfiRequestDetail
-            | SubscriptionCancelledReferToPayerDetail
-            | SubscriptionCancelledMandateCancelledDetail
-            | SubscriptionCancelledInvalidBankDetailsDetail
-            | SubscriptionCancelledDirectDebitNotEnabledDetail
-            | SubscriptionCancelledAuthorisationDisputedDetail
-            | SubscriptionCancelledSubscriptionCancelledDetail
-            | SubscriptionCancelledMandateExpiredDetail
-            | SubscriptionCancelledBankAccountTransferredDetail
-            | SubscriptionCancelledAccountBlockedForAnyFinancialTransactionDetail
-            | SubscriptionCancelledPlanCancelledDetail
-            | SubscriptionCancelledPaymentStoppedDetail
-            | SubscriptionCancelledOtherDetail
-            | SubscriptionCancelledMandateSuspendedByPayerDetail
-            | SubscriptionCancelledInitialOneOffPaymentFailedDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        SubscriptionCancelledBankAccountClosedDetail
+        | SubscriptionCancelledReturnOnOdfiRequestDetail
+        | SubscriptionCancelledReferToPayerDetail
+        | SubscriptionCancelledMandateCancelledDetail
+        | SubscriptionCancelledInvalidBankDetailsDetail
+        | SubscriptionCancelledDirectDebitNotEnabledDetail
+        | SubscriptionCancelledAuthorisationDisputedDetail
+        | SubscriptionCancelledSubscriptionCancelledDetail
+        | SubscriptionCancelledMandateExpiredDetail
+        | SubscriptionCancelledBankAccountTransferredDetail
+        | SubscriptionCancelledAccountBlockedForAnyFinancialTransactionDetail
+        | SubscriptionCancelledPlanCancelledDetail
+        | SubscriptionCancelledPaymentStoppedDetail
+        | SubscriptionCancelledOtherDetail
+        | SubscriptionCancelledMandateSuspendedByPayerDetail
+        | SubscriptionCancelledInitialOneOffPaymentFailedDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None

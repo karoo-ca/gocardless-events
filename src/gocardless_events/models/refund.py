@@ -59,11 +59,9 @@ class RefundCreated(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["refunds"]
     action: Literal["created"]
-    details: list[
-        Annotated[
-            RefundCreatedPaymentRefundedDetail | RefundCreatedRefundCreatedDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        RefundCreatedPaymentRefundedDetail | RefundCreatedRefundCreatedDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None

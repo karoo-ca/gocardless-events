@@ -44,11 +44,9 @@ class MandateExpired(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["expired"]
-    details: list[
-        Annotated[
-            MandateExpiredMandateExpiredDetail | MandateExpiredMandateCancelledDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        MandateExpiredMandateExpiredDetail | MandateExpiredMandateCancelledDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
@@ -64,12 +62,10 @@ class MandateResubmissionRequested(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["resubmission_requested"]
-    details: list[
-        Annotated[
-            MandateResubmissionRequestedResubmissionRequestedDetail
-            | MandateResubmissionRequestedBankAccountTransferredDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        MandateResubmissionRequestedResubmissionRequestedDetail
+        | MandateResubmissionRequestedBankAccountTransferredDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
@@ -85,20 +81,18 @@ class MandateFailed(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["failed"]
-    details: list[
-        Annotated[
-            MandateFailedBankAccountClosedDetail
-            | MandateFailedReferToPayerDetail
-            | MandateFailedMandateCancelledDetail
-            | MandateFailedAuthorisationDisputedDetail
-            | MandateFailedInvalidBankDetailsDetail
-            | MandateFailedDirectDebitNotEnabledDetail
-            | MandateFailedOtherDetail
-            | MandateFailedReturnOnOdfiRequestDetail
-            | MandateFailedBankAccountTransferredDetail
-            | MandateFailedPaymentStoppedDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        MandateFailedBankAccountClosedDetail
+        | MandateFailedReferToPayerDetail
+        | MandateFailedMandateCancelledDetail
+        | MandateFailedAuthorisationDisputedDetail
+        | MandateFailedInvalidBankDetailsDetail
+        | MandateFailedDirectDebitNotEnabledDetail
+        | MandateFailedOtherDetail
+        | MandateFailedReturnOnOdfiRequestDetail
+        | MandateFailedBankAccountTransferredDetail
+        | MandateFailedPaymentStoppedDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
@@ -114,12 +108,10 @@ class MandateSubmitted(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["submitted"]
-    details: list[
-        Annotated[
-            MandateSubmittedMandateSubmittedDetail
-            | MandateSubmittedBankAccountTransferredDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        MandateSubmittedMandateSubmittedDetail
+        | MandateSubmittedBankAccountTransferredDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
@@ -135,12 +127,10 @@ class MandateTransferred(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["transferred"]
-    details: list[
-        Annotated[
-            MandateTransferredBankAccountTransferredDetail
-            | MandateTransferredMandateTransferredDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        MandateTransferredBankAccountTransferredDetail
+        | MandateTransferredMandateTransferredDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
@@ -216,12 +206,10 @@ class MandateBlocked(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["blocked"]
-    details: list[
-        Annotated[
-            MandateBlockedMandateBlockedDetail
-            | MandateBlockedMandateBlockedByGocardlessDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        MandateBlockedMandateBlockedDetail
+        | MandateBlockedMandateBlockedByGocardlessDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
@@ -252,22 +240,20 @@ class MandateCancelled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["mandates"]
     action: Literal["cancelled"]
-    details: list[
-        Annotated[
-            MandateCancelledBankAccountClosedDetail
-            | MandateCancelledMandateCancelledDetail
-            | MandateCancelledAuthorisationDisputedDetail
-            | MandateCancelledInvalidBankDetailsDetail
-            | MandateCancelledDirectDebitNotEnabledDetail
-            | MandateCancelledReferToPayerDetail
-            | MandateCancelledReturnOnOdfiRequestDetail
-            | MandateCancelledBankAccountTransferredDetail
-            | MandateCancelledAccountBlockedForAnyFinancialTransactionDetail
-            | MandateCancelledPaymentStoppedDetail
-            | MandateCancelledOtherDetail
-            | MandateCancelledInitialOneOffPaymentFailedDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        MandateCancelledBankAccountClosedDetail
+        | MandateCancelledMandateCancelledDetail
+        | MandateCancelledAuthorisationDisputedDetail
+        | MandateCancelledInvalidBankDetailsDetail
+        | MandateCancelledDirectDebitNotEnabledDetail
+        | MandateCancelledReferToPayerDetail
+        | MandateCancelledReturnOnOdfiRequestDetail
+        | MandateCancelledBankAccountTransferredDetail
+        | MandateCancelledAccountBlockedForAnyFinancialTransactionDetail
+        | MandateCancelledPaymentStoppedDetail
+        | MandateCancelledOtherDetail
+        | MandateCancelledInitialOneOffPaymentFailedDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None

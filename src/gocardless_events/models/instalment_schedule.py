@@ -44,12 +44,10 @@ class InstalmentScheduleErrored(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["instalment_schedules"]
     action: Literal["errored"]
-    details: list[
-        Annotated[
-            InstalmentScheduleErroredInstalmentScheduleErroredDetail
-            | InstalmentScheduleErroredInstalmentScheduleErroredLateDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        InstalmentScheduleErroredInstalmentScheduleErroredDetail
+        | InstalmentScheduleErroredInstalmentScheduleErroredLateDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
@@ -95,15 +93,13 @@ class InstalmentScheduleCancelled(BaseModel):
     created_at: AwareDatetime
     resource_type: Literal["instalment_schedules"]
     action: Literal["cancelled"]
-    details: list[
-        Annotated[
-            InstalmentScheduleCancelledInstalmentScheduleCancelledDetail
-            | InstalmentScheduleCancelledMandateCancelledDetail
-            | InstalmentScheduleCancelledMandateFailedDetail
-            | InstalmentScheduleCancelledMandateSuspendedByPayerDetail
-            | InstalmentScheduleCancelledMandateExpiredDetail,
-            Field(..., discriminator="cause"),
-        ]
+    details: Annotated[
+        InstalmentScheduleCancelledInstalmentScheduleCancelledDetail
+        | InstalmentScheduleCancelledMandateCancelledDetail
+        | InstalmentScheduleCancelledMandateFailedDetail
+        | InstalmentScheduleCancelledMandateSuspendedByPayerDetail
+        | InstalmentScheduleCancelledMandateExpiredDetail,
+        Field(..., discriminator="cause"),
     ]
     metadata: dict[str, Any]
     resource_metadata: dict[str, Any] | None = None
