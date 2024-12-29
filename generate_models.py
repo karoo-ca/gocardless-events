@@ -9,10 +9,17 @@ def to_pascal(s):
     return "".join(word.capitalize() for word in s.split("_"))
 
 
-outdir = Path("models")
+root_dir = Path("src/gocardless_events")
+root_dir.mkdir(parents=True, exist_ok=True)
+
+root_init = root_dir / "__init__.py"
+root_init.touch()
+root_py_typed = root_dir / "py.typed"
+root_py_typed.touch()
+outdir = root_dir / "models"
 outdir.mkdir(parents=True, exist_ok=True)
 
-env = Environment(
+env = Environment(  # noqa: S701
     loader=FileSystemLoader(searchpath="./templates/"),
     extensions=["jinja2.ext.do"],
 )
@@ -37,5 +44,5 @@ outfile = outdir / "__init__.py"
 outfile.write_text(rendered)
 print(f"Wrote {outfile}")
 
-subprocess.run(["ruff", "format", str(outdir)], check=True)
-subprocess.run(["ruff", "check", "--fix", str(outdir)], check=True)
+subprocess.run(["ruff", "format", str(root_dir)], check=True)  # noqa: S603,S607
+subprocess.run(["ruff", "check", "--fix", str(root_dir)], check=True)  # noqa: S603,S607

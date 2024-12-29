@@ -2,17 +2,17 @@ from typing import Annotated
 
 from pydantic import Field, RootModel
 
-from models.billing_request import BillingRequest
-from models.creditor import Creditor
-from models.export import Export
-from models.instalment_schedule import InstalmentSchedule
-from models.mandate import Mandate
-from models.payer_authorization import PayerAuthorization
-from models.payment import Payment
-from models.payout import Payout
-from models.refund import Refund
-from models.scheme_identifier import SchemeIdentifier
-from models.subscription import Subscription
+from .billing_request import BillingRequest
+from .creditor import Creditor
+from .export import Export
+from .instalment_schedule import InstalmentSchedule
+from .mandate import Mandate
+from .payer_authorization import PayerAuthorization
+from .payment import Payment
+from .payout import Payout
+from .refund import Refund
+from .scheme_identifier import SchemeIdentifier
+from .subscription import Subscription
 
 EventType = Annotated[
     SchemeIdentifier
