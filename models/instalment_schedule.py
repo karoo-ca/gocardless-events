@@ -1,6 +1,8 @@
 from __future__ import annotations
-from typing import Annotated, Literal, Union, List
-from pydantic import BaseModel, Field, RootModel
+
+from typing import Annotated, Any, Literal, Union, List
+
+from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
 class InstalmentScheduleResumed(BaseModel):
@@ -8,9 +10,15 @@ class InstalmentScheduleResumed(BaseModel):
     The instalment schedule has been rectified by remedying any failed payments.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["instalment_schedules"]
     action: Literal["resumed"]
     description: str
     details: InstalmentScheduleResumedInstalmentScheduleResumedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class InstalmentScheduleCreationFailed(BaseModel):
@@ -18,9 +26,15 @@ class InstalmentScheduleCreationFailed(BaseModel):
     The instalment schedule failed to create due to validation errors when creating the payments. The errors will be included in the event payload.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["instalment_schedules"]
     action: Literal["creation_failed"]
     description: str
     details: InstalmentScheduleCreationFailedInstalmentScheduleCreationFailedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class InstalmentScheduleErrored(BaseModel):
@@ -28,6 +42,9 @@ class InstalmentScheduleErrored(BaseModel):
     One or more instalments in this instalment schedule failed to collect successfully.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["instalment_schedules"]
     action: Literal["errored"]
     description: str
     details: List[
@@ -39,6 +56,9 @@ class InstalmentScheduleErrored(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class InstalmentScheduleCompleted(BaseModel):
@@ -46,9 +66,15 @@ class InstalmentScheduleCompleted(BaseModel):
     This instalment schedule has concluded. No further instalments will be collected.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["instalment_schedules"]
     action: Literal["completed"]
     description: str
     details: InstalmentScheduleCompletedInstalmentScheduleCompletedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class InstalmentScheduleCreated(BaseModel):
@@ -56,9 +82,15 @@ class InstalmentScheduleCreated(BaseModel):
     The instalment schedule has been created.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["instalment_schedules"]
     action: Literal["created"]
     description: str
     details: InstalmentScheduleCreatedInstalmentScheduleCreatedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class InstalmentScheduleCancelled(BaseModel):
@@ -66,6 +98,9 @@ class InstalmentScheduleCancelled(BaseModel):
     The instalment schedule has been cancelled. Any pending payments have also been cancelled.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["instalment_schedules"]
     action: Literal["cancelled"]
     description: str
     details: List[
@@ -80,6 +115,9 @@ class InstalmentScheduleCancelled(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class InstalmentScheduleResumedInstalmentScheduleResumedDetail(BaseModel):

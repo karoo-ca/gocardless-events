@@ -1,6 +1,8 @@
 from __future__ import annotations
-from typing import Annotated, Literal, Union
-from pydantic import BaseModel, Field, RootModel
+
+from typing import Annotated, Any, Literal, Union
+
+from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
 class CreditorAccountAutoFrozen(BaseModel):
@@ -8,9 +10,15 @@ class CreditorAccountAutoFrozen(BaseModel):
     This creditor account has been automatically frozen and had restrictions applied.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["creditors"]
     action: Literal["account_auto_frozen"]
     description: str
     details: CreditorAccountAutoFrozenAccountAutoFrozenDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class CreditorUpdated(BaseModel):
@@ -18,9 +26,15 @@ class CreditorUpdated(BaseModel):
     Something has changed about this creditor. The property that has changed will be included in the event details. Currently this webhook is sent forlogo_urlverification_statusmandate_imports_enabledcustom_payment_pages_enabledandmerchant_responsible_for_notifications.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["creditors"]
     action: Literal["updated"]
     description: str
     details: CreditorUpdatedCreditorUpdatedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class CreditorAccountAutoFrozenReverted(BaseModel):
@@ -28,9 +42,15 @@ class CreditorAccountAutoFrozenReverted(BaseModel):
     This creditor accounts restrictions have been removed.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["creditors"]
     action: Literal["account_auto_frozen_reverted"]
     description: str
     details: CreditorAccountAutoFrozenRevertedAccountAutoFrozenRevertedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class CreditorBouncedPayout(BaseModel):
@@ -38,9 +58,15 @@ class CreditorBouncedPayout(BaseModel):
     A payout for this creditor has failed. Please contact your bank for more information or retry the payout.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["creditors"]
     action: Literal["bounced_payout"]
     description: str
     details: CreditorBouncedPayoutBouncedPayoutDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class CreditorNewPayoutCurrencyAdded(BaseModel):
@@ -48,9 +74,15 @@ class CreditorNewPayoutCurrencyAdded(BaseModel):
     This creditor has added a new payout currency.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["creditors"]
     action: Literal["new_payout_currency_added"]
     description: str
     details: CreditorNewPayoutCurrencyAddedNewPayoutCurrencyAddedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class CreditorAccountAutoFrozenAccountAutoFrozenDetail(BaseModel):

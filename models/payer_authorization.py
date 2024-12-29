@@ -1,6 +1,8 @@
 from __future__ import annotations
-from typing import Annotated, Literal, Union, List
-from pydantic import BaseModel, Field, RootModel
+
+from typing import Annotated, Any, Literal, Union, List
+
+from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
 class PayerAuthorizationFailed(BaseModel):
@@ -8,6 +10,9 @@ class PayerAuthorizationFailed(BaseModel):
     PayerAuthorisation is failed. Customer CustomerBankAccount and Mandate creation have been failed.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payer_authorizations"]
     action: Literal["failed"]
     description: str
     details: List[
@@ -20,6 +25,9 @@ class PayerAuthorizationFailed(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PayerAuthorizationCompleted(BaseModel):
@@ -27,9 +35,15 @@ class PayerAuthorizationCompleted(BaseModel):
     PayerAuthorisation is completed. Customer CustomerBankAccount and Mandate have been created.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payer_authorizations"]
     action: Literal["completed"]
     description: str
     details: PayerAuthorizationCompletedPayerAuthorisationCompletedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PayerAuthorizationFailedCustomerCreationFailedDetail(BaseModel):

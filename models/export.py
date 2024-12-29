@@ -1,6 +1,8 @@
 from __future__ import annotations
-from typing import Annotated, Literal, Union
-from pydantic import BaseModel, Field, RootModel
+
+from typing import Annotated, Any, Literal, Union
+
+from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
 class ExportFailed(BaseModel):
@@ -8,9 +10,15 @@ class ExportFailed(BaseModel):
     Export failed
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["exports"]
     action: Literal["failed"]
     description: str
     details: ExportFailedExportFailedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class ExportCompleted(BaseModel):
@@ -18,9 +26,15 @@ class ExportCompleted(BaseModel):
     Export completed
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["exports"]
     action: Literal["completed"]
     description: str
     details: ExportCompletedExportCompletedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class ExportStarted(BaseModel):
@@ -28,9 +42,15 @@ class ExportStarted(BaseModel):
     Export started
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["exports"]
     action: Literal["started"]
     description: str
     details: ExportStartedExportStartedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class ExportFailedExportFailedDetail(BaseModel):

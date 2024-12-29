@@ -1,6 +1,8 @@
 from __future__ import annotations
-from typing import Annotated, Literal, Union, List
-from pydantic import BaseModel, Field, RootModel
+
+from typing import Annotated, Any, Literal, Union, List
+
+from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
 class MandateReinstated(BaseModel):
@@ -8,9 +10,15 @@ class MandateReinstated(BaseModel):
     The mandate has become active again after it was cancelled or expired. This can be due to the customer's bank wishing to undo a cancellation or expiry notice they sent or because the mandate was successfully reinstated via the reinstate endpoint.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["reinstated"]
     description: str
     details: MandateReinstatedMandateReinstatedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateCustomerApprovalGranted(BaseModel):
@@ -18,9 +26,15 @@ class MandateCustomerApprovalGranted(BaseModel):
     The mandate required additional approval from the customer (e.g. permission from a second signatory) and that approval has been granted.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["customer_approval_granted"]
     description: str
     details: MandateCustomerApprovalGrantedCustomerApprovalGrantedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateExpired(BaseModel):
@@ -28,6 +42,9 @@ class MandateExpired(BaseModel):
     No collection attempts were made against the mandate within the dormancy period of your service user number. As a result it has expired and no further collections can be taken against it. If you wish to continue taking payments from this customer you should request their permission and use the reinstate endpoint.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["expired"]
     description: str
     details: List[
@@ -39,6 +56,9 @@ class MandateExpired(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateResubmissionRequested(BaseModel):
@@ -46,6 +66,9 @@ class MandateResubmissionRequested(BaseModel):
     A request to resubmit the mandate was made by the mandate reinstate endpoint.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["resubmission_requested"]
     description: str
     details: List[
@@ -57,6 +80,9 @@ class MandateResubmissionRequested(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateFailed(BaseModel):
@@ -64,6 +90,9 @@ class MandateFailed(BaseModel):
     The mandate could not be set up generally because the specified bank account does not accept Direct Debit payments or is closed.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["failed"]
     description: str
     details: List[
@@ -83,6 +112,9 @@ class MandateFailed(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateSubmitted(BaseModel):
@@ -90,6 +122,9 @@ class MandateSubmitted(BaseModel):
     The mandate has been submitted to the banks and should become active in a few days unless the bank declines the request.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["submitted"]
     description: str
     details: List[
@@ -101,6 +136,9 @@ class MandateSubmitted(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateTransferred(BaseModel):
@@ -108,6 +146,9 @@ class MandateTransferred(BaseModel):
     The mandate has been transferred to a different bank account either using a bank switching service (where it is supported) or with help from GoCardless Support when a customer asks to change their bank account (we can make the switch after verifying the details). The event will includelinks[previous_customer_bank_account]andlinks[new_customer_bank_account]. When using a bank switching service the mandate may have been submitted again depending on how the involved banks handled the transfer.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["transferred"]
     description: str
     details: List[
@@ -119,6 +160,9 @@ class MandateTransferred(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateConsumed(BaseModel):
@@ -126,9 +170,15 @@ class MandateConsumed(BaseModel):
     The mandate has been used to create a payment and has now been consumed. It cannot be used again.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["consumed"]
     description: str
     details: MandateConsumedMandateConsumedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateCustomerApprovalSkipped(BaseModel):
@@ -136,9 +186,15 @@ class MandateCustomerApprovalSkipped(BaseModel):
     The mandate originally was believed to require additional approval from the customer (e.g. permission from a second signatory) but approval has been skipped (for example because the mandate was erroneously marked as needing a second signature).
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["customer_approval_skipped"]
     description: str
     details: MandateCustomerApprovalSkippedCustomerApprovalSkippedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateActive(BaseModel):
@@ -146,9 +202,15 @@ class MandateActive(BaseModel):
     The mandate has been successfully set up by the customer's bank.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["active"]
     description: str
     details: MandateActiveMandateActivatedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateCreated(BaseModel):
@@ -156,9 +218,15 @@ class MandateCreated(BaseModel):
     The mandate has been created.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["created"]
     description: str
     details: MandateCreatedMandateCreatedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateBlocked(BaseModel):
@@ -166,6 +234,9 @@ class MandateBlocked(BaseModel):
     The mandate has been blocked because the customer's details matched against an entry in either our global blocklist or the blocklist populated by you. This mandate cannot be unblocked and no payments can be created against it. If you still wish to collect payments from this customer you will need to remove their details from any blocks you have created and ask them to set up a new mandate. If you contacted GoCardless to block the customer's details you will need to make a request to unblock them.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["blocked"]
     description: str
     details: List[
@@ -177,6 +248,9 @@ class MandateBlocked(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateReplaced(BaseModel):
@@ -184,9 +258,15 @@ class MandateReplaced(BaseModel):
     The mandate has been cancelled and replaced by a new mandate (for example because the creditor has moved to a new Service User Number). The event will includelinks[new_mandate]with the ID of the new mandate.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["replaced"]
     description: str
     details: MandateReplacedSchemeIdentifierChangedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateCancelled(BaseModel):
@@ -194,6 +274,9 @@ class MandateCancelled(BaseModel):
     The mandate has been cancelled either by the customer through their bank or this API or automatically when their bank account is closed.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["mandates"]
     action: Literal["cancelled"]
     description: str
     details: List[
@@ -215,6 +298,9 @@ class MandateCancelled(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class MandateReinstatedMandateReinstatedDetail(BaseModel):

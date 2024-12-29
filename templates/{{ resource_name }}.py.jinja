@@ -22,8 +22,10 @@
 #}
 
 from __future__ import annotations
-from typing import Annotated, Literal, Union, List
-from pydantic import BaseModel, Field, RootModel
+
+from typing import Annotated, Any, Literal, Union, List
+
+from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 {%- set resource_singular = resource_name.rstrip('s') | to_pascal %}
 {%- set actions = resource_list | map(attribute='action') | list %}
@@ -33,6 +35,9 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
     """
     {{ resource_item.description }}
     """
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["{{ resource_name }}"]
     action: Literal["{{ resource_item.action }}"]
     description: str
     {%- set causes = [] -%}
@@ -55,6 +60,9 @@ class {{ resource_singular }}{{ resource_item.action | to_pascal }}(BaseModel):
         Field(..., discriminator="cause")
     ]]
     {%- endif %}
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 {%- endfor %}
 
 {%- for resource_item in resource_list %}

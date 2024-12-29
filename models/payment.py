@@ -1,6 +1,8 @@
 from __future__ import annotations
-from typing import Annotated, Literal, Union, List
-from pydantic import BaseModel, Field, RootModel
+
+from typing import Annotated, Any, Literal, Union, List
+
+from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
 class PaymentSurchargeFeeDebited(BaseModel):
@@ -8,9 +10,15 @@ class PaymentSurchargeFeeDebited(BaseModel):
     A surcharge fee has been charged for this payment because it failed or got charged back.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["surcharge_fee_debited"]
     description: str
     details: PaymentSurchargeFeeDebitedSurchargeFeeDebitedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentChargebackCancelled(BaseModel):
@@ -18,9 +26,15 @@ class PaymentChargebackCancelled(BaseModel):
     The customer's bank has cancelled the chargeback request. This is almost always at the request of the customer.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["chargeback_cancelled"]
     description: str
     details: PaymentChargebackCancelledPaymentConfirmedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentCustomerApprovalGranted(BaseModel):
@@ -28,9 +42,15 @@ class PaymentCustomerApprovalGranted(BaseModel):
     The payment required additional approval from the customer before it could be submitted and that approval has been granted.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["customer_approval_granted"]
     description: str
     details: PaymentCustomerApprovalGrantedCustomerApprovalGrantedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentLateFailureSettled(BaseModel):
@@ -38,9 +58,15 @@ class PaymentLateFailureSettled(BaseModel):
     The payment was a late failure which had already been paid out and has been debited from a payout.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["late_failure_settled"]
     description: str
     details: PaymentLateFailureSettledLateFailureSettledDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentChargedBack(BaseModel):
@@ -48,6 +74,9 @@ class PaymentChargedBack(BaseModel):
     The customer asked their bank to refund the payment under the Direct Debit Guarantee and it has been returned to the customer.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["charged_back"]
     description: str
     details: List[
@@ -62,6 +91,9 @@ class PaymentChargedBack(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentCustomerApprovalDenied(BaseModel):
@@ -69,9 +101,15 @@ class PaymentCustomerApprovalDenied(BaseModel):
     The payment required additional approval from the customer before it could be submitted and that approval has been denied.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["customer_approval_denied"]
     description: str
     details: PaymentCustomerApprovalDeniedCustomerApprovalDeniedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentResubmissionRequested(BaseModel):
@@ -79,6 +117,9 @@ class PaymentResubmissionRequested(BaseModel):
     A request to resubmit the payment was made by the payment retry endpoint. This can also mean that the payment was automatically scheduled for resubmission by GoCardless if you have opted in for the intelligent retries feature.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["resubmission_requested"]
     description: str
     details: List[
@@ -90,6 +131,9 @@ class PaymentResubmissionRequested(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentFailed(BaseModel):
@@ -97,6 +141,9 @@ class PaymentFailed(BaseModel):
     The payment could not be collected usually because the customer did not have sufficient funds available. GoCardless will automatically retry the payment if event'swill_attempt_retryfield is true. See the intelligent retries section below.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["failed"]
     description: str
     details: List[
@@ -123,6 +170,9 @@ class PaymentFailed(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentSubmitted(BaseModel):
@@ -130,9 +180,15 @@ class PaymentSubmitted(BaseModel):
     The payment has been submitted to the banks. It will be a few days until it is collected or fails.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["submitted"]
     description: str
     details: PaymentSubmittedPaymentSubmittedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentConfirmed(BaseModel):
@@ -140,9 +196,15 @@ class PaymentConfirmed(BaseModel):
     The payment has been collected from the customer's bank account and is now being held by GoCardless. It can take up to 5 working days for a payment to be collected and will then be held for a short time before becomingpaid_out.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["confirmed"]
     description: str
     details: PaymentConfirmedPaymentConfirmedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentCreated(BaseModel):
@@ -150,6 +212,9 @@ class PaymentCreated(BaseModel):
     The payment has been created.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["created"]
     description: str
     details: List[
@@ -161,6 +226,9 @@ class PaymentCreated(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentChargebackSettled(BaseModel):
@@ -168,9 +236,15 @@ class PaymentChargebackSettled(BaseModel):
     The payment was charged back having previously been paid out and has been debited from a payout.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["chargeback_settled"]
     description: str
     details: PaymentChargebackSettledChargebackSettledDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentPaidOut(BaseModel):
@@ -178,9 +252,15 @@ class PaymentPaidOut(BaseModel):
     The payment has left GoCardless and has been sent to the creditor's bank account.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["paid_out"]
     description: str
     details: PaymentPaidOutPaymentPaidOutDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentCancelled(BaseModel):
@@ -188,6 +268,9 @@ class PaymentCancelled(BaseModel):
     The payment was cancelled.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["payments"]
     action: Literal["cancelled"]
     description: str
     details: List[
@@ -213,6 +296,9 @@ class PaymentCancelled(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class PaymentSurchargeFeeDebitedSurchargeFeeDebitedDetail(BaseModel):

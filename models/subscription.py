@@ -1,6 +1,8 @@
 from __future__ import annotations
-from typing import Annotated, Literal, Union, List
-from pydantic import BaseModel, Field, RootModel
+
+from typing import Annotated, Any, Literal, Union, List
+
+from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
 class SubscriptionCustomerApprovalGranted(BaseModel):
@@ -8,9 +10,15 @@ class SubscriptionCustomerApprovalGranted(BaseModel):
     The subscription required additional approval from the customer before it could become active and that approval has been granted.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["subscriptions"]
     action: Literal["customer_approval_granted"]
     description: str
     details: SubscriptionCustomerApprovalGrantedCustomerApprovalGrantedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SubscriptionFinished(BaseModel):
@@ -18,9 +26,15 @@ class SubscriptionFinished(BaseModel):
     This subscription has finished. No further payments will be created.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["subscriptions"]
     action: Literal["finished"]
     description: str
     details: SubscriptionFinishedSubscriptionFinishedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SubscriptionResumed(BaseModel):
@@ -28,9 +42,15 @@ class SubscriptionResumed(BaseModel):
     This subscription was resumed.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["subscriptions"]
     action: Literal["resumed"]
     description: str
     details: SubscriptionResumedSubscriptionResumedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SubscriptionAmended(BaseModel):
@@ -38,9 +58,15 @@ class SubscriptionAmended(BaseModel):
     The subscription amount has been changed.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["subscriptions"]
     action: Literal["amended"]
     description: str
     details: SubscriptionAmendedSubscriptionAmendedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SubscriptionCustomerApprovalDenied(BaseModel):
@@ -48,9 +74,15 @@ class SubscriptionCustomerApprovalDenied(BaseModel):
     The subscription required additional approval from the customer before it could become active and that approval has been denied.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["subscriptions"]
     action: Literal["customer_approval_denied"]
     description: str
     details: SubscriptionCustomerApprovalDeniedCustomerApprovalDeniedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SubscriptionPaused(BaseModel):
@@ -58,9 +90,15 @@ class SubscriptionPaused(BaseModel):
     This subscription has been paused.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["subscriptions"]
     action: Literal["paused"]
     description: str
     details: SubscriptionPausedSubscriptionPausedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SubscriptionScheduledPauseCancelled(BaseModel):
@@ -68,9 +106,15 @@ class SubscriptionScheduledPauseCancelled(BaseModel):
     An upcoming pause for this subscription has been cancelled.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["subscriptions"]
     action: Literal["scheduled_pause_cancelled"]
     description: str
     details: SubscriptionScheduledPauseCancelledScheduledPauseCancelledDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SubscriptionScheduledPause(BaseModel):
@@ -78,9 +122,15 @@ class SubscriptionScheduledPause(BaseModel):
     This subscription has been scheduled to be paused at a future date.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["subscriptions"]
     action: Literal["scheduled_pause"]
     description: str
     details: SubscriptionScheduledPauseScheduledPauseDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SubscriptionCreated(BaseModel):
@@ -88,9 +138,15 @@ class SubscriptionCreated(BaseModel):
     The subscription has been created.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["subscriptions"]
     action: Literal["created"]
     description: str
     details: SubscriptionCreatedSubscriptionCreatedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SubscriptionPaymentCreated(BaseModel):
@@ -98,9 +154,15 @@ class SubscriptionPaymentCreated(BaseModel):
     A payment has been created by this subscription.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["subscriptions"]
     action: Literal["payment_created"]
     description: str
     details: SubscriptionPaymentCreatedPaymentCreatedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SubscriptionScheduledResume(BaseModel):
@@ -108,9 +170,15 @@ class SubscriptionScheduledResume(BaseModel):
     This paused subscription has been scheduled to be resumed at a future date.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["subscriptions"]
     action: Literal["scheduled_resume"]
     description: str
     details: SubscriptionScheduledResumeScheduledResumeDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SubscriptionCancelled(BaseModel):
@@ -118,6 +186,9 @@ class SubscriptionCancelled(BaseModel):
     This subscription has been cancelled. No further payments will be created.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["subscriptions"]
     action: Literal["cancelled"]
     description: str
     details: List[
@@ -143,6 +214,9 @@ class SubscriptionCancelled(BaseModel):
             Field(..., discriminator="cause"),
         ]
     ]
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SubscriptionCustomerApprovalGrantedCustomerApprovalGrantedDetail(BaseModel):

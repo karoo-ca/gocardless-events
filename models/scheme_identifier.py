@@ -1,6 +1,8 @@
 from __future__ import annotations
-from typing import Annotated, Literal, Union
-from pydantic import BaseModel, Field, RootModel
+
+from typing import Annotated, Any, Literal, Union
+
+from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
 class SchemeIdentifierActivated(BaseModel):
@@ -8,9 +10,15 @@ class SchemeIdentifierActivated(BaseModel):
     This scheme identifier has been activated.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["scheme_identifiers"]
     action: Literal["activated"]
     description: str
     details: SchemeIdentifierActivatedSchemeIdentifierActivatedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class SchemeIdentifierActivatedSchemeIdentifierActivatedDetail(BaseModel):

@@ -1,6 +1,8 @@
 from __future__ import annotations
-from typing import Annotated, Literal, Union
-from pydantic import BaseModel, Field, RootModel
+
+from typing import Annotated, Any, Literal, Union
+
+from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
 class BillingRequestChooseCurrency(BaseModel):
@@ -8,9 +10,15 @@ class BillingRequestChooseCurrency(BaseModel):
     Currency details have been collected for this billing request.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["choose_currency"]
     description: str
     details: BillingRequestChooseCurrencyBillingRequestChooseCurrencyDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestFulfilled(BaseModel):
@@ -18,9 +26,15 @@ class BillingRequestFulfilled(BaseModel):
     This billing request has been fulfilled and the resources have been created.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["fulfilled"]
     description: str
     details: BillingRequestFulfilledBillingRequestFulfilledDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestBankAuthorisationAuthorised(BaseModel):
@@ -28,9 +42,15 @@ class BillingRequestBankAuthorisationAuthorised(BaseModel):
     A bank authorisation for this billing request has been authorised by the payer.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_authorised"]
     description: str
     details: BillingRequestBankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestFlowVisited(BaseModel):
@@ -38,9 +58,15 @@ class BillingRequestFlowVisited(BaseModel):
     The billing request flow has been visited.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["flow_visited"]
     description: str
     details: BillingRequestFlowVisitedBillingRequestFlowVisitedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestFailed(BaseModel):
@@ -48,9 +74,15 @@ class BillingRequestFailed(BaseModel):
     This billing request has failed.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["failed"]
     description: str
     details: BillingRequestFailedBillingRequestFailedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestCollectBankAccount(BaseModel):
@@ -58,9 +90,15 @@ class BillingRequestCollectBankAccount(BaseModel):
     Bank account details have been collected for this billing request.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["collect_bank_account"]
     description: str
     details: BillingRequestCollectBankAccountBillingRequestCollectBankAccountDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestPayerDetailsConfirmed(BaseModel):
@@ -68,11 +106,17 @@ class BillingRequestPayerDetailsConfirmed(BaseModel):
     Payer has confirmed all their details for this billing request.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["payer_details_confirmed"]
     description: str
     details: (
         BillingRequestPayerDetailsConfirmedBillingRequestPayerDetailsConfirmedDetail
     )
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestCollectAmount(BaseModel):
@@ -80,9 +124,15 @@ class BillingRequestCollectAmount(BaseModel):
     Amount has been collected for this billing request.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["collect_amount"]
     description: str
     details: BillingRequestCollectAmountBillingRequestCollectAmountDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestBankAuthorisationExpired(BaseModel):
@@ -90,9 +140,15 @@ class BillingRequestBankAuthorisationExpired(BaseModel):
     A bank authorisation for this billing request has expired.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_expired"]
     description: str
     details: BillingRequestBankAuthorisationExpiredBillingRequestBankAuthorisationExpiredDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestFlowExited(BaseModel):
@@ -100,9 +156,15 @@ class BillingRequestFlowExited(BaseModel):
     The billing request flow has been exited by the payer.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["flow_exited"]
     description: str
     details: BillingRequestFlowExitedBillingRequestFlowExitedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestCollectCustomerDetails(BaseModel):
@@ -110,11 +172,17 @@ class BillingRequestCollectCustomerDetails(BaseModel):
     Customer details have been collected for this billing request.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["collect_customer_details"]
     description: str
     details: (
         BillingRequestCollectCustomerDetailsBillingRequestCollectCustomerDetailsDetail
     )
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestCreated(BaseModel):
@@ -122,9 +190,15 @@ class BillingRequestCreated(BaseModel):
     This billing request has been created.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["created"]
     description: str
     details: BillingRequestCreatedBillingRequestCreatedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestBankAuthorisationFailed(BaseModel):
@@ -132,11 +206,17 @@ class BillingRequestBankAuthorisationFailed(BaseModel):
     A bank authorisation for this billing request has failed because of a bank account mismatch.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_failed"]
     description: str
     details: (
         BillingRequestBankAuthorisationFailedBillingRequestBankAuthorisationFailedDetail
     )
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestPayerGeoBlocked(BaseModel):
@@ -144,9 +224,15 @@ class BillingRequestPayerGeoBlocked(BaseModel):
     Payer blocked for 24 hours for attempting to pay from an unsupported location.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["payer_geo_blocked"]
     description: str
     details: BillingRequestPayerGeoBlockedPayerGeoBlockedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestFlowCreated(BaseModel):
@@ -154,9 +240,15 @@ class BillingRequestFlowCreated(BaseModel):
     A billing request flow has been created against this billing request.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["flow_created"]
     description: str
     details: BillingRequestFlowCreatedBillingRequestFlowCreatedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestBankAuthorisationDenied(BaseModel):
@@ -164,11 +256,17 @@ class BillingRequestBankAuthorisationDenied(BaseModel):
     A bank authorisation for this billing request has been denied by the payer.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_denied"]
     description: str
     details: (
         BillingRequestBankAuthorisationDeniedBillingRequestBankAuthorisationDeniedDetail
     )
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestSelectInstitution(BaseModel):
@@ -176,9 +274,15 @@ class BillingRequestSelectInstitution(BaseModel):
     Institution details have been collected for this billing request.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["select_institution"]
     description: str
     details: BillingRequestSelectInstitutionBillingRequestSelectInstitutionDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestBankAuthorisationVisited(BaseModel):
@@ -186,9 +290,15 @@ class BillingRequestBankAuthorisationVisited(BaseModel):
     A bank authorisation link for this billing request has been visited.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_visited"]
     description: str
     details: BillingRequestBankAuthorisationVisitedBillingRequestBankAuthorisationVisitedDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestCancelled(BaseModel):
@@ -196,9 +306,15 @@ class BillingRequestCancelled(BaseModel):
     This billing request has been cancelled none of the resources have been created.
     """
 
+    id: str
+    created_at: AwareDatetime
+    resource_type: Literal["billing_requests"]
     action: Literal["cancelled"]
     description: str
     details: BillingRequestCancelledBillingRequestCancelledDetail
+    metadata: dict[str, Any]
+    resource_metadata: dict[str, Any]
+    links: dict[str, Any]
 
 
 class BillingRequestChooseCurrencyBillingRequestChooseCurrencyDetail(BaseModel):
