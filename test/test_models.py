@@ -388,18 +388,18 @@ def test_resource_event() -> None:
         billing_request_created_json,
         creditor_updated_gocardless_json,
         export_started_gocardless_json,
-        instalment_schedule_payment_created_api_json,  # failing, no action=payment_created
+        instalment_schedule_payment_created_api_json,  # FIX: no action=payment_created
         mandate_cancelled_bank_account_closed_json,
-        mandate_cancelled_api_json,
+        mandate_cancelled_api_json,  # FIX: missing details.scheme and details.reason_code
         mandate_tranferred_bank_account_transferred_json,
         payment_failed_bank_insufficient_funds_json,
         payment_cancelled_bank_mandate_cancelled_json,
-        payment_cancelled_api_json,
+        payment_cancelled_api_json,  # FIX: missing details.scheme and details.reason_code
         payment_confirmed_gocardless_json,
         payout_paid_gocardless_json,
         refund_created_api_json,
         scheme_identifier_activated_gocardless_json,
-        subscription_payment_created_api_json,
+        subscription_payment_created_api_json,  # FIX: no details.origin=api
     ],
     ids=[
         "billing_request_created",
