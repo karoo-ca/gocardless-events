@@ -1,0 +1,15 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "python",
+      "extra-files": [
+        {
+          "type": "regex",
+          "path": "src/gocardless_events/__init__.py",
+          "regex": "__version__\\s*=\\s*[\"'](.*?)[\"']",
+          "replacement": "__version__ = \"${version}\""
+        }
+      ]
+    }
+  }
+}
