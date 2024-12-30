@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0](https://github.com/karoo-ca/gocardless-events/compare/v0.0.1...v0.1.0) (2024-12-30)
+
+
+### Miscellaneous Chores
+
+* release 0.1.0 ([9915d49](https://github.com/karoo-ca/gocardless-events/commit/9915d4936f25edbe3a73503af69367e013d070ff))
+
 ## 0.0.1 (2024-12-30)
 
 
