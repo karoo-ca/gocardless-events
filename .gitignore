@@ -2,5 +2,6 @@
 .ruff_cache
 .pytest_cache
 .mypy_cache
+dist
 
 __pycache__
