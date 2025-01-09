@@ -477,7 +477,7 @@ class BillingRequestChooseCurrency(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["choose_currency"]
     details: ChooseCurrencyBillingRequestChooseCurrencyDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -492,7 +492,7 @@ class BillingRequestFulfilled(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["fulfilled"]
     details: FulfilledBillingRequestFulfilledDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -507,7 +507,7 @@ class BillingRequestBankAuthorisationAuthorised(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_authorised"]
     details: BankAuthorisationAuthorisedBillingRequestBankAuthorisationAuthorisedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -522,7 +522,7 @@ class BillingRequestFlowVisited(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["flow_visited"]
     details: FlowVisitedBillingRequestFlowVisitedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -537,7 +537,7 @@ class BillingRequestFailed(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["failed"]
     details: FailedBillingRequestFailedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -552,7 +552,7 @@ class BillingRequestCollectBankAccount(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["collect_bank_account"]
     details: CollectBankAccountBillingRequestCollectBankAccountDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -567,7 +567,7 @@ class BillingRequestPayerDetailsConfirmed(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["payer_details_confirmed"]
     details: PayerDetailsConfirmedBillingRequestPayerDetailsConfirmedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -582,7 +582,7 @@ class BillingRequestCollectAmount(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["collect_amount"]
     details: CollectAmountBillingRequestCollectAmountDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -597,7 +597,7 @@ class BillingRequestBankAuthorisationExpired(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_expired"]
     details: BankAuthorisationExpiredBillingRequestBankAuthorisationExpiredDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -612,7 +612,7 @@ class BillingRequestFlowExited(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["flow_exited"]
     details: FlowExitedBillingRequestFlowExitedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -627,7 +627,7 @@ class BillingRequestCollectCustomerDetails(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["collect_customer_details"]
     details: CollectCustomerDetailsBillingRequestCollectCustomerDetailsDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -642,7 +642,7 @@ class BillingRequestCreated(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["created"]
     details: CreatedBillingRequestCreatedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -657,7 +657,7 @@ class BillingRequestBankAuthorisationFailed(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_failed"]
     details: BankAuthorisationFailedBillingRequestBankAuthorisationFailedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -672,7 +672,7 @@ class BillingRequestPayerGeoBlocked(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["payer_geo_blocked"]
     details: PayerGeoBlockedPayerGeoBlockedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -687,7 +687,7 @@ class BillingRequestFlowCreated(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["flow_created"]
     details: FlowCreatedBillingRequestFlowCreatedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -702,7 +702,7 @@ class BillingRequestBankAuthorisationDenied(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_denied"]
     details: BankAuthorisationDeniedBillingRequestBankAuthorisationDeniedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -717,7 +717,7 @@ class BillingRequestSelectInstitution(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["select_institution"]
     details: SelectInstitutionBillingRequestSelectInstitutionDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -732,7 +732,7 @@ class BillingRequestBankAuthorisationVisited(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["bank_authorisation_visited"]
     details: BankAuthorisationVisitedBillingRequestBankAuthorisationVisitedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -747,7 +747,7 @@ class BillingRequestCancelled(BaseModel):
     resource_type: Literal["billing_requests"]
     action: Literal["cancelled"]
     details: CancelledBillingRequestCancelledDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 

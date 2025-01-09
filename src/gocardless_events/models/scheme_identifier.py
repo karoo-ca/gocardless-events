@@ -30,7 +30,7 @@ class SchemeIdentifierActivated(BaseModel):
     resource_type: Literal["scheme_identifiers"]
     action: Literal["activated"]
     details: ActivatedSchemeIdentifierActivatedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 

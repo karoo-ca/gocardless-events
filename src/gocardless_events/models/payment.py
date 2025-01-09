@@ -864,7 +864,7 @@ class PaymentSurchargeFeeDebited(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["surcharge_fee_debited"]
     details: SurchargeFeeDebitedSurchargeFeeDebitedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -879,7 +879,7 @@ class PaymentChargebackCancelled(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["chargeback_cancelled"]
     details: ChargebackCancelledPaymentConfirmedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -894,7 +894,7 @@ class PaymentCustomerApprovalGranted(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["customer_approval_granted"]
     details: CustomerApprovalGrantedCustomerApprovalGrantedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -909,7 +909,7 @@ class PaymentLateFailureSettled(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["late_failure_settled"]
     details: LateFailureSettledLateFailureSettledDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -931,7 +931,7 @@ class PaymentChargedBack(BaseModel):
         | ChargedBackOtherDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -946,7 +946,7 @@ class PaymentCustomerApprovalDenied(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["customer_approval_denied"]
     details: CustomerApprovalDeniedCustomerApprovalDeniedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -965,7 +965,7 @@ class PaymentResubmissionRequested(BaseModel):
         | ResubmissionRequestedPaymentAutoretriedDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -999,7 +999,7 @@ class PaymentFailed(BaseModel):
         | FailedPaymentViolatedMandateParametersDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -1014,7 +1014,7 @@ class PaymentSubmitted(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["submitted"]
     details: SubmittedPaymentSubmittedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -1029,7 +1029,7 @@ class PaymentConfirmed(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["confirmed"]
     details: ConfirmedPaymentConfirmedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -1047,7 +1047,7 @@ class PaymentCreated(BaseModel):
         CreatedPaymentCreatedDetail | CreatedInstalmentScheduleCreatedDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -1062,7 +1062,7 @@ class PaymentChargebackSettled(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["chargeback_settled"]
     details: ChargebackSettledChargebackSettledDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -1077,7 +1077,7 @@ class PaymentPaidOut(BaseModel):
     resource_type: Literal["payments"]
     action: Literal["paid_out"]
     details: PaidOutPaymentPaidOutDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -1110,7 +1110,7 @@ class PaymentCancelled(BaseModel):
         | CancelledInitialOneOffPaymentFailedDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 

@@ -670,7 +670,7 @@ class MandateReinstated(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["reinstated"]
     details: ReinstatedMandateReinstatedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -685,7 +685,7 @@ class MandateCustomerApprovalGranted(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["customer_approval_granted"]
     details: CustomerApprovalGrantedCustomerApprovalGrantedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -703,7 +703,7 @@ class MandateExpired(BaseModel):
         ExpiredMandateExpiredDetail | ExpiredMandateCancelledDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -722,7 +722,7 @@ class MandateResubmissionRequested(BaseModel):
         | ResubmissionRequestedBankAccountTransferredDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -749,7 +749,7 @@ class MandateFailed(BaseModel):
         | FailedPaymentStoppedDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -767,7 +767,7 @@ class MandateSubmitted(BaseModel):
         SubmittedMandateSubmittedDetail | SubmittedBankAccountTransferredDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -785,7 +785,7 @@ class MandateTransferred(BaseModel):
         TransferredBankAccountTransferredDetail | TransferredMandateTransferredDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -800,7 +800,7 @@ class MandateConsumed(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["consumed"]
     details: ConsumedMandateConsumedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -815,7 +815,7 @@ class MandateCustomerApprovalSkipped(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["customer_approval_skipped"]
     details: CustomerApprovalSkippedCustomerApprovalSkippedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -830,7 +830,7 @@ class MandateActive(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["active"]
     details: ActiveMandateActivatedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -845,7 +845,7 @@ class MandateCreated(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["created"]
     details: CreatedMandateCreatedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -863,7 +863,7 @@ class MandateBlocked(BaseModel):
         BlockedMandateBlockedDetail | BlockedMandateBlockedByGocardlessDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -878,7 +878,7 @@ class MandateReplaced(BaseModel):
     resource_type: Literal["mandates"]
     action: Literal["replaced"]
     details: ReplacedSchemeIdentifierChangedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -907,7 +907,7 @@ class MandateCancelled(BaseModel):
         | CancelledInitialOneOffPaymentFailedDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 

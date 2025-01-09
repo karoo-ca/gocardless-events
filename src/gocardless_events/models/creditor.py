@@ -86,7 +86,7 @@ class CreditorAccountAutoFrozen(BaseModel):
     resource_type: Literal["creditors"]
     action: Literal["account_auto_frozen"]
     details: AccountAutoFrozenAccountAutoFrozenDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -101,7 +101,7 @@ class CreditorUpdated(BaseModel):
     resource_type: Literal["creditors"]
     action: Literal["updated"]
     details: UpdatedCreditorUpdatedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -116,7 +116,7 @@ class CreditorAccountAutoFrozenReverted(BaseModel):
     resource_type: Literal["creditors"]
     action: Literal["account_auto_frozen_reverted"]
     details: AccountAutoFrozenRevertedAccountAutoFrozenRevertedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -131,7 +131,7 @@ class CreditorBouncedPayout(BaseModel):
     resource_type: Literal["creditors"]
     action: Literal["bounced_payout"]
     details: BouncedPayoutBouncedPayoutDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -146,7 +146,7 @@ class CreditorNewPayoutCurrencyAdded(BaseModel):
     resource_type: Literal["creditors"]
     action: Literal["new_payout_currency_added"]
     details: NewPayoutCurrencyAddedNewPayoutCurrencyAddedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 

@@ -172,7 +172,7 @@ class InstalmentScheduleResumed(BaseModel):
     resource_type: Literal["instalment_schedules"]
     action: Literal["resumed"]
     details: ResumedInstalmentScheduleResumedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -187,7 +187,7 @@ class InstalmentScheduleCreationFailed(BaseModel):
     resource_type: Literal["instalment_schedules"]
     action: Literal["creation_failed"]
     details: CreationFailedInstalmentScheduleCreationFailedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -206,7 +206,7 @@ class InstalmentScheduleErrored(BaseModel):
         | ErroredInstalmentScheduleErroredLateDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -221,7 +221,7 @@ class InstalmentScheduleCompleted(BaseModel):
     resource_type: Literal["instalment_schedules"]
     action: Literal["completed"]
     details: CompletedInstalmentScheduleCompletedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -236,7 +236,7 @@ class InstalmentScheduleCreated(BaseModel):
     resource_type: Literal["instalment_schedules"]
     action: Literal["created"]
     details: CreatedInstalmentScheduleCreatedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -258,7 +258,7 @@ class InstalmentScheduleCancelled(BaseModel):
         | CancelledMandateExpiredDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 

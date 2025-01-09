@@ -76,7 +76,7 @@ class PayerAuthorizationFailed(BaseModel):
         | FailedMandateCreationFailedDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -91,7 +91,7 @@ class PayerAuthorizationCompleted(BaseModel):
     resource_type: Literal["payer_authorizations"]
     action: Literal["completed"]
     details: CompletedPayerAuthorisationCompletedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 

@@ -466,7 +466,7 @@ class SubscriptionCustomerApprovalGranted(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["customer_approval_granted"]
     details: CustomerApprovalGrantedCustomerApprovalGrantedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -481,7 +481,7 @@ class SubscriptionFinished(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["finished"]
     details: FinishedSubscriptionFinishedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -496,7 +496,7 @@ class SubscriptionResumed(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["resumed"]
     details: ResumedSubscriptionResumedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -511,7 +511,7 @@ class SubscriptionAmended(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["amended"]
     details: AmendedSubscriptionAmendedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -526,7 +526,7 @@ class SubscriptionCustomerApprovalDenied(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["customer_approval_denied"]
     details: CustomerApprovalDeniedCustomerApprovalDeniedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -541,7 +541,7 @@ class SubscriptionPaused(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["paused"]
     details: PausedSubscriptionPausedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -556,7 +556,7 @@ class SubscriptionScheduledPauseCancelled(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["scheduled_pause_cancelled"]
     details: ScheduledPauseCancelledScheduledPauseCancelledDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -571,7 +571,7 @@ class SubscriptionScheduledPause(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["scheduled_pause"]
     details: ScheduledPauseScheduledPauseDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -586,7 +586,7 @@ class SubscriptionCreated(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["created"]
     details: CreatedSubscriptionCreatedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -601,7 +601,7 @@ class SubscriptionPaymentCreated(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["payment_created"]
     details: PaymentCreatedPaymentCreatedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -616,7 +616,7 @@ class SubscriptionScheduledResume(BaseModel):
     resource_type: Literal["subscriptions"]
     action: Literal["scheduled_resume"]
     details: ScheduledResumeScheduledResumeDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -649,7 +649,7 @@ class SubscriptionCancelled(BaseModel):
         | CancelledInitialOneOffPaymentFailedDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 

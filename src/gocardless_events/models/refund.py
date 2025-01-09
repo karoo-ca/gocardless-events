@@ -95,7 +95,7 @@ class RefundFundsReturned(BaseModel):
     resource_type: Literal["refunds"]
     action: Literal["funds_returned"]
     details: FundsReturnedRefundFundsReturnedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -110,7 +110,7 @@ class RefundFailed(BaseModel):
     resource_type: Literal["refunds"]
     action: Literal["failed"]
     details: FailedRefundFailedDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -125,7 +125,7 @@ class RefundPaid(BaseModel):
     resource_type: Literal["refunds"]
     action: Literal["paid"]
     details: PaidRefundPaidDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -143,7 +143,7 @@ class RefundCreated(BaseModel):
         CreatedPaymentRefundedDetail | CreatedRefundCreatedDetail,
         Field(..., discriminator="cause"),
     ]
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
@@ -158,7 +158,7 @@ class RefundRefundSettled(BaseModel):
     resource_type: Literal["refunds"]
     action: Literal["refund_settled"]
     details: RefundSettledRefundSettledDetail
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] = Field(default_factory=dict)
     resource_metadata: dict[str, Any] | None = None
     links: dict[str, Any]
 
