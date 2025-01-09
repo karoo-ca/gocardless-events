@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/karoo-ca/gocardless-events/compare/v0.1.3...v0.1.4) (2025-01-09)
+
+
+### Bug Fixes
+
+* default to empty dict for metadata fields ([30b31fc](https://github.com/karoo-ca/gocardless-events/commit/30b31fc7fbad15e4e3397d6d1f2028b37f8b8f4c))
+
 ## [0.1.3](https://github.com/karoo-ca/gocardless-events/compare/v0.1.2...v0.1.3) (2024-12-30)
 
 
